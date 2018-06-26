@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>art-template-filter</title>
+	<script src="./template-web.js"></script>
+</head>
+<body>
+	<div id="dv"></div>
+	<script type="text/template" id="tpl">
+		<div>{{ txt | up: '传入的第2个参数': '传入第3个参数' }}</div>
+	</script>
+	<script>
+		var dv = document.getElementById( 'dv' );
+		var obj = {
+			txt: 'abc'
+		}
+
+		// obj.txt.toUpperCase()... 这种方式会改变原始数据，不建议使用
+
+		// 定义一个过滤器，第1个参数一定是input，第2个参数是end，第3个参数是third，参数之间用冒号： 分隔
+		template.defaults.imports.up = function ( input, end, third ) {
+			return input.toUpperCase() + end + ', ' + third;
+		}
+
+		dv.innerHTML = template( 'tpl', obj );
+
+	</script>
+</body>
+</html>

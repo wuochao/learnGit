@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>useConfigPath</title>
+</head>
+<body>
+	<script src="require.js"></script>	
+	<script>
+		
+		require.config({
+			baseUrl: './lib',
+			paths: {
+				moduleA: 'moduleA/moduleA',
+				moduleB: 'moduleB/moduleB'
+			}
+		});
+
+
+		require( [ 'moduleA' ] );
+		console.log("this is an end of code");
+
+
+	</script>
+</body>
+</html>

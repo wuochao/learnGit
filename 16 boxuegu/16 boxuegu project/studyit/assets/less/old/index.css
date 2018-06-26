@@ -1,0 +1,68 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+.aside {
+  width: 180px;
+  height: 100%;
+  background-color: #2f4050;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.aside .profile {
+  background-color: #243443;
+  padding-bottom: 15px;
+}
+.aside .profile .avatar {
+  text-align: center;
+  padding-top: 30px;
+}
+.aside .profile .avatar img {
+  width: 75px;
+  height: 75px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.aside .profile h4 {
+  text-align: center;
+  color: #a9b0c2;
+}
+.aside .menu .list-group {
+  padding: 10px 0;
+  margin-bottom: 0;
+  background-color: #2f4050;
+}
+.aside .menu .list-group .list-group-item {
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+.aside .menu .list-group a.list-group-item:hover,
+.aside .menu .list-group a.list-group-item:focus {
+  background-color: #243443;
+}
+.main {
+  height: 700px;
+  background-color: #f4f6f8;
+  margin-left: 180px;
+}
+.main .header .navbar {
+  background-color: #fff;
+}
+.main .header .navbar a {
+  color: #337ab7;
+}
+.main .body {
+  padding: 0 20px;
+}
+.main .body .breadcrumb,
+.main .body .panel {
+  background-color: #fff;
+  border: 1px solid #e7e7e7;
+}
+.main .body table th,
+.main .body table td {
+  text-align: center;
+}

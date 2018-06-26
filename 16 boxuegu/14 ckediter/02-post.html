@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./jquery/jquery-3.2.0.js"></script>
+	<script src="./ckeditor/ckeditor.js"></script>
+</head>
+<body>
+	<form id="form">
+		<textarea name="txt" id="txt" cols="30" rows="10"></textarea>
+		<input type="submit" value="提交">
+	</form>
+	<script>
+		// 处理富文本编辑器
+		CKEDITOR.replace( 'txt' );
+
+		// 处理提交行为
+		$( '#form' ).on( 'submit', function () {
+			
+			// 需要手动将 CKEDITOR 中的数据更新（同步）到 textarea 中
+			for ( var k in CKEDITOR.instances ) {
+				CKEDITOR.instances[ k ].updateElement();
+			}
+
+			// 数据提交
+			var formData = $( this ).serialize();
+
+			$.ajax({
+				url: './03-response.php',
+				type: 'post',
+				data: formData,
+				success: function ( info ) {
+					console.log( info );
+				}
+			});
+
+			return false;
+		});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./jquery-3.2.0.js"></script>
+	<script src="./validate-master/jquery-validate.js"></script>
+</head>
+<body>
+	<form >
+		<input type="text" name="name" data-required><br>
+		<input type="text" name="name"
+			   data-conditional="f1 f2 f3"><br>
+		<input type="submit">
+	</form>
+	<script>
+		$( 'form' ).validate({
+			conditional: {
+				f1: function () { console.log( arguments ); return true; },
+				f2: function () { console.log( arguments ); return true; },
+				f3: function () { console.log( arguments ); return true; }
+			}
+		});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>normalPath</title>
+</head>
+<body>
+	<script src="require.js"></script>	
+	<script>
+		
+		require( [ 'moduleA' ] );
+		// 如果在项目中使用加载模块时，使用的是 没有 ../  ./  /  等路径字符串
+		// 而是使用一个文件的名字来表示模块，那么默认的路径搜索为当前 html 所在的文件夹。
+		// 如：写 'moduleA' 就相当于 在当前文件中找 moduleA.js 文件
+
+	</script>
+</body>
+</html>

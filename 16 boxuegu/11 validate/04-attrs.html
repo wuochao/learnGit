@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./jquery-3.2.0.js"></script>
+	<script src="./validate-master/jquery-validate.js"></script>
+</head>
+<body>
+	<form >
+		请输入数字: <input type="text" name="name"
+			   data-pattern="^\d+$"><br>
+		<input type="submit">
+	</form>
+	<script>
+		$( 'form' ).validate();
+
+	</script>
+</body>
+</html>

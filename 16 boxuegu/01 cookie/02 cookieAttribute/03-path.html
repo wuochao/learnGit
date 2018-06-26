@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cookie-path</title>
+</head>
+<body>
+	<button id="btn">设置 cookie </button>
+</body>
+<script>
+	//它指定与cookie关联在一起的网页。在默认的情况下cookie会与创建它的网页，
+	//该网页处于同一目录下的网页以及与这个网页所在目录下的子目录下的网页关联。
+	document.getElementById( 'btn' ).onclick = function () {
+		document.cookie = 'key=value; path=/';
+		console.log( document.cookie );
+	};
+</script>
+</html>

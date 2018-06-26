@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="saveCookie">点击存储 cookie</button>
+	<button id="send">发送请求</button>
+</body>
+<script>
+	var btnSaveCookie = document.getElementById( 'saveCookie' ),
+		btnSend = document.getElementById( 'send' );
+
+	btnSaveCookie.onclick = function () {
+		document.cookie = 'tc_name=' + encodeURI( '前端学院' )  
+						  // + '; secure=true;';
+		// 
+	}
+
+	btnSend.onclick = function () {
+		var xhr = new XMLHttpRequest();
+		xhr.open( 'GET', './02-index.php' );
+		xhr.send();
+	}
+
+</script>
+</html>

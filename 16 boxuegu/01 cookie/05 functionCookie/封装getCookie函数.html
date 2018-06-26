@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>封装cookie操作函数</title>
+</head>
+<body>
+	<button> 存储 cookie </button>
+	<br>
+	<button> 取对象 </button>
+	<button> 取值 </button>
+	<script>
+    //封装一个getcookie函数，返回的是一个字符串 或者 一个对象
+    function getCookie(key){
+        //cookie的取值： 'k1=v1; k2=v2; k3=v3'
+        var strCookie = document.cookie;
+        if(!strCookie)
+            return null;
+        var arrCookies = strCookie.split(';');
+        //使用正则处理 'k=v' 形式的字符串
+        var r = /(.+)=(.+)/;
+        var temp = {}; //定义一个临时空对象
+        for(var i=0; i<arrCookies.length; i++){
+            var cookie = arrCookies[i];
+            var m = r.exec(cookie);
+            // temp[m[1]] = m[2];   需要考虑如果有中文字符，必须要用decodeURI()处理中文乱码
+            // 调用exec首先获得第1个匹配项，再调用一次该方法，获得第2个匹配项，一直调用下去，
+            // 就获得所有匹配项，直到最后全部匹配完，如果还用该方法，则返回null
+            temp[m[1]] = decodeURI(m[2]);
+        }
+        return key ? temp[key] : temp;
+    }
+
+	var btn = document.getElementsByTagName( 'button' )[ 0 ];
+	btn.onclick = function () {
+		document.cookie = 'itcast=' + encodeURI( '传智播客' );
+		document.cookie = 'itheima=' + encodeURI( '黑马程序员' ); 
+	};
+
+	var get1 = document.getElementsByTagName( 'button' )[ 1 ];
+	var get2 = document.getElementsByTagName( 'button' )[ 2 ];
+
+	get1.onclick = function () {
+		// 取对象
+		console.log( getCookie() );
+	};
+
+	get2.onclick = function () {
+		// 取值
+		console.log( getCookie( 'itheima' ) );
+		console.log( getCookie( 'itcast' ) );
+	};
+
+
+	</script>
+</body>
+</html>

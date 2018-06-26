@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./jquery/jquery-3.2.0.js"></script>
+	<script src="./jquery-region/jquery.region.js"></script>
+</head>
+<body>
+	<div id="hometown">
+		<select id="p" data-id="110000"></select>
+		<select id="c" data-id="110100"></select>
+		<select id="d" data-id="110108"></select>
+	</div>
+	<script>
+		$( '#hometown' ).region({
+			url: './jquery-region/region.json'
+		});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./src/jquery-3.2.0.js"></script>
+	<script src="./src/jquery.cookie.js"></script>
+</head>
+<body>
+	<input type="text" id="key">
+	<input type="text" id="value">
+	<button id="btnSave">存储cookie</button>
+	<br>
+	<button id="btnGetObj">获得 cookie 对象</button>
+	<br>
+	<input type="text" id="getKey">
+	<button id="btnGetKey">获得单个 cookie 值</button>
+</body>
+<script>
+	$( '#btnSave' ).click(function () {
+		$.cookie( $( '#key' ).val(), $( '#value' ).val() );
+	});
+
+	$( '#btnGetObj' ).click(function () {
+		console.log( $.cookie() );
+	});
+
+	$( '#btnGetKey' ).click(function () {
+		console.log( $.cookie( $( '#getKey' ).val() ) );
+	});
+
+</script>
+</html>

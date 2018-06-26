@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./ckeditor/ckeditor.js"></script>
+	<style>
+		.box {
+			width: 500px;
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<textarea name="" id="txt" cols="30" rows="10"></textarea>
+	</div>
+	
+	<script>
+		CKEDITOR.replace( 'txt' );
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" id="imagePath"><button id="show">显示</button>
+	<div id="dv"></div>
+	<script type="text/template" id="tpl">
+		{{ if headerImage }} 
+			<img src="{{ headerImage }}" >
+		{{ else }}
+			<img src="./default.png" >
+		{{ /if }}
+	</script>
+</body>
+<script src="../src/template-web.js"></script>
+<script src="../src/jquery.js"></script>
+<script>
+	
+	$( '#show' ).click(function () {
+
+		var headerImage = $( '#imagePath' ).val();
+
+		var html = template( 'tpl', { headerImage: headerImage } );
+
+		$( '#dv' ).html( html );
+	});
+
+</script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajaxEventHandler</title>
+	<script src="./jquery-3.2.0.js"></script>
+</head>
+<body>
+	<table border="1" width="800">
+		<tr>
+			<td>&nbsp;</td>
+			<td>ajaxStart</td>
+			<td>ajaxSend</td>
+			<td>ajaxSuccess</td>
+			<td>ajaxError</td>
+			<td>ajaxComplete</td>
+			<td>ajaxStop</td>
+		</tr>
+		<tr>
+			<td>
+				<button id="btn1"> click1 ( 5s ) </button><br>
+				<button id="btn2"> click2 ( 10s ) </button>
+			</td>
+			<td class="ajaxStart"></td>
+			<td class="ajaxSend"></td>
+			<td class="ajaxSuccess"></td>
+			<td class="ajaxError"></td>
+			<td class="ajaxComplete"></td>
+			<td class="ajaxStop"></td>
+		</tr>
+	</table>
+	<script>
+		$( document ).ajaxStart(function () {
+			$( '.ajaxStart' ).append( '<span>start</span><br />' );
+		});
+		$( document ).ajaxSend(function () {
+			$( '.ajaxSend' ).append( '<span>send</span><br />' );
+		});
+		$( document ).ajaxSuccess(function () {
+			$( '.ajaxSuccess' ).append( '<span>success</span><br />' );
+		});
+		$( document ).ajaxError(function () {
+			$( '.ajaxError' ).append( '<span>error</span><br />' );
+		});
+		$( document ).ajaxComplete(function () {
+			$( '.ajaxComplete' ).append( '<span>complete</span><br />' );
+		});
+		$( document ).ajaxStop(function () {
+			$( '.ajaxStop' ).append( '<span>stop</span><br />' );
+		});
+
+		$( '#btn1' ).click(function () {
+			$.ajax({
+				url: './02-index.php',
+				success: function ( info ) {
+					console.log( info );
+				}
+			});
+		});
+		$( '#btn2' ).click(function () {
+			$.ajax({
+				url: './03-index.php',
+				success: function ( info ) {
+					console.log( info );
+				}
+			});
+		});
+	</script>
+</body>
+</html>

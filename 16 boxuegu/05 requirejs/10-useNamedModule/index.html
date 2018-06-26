@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>useNamedModule使用命名模块</title>
+</head>
+<body>
+	<script src="require.js"></script>
+	<script>
+		require.config({
+			baseUrl: './js',
+			paths: {
+				jquery: 'jquery/jquery-3.2.0'
+			}
+		});
+
+		require(['jquery'], function( $ ){
+			console.log($);
+		});
+	</script>
+</body>
+</html>

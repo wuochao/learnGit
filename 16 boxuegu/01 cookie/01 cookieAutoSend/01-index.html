@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cookieAutoSend</title>
+</head>
+<body>
+	<button id="saveCookie">点击存储 cookie</button>
+	<button id="send">发送请求</button>
+</body>
+<script>
+	//cookie 会便随着 http 请求，自动的 发送到 服务器，
+
+	var btnSaveCookie = document.getElementById( 'saveCookie' ),
+		btnSend = document.getElementById( 'send' );
+
+	btnSaveCookie.onclick = function () {
+		// encodeURI()转化中文为带百分号的字符
+		document.cookie = 'tc_name=' + encodeURI( '前端学院' );
+		console.log('cookie中已经存储 tc_name "前端学院"。');
+	}
+
+	btnSend.onclick = function () {
+		var xhr = new XMLHttpRequest();
+		xhr.open( 'GET', './02-index.php' );
+		xhr.send();
+		console.log('发送ajax的get请求');
+	}
+
+</script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./jquery-3.2.0.js"></script>
+	<script src="./validate-master/jquery-validate.js"></script>
+</head>
+<body>
+	<form >
+		数组字母: 
+		<input type="text" name="word"
+			   data-describedby="for_word"
+			   data-description="aaa"
+			   data-required
+			   data-pattern="^[a-zA-Z]+$">
+		<span id="for_word"></span>
+		<br>
+
+		输入数字: 
+		<input type="text" name="number"
+			   data-describedby="for_number"
+			   data-description="bbb"
+			   data-required
+			   data-pattern="^\d+$">
+		<span id="for_number"></span>
+		<br>
+		<input type="submit">
+	</form>
+	<script>
+		$( 'form' ).validate({
+			description: {
+				aaa: {
+					required: '必须填写内容',
+					pattern: '必须填写字母'
+				},
+				bbb: {
+					required: '必须填写内容',
+					pattern: '必须填写数字'
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>

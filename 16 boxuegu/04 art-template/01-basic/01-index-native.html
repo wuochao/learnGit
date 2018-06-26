@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="dv01"></div>
+	<script type="text/template" id="tpl01">
+		<h1>一个模板, 一个很普通的模板</h1>
+	</script>
+
+
+	<div id="dv02"></div>
+	<script type="text/template" id="tpl02">
+		<h1>你好, <%= name %></h1>
+	</script>
+
+	<div id="dv03"></div>
+	<script type="text/template" id="tpl03">
+		<h1>遍历数组</h1>
+		<ul>
+			<% for ( var i = 0; i < list.length; i++ ) { %>
+				<!-- 遍历数组, 根据数组中的元素确定有多少个 li -->
+				<li><%= list[ i ] %></li>
+			<% } %>
+		</ul>
+	</script>
+	
+
+</body>
+<script src="../src/template-web.js"></script>
+<script>
+	var htmlStr01 = template( 'tpl01', {} );
+	var dv01 = document.getElementById( 'dv01' );
+	dv01.innerHTML = htmlStr01;
+
+
+	// 在模板引擎背后有一个对象
+	// 模板引擎中使用的 名字( 标识符 ), 对象的就是背后那个对象的属性
+	var htmlStr02 = template( 'tpl02', {
+		name: '赵四'
+	} );
+	var dv02 = document.getElementById( 'dv02' );
+	dv02.innerHTML = htmlStr02;
+
+
+	// 在模板引擎中还可以编辑逻辑
+	var htmlStr03 = template( 'tpl03', {
+		list: [ 'HTML与CSS', 'JavaScript基础', 'DOM操作' ] 
+	} );
+	var dv03 = document.getElementById( 'dv03' );
+	dv03.innerHTML = htmlStr03;
+
+
+</script>
+</html>

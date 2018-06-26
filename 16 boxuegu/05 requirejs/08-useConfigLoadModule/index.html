@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>useConfigLoadModule</title>
+</head>
+<body>
+	<script src="require.js"></script>	
+	<script>
+		require.config({
+			baseUrl: './lib'
+		});
+
+		require(['moduleA/moduleA']);
+		console.log("This is an end of code"); //注意这里打印的时候，并不是最后打印这句话，说明requirejs是异步加载的
+
+	</script>
+</body>
+</html>

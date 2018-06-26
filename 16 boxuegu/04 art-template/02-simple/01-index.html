@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="dv"></div>
+	<script type="text/template" id="tpl1">
+		<h3>你好, {{ person.name }}</h3>
+	</script>
+</body>
+<script src="../src/template-web.js"></script>
+<script src="../src/jquery.js"></script>
+<script>
+	
+	// 最新的 template 版本同时支持 原生语法 和 简化语法
+	var html = template( 'tpl1', { person: { name: '小沈阳' } } );
+
+	$( '#dv' ).html( html );
+
+</script>
+</html>

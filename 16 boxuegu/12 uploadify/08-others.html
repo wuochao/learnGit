@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="./uploadify/uploadify.css">
+	<script src="./jquery/jquery-3.2.0.js"></script>
+	<script src="./uploadify/jquery.uploadify.js"></script>
+	<link rel="stylesheet" href="./bootstrap/dist/css/bootstrap.css">
+	<style>
+		.uploadify {
+			overflow: hidden;
+		}
+		#dv {
+			width: 200px;
+			height: 100px;
+			border: 1px dashed blue;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<input id="upload" type="file" >
+	<div id="dv"></div>
+	<script >
+		// 初始化 uploadify
+		$( '#upload' ).uploadify({
+			swf: 	  './uploadify/uploadify.swf',
+			uploader: './09-others.php'
+
+			// , onUploadSuccess: function ( obj, responseText ) {
+			, onUploadSuccess: function ( _, filename ) {
+				// 学习任何插件或工具, 如果遇到了函数
+				// 应该分析其功能, 参数与返回值
+
+				// 由于第一个参数我们不怎么使用, 因此命名的时候可以直接使用 _
+				// 第二个参数是 返回的文件名, 因此可以直接命名 filename
+
+				// console.log( arguments );
+
+				$( '<img >' ).attr( 'src', filename ).appendTo( 'body' );
+			}
+
+
+		});
+	</script>
+</body>
+</html>

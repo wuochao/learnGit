@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>useScriptLoadModule</title>
+</head>
+<body>
+	<script src="require.js" data-main="./src/moduleA.js"></script>
+
+	<!-- 
+		此时 moduleA 所在的文件夹为 默认搜索的路径
+		因此要表示 moduleB, 我们使用mainModule/moduleB
+		在使用 script 引入require.js 文件的时候, 可以提供一个 data-main自定义属性, 来说明 默认的加载的模块.
+	 -->
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cookie-max-age</title>
+</head>
+<body>
+	
+</body>
+<script>
+	console.log( document.cookie );
+	document.cookie = 'key1=value01';
+	document.cookie = 'key2=value02; max-age=' + 30;  //表示30s后过期，正常情况下，max-age的优先级高于expires。
+	console.log( document.cookie );
+</script>
+</html>

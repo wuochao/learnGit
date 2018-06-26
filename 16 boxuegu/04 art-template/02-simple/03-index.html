@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="dv"></div>
+	<script type="text/template" id="tpl">
+		<ul>
+		{{ each list }}
+			<li>{{ $index }}, {{ $value }}</li>
+		{{ /each }}
+		</ul>
+	</script>
+</body>
+<script src="../src/template-web.js"></script>
+<script src="../src/jquery.js"></script>
+<script>
+	
+	$( '#dv' )
+		.html( template( 'tpl', { 
+				list: 'html与css,javascript基础,面向对象与高级,流向框架,博学谷项目'.split( ',' )
+		} ) );
+
+</script>
+</html>

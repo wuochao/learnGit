@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="./uploadify/uploadify.css">
+	<script src="./jquery/jquery-3.2.0.js"></script>
+	<script src="./uploadify/jquery.uploadify.js"></script>
+	<link rel="stylesheet" href="./bootstrap/dist/css/bootstrap.css">
+	<style>
+		.uploadify {
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<input id="upload" type="file" >
+	<script >
+		// 初始化 uploadify
+		$( '#upload' ).uploadify({
+			swf: 	  './uploadify/uploadify.swf',
+			uploader: './05-options.php'
+
+			// , buttonClass: 'btn btn-success btn-sm' // 用于设置按钮使用的样式
+			// , height: 'auto'	// 使用 bootstrap 文字高度变化
+			// , buttonImage: ''	// 配置背景图片
+			// , buttonText: '上传图片'
+			// , buttonCursor: 'arrow'
+
+
+			// 提交数据的时候使用的 名字
+			// 默认 Filedata
+			, fileObjName: 'itcastfile'
+
+			, fileTypeDesc: 'aaa'
+			, fileTypeExts: '*.jpg'
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./jquery-3.2.0.js"></script>
+	<script src="./validate-master/jquery-validate.js"></script>
+</head>
+<body>
+	<form >
+		请输入数字: <input type="text" name="name"
+			   data-conditional="isNumber"><br>
+		<input type="submit">
+	</form>
+	<script>
+		$( 'form' ).validate({
+			conditional: {
+				isNumber: function ( value ) {
+					//方式一： 使用正则表达式
+					return /^\d+$/.test( value );
+
+					//方式二：遍历所有输入字符，只要有1个字符是非数字那么用户输入的就是非数字，否则就是数字
+					/*
+					// 取每一个字符, 看 字符的数据是不是都在 48 到 57 之间
+					for ( var i = 0; i < value.length; i++ ) {
+						var charCode = value.charCodeAt( i );
+						// 只要有一个不是数字, 就表示他肯定输入的不是数字
+						if ( charCode < 48 || charCode > 57 ) {
+							return false;
+						}
+					}
+					// 整个循环结束如果没有出现非数字, 那么就表示输入的一定是数字 
+					return true;
+					*/
+
+					//方式三： 采用 value - 0 + ''=== value
+					// value - 0 + '' === value + ''
+					// return value - 0 + '' === value + '';
+				}
+ 			}
+		});
+
+	</script>
+</body>
+</html>
