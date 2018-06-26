@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令directive</title>
+    <style>
+        .flag{
+            background-color: #ccc;
+        }
+        .login {
+            color: red;
+            background: lightblue;
+        }
+        .register {
+            background: orange;
+        }
+    </style>
+</head>
+<body ng-app="directiveApp">
+<h1>以属性形式使用: Attribute （最常用的方式）</h1>
+<div my-btn>如果模版template使用ng-transclude时，会替换模版中有ng-transclude标签中的内容</div>
+
+<h1>以样式名形式使用: CCS class</h1>
+<div class="my-btn"></div>
+
+<h1>以自定义标签形式使用: Element</h1>
+<my-btn>自定义标签的形式element！</my-btn>
+<my-btn mystyle="login">登陆按钮，使用@自定义属性来改变样式</my-btn>
+<my-btn mystyle="register">注册按钮，使用@自定义属性来改变样式</my-btn>
+
+<h1>以注释形式使用：Comment （使用不多）</h1>
+<pre><--directive:myBtn以注释形式展示--></pre>
+
+<script id="tpl" type="text/ng-template">  <!--注意：这里的type类型一定要修改成 text/ng-template-->
+    <div class="flag">
+        <p>{{msg}}</p>
+        <button class="{{mystyle}}" ng-transclude>登陆</button>
+    </div>
+</script>
+<script src="angular.js"></script>
+<script>
+    //1 创建模块对象
+    var app = angular.module('directiveApp', []);
+    //2 创建自定义指令，使用directive方法
+    // 第1个参数是自定义指令的名字，必须是驼峰命名法，但在html页面上使用时，要写成用“-”分隔形式，这点同H5里面的自定义属性
+    // 第2个参数是 和控制器的第2个参数类似
+    app.directive('myBtn', [function(){
+        return {
+            //template: '<div><p>这是使用template定义的模版</p></div>', //封装UI，提供字符串，对应的内容直接插入到自定义指令的位置
+            templateUrl:'tpl', //同template，但是需要一个带id的script标签形式的html代码段，插入自定义指令的位置；或者一个url的文件
+            restrict: 'ACEM',  //分别表示：attribute、CSS class、element、comment
+            replate: true,    //默认为false，是插入到自定义指令之间（false），还是替换自定义整理（true）
+            transclude: true, //获取自定义指令的属性，并使用该属性值修改template中拥有ng-transclude指令的标签中间
+            scope:{ //类似于控制器时里的$scope，但是这里的scope属性值是在模板中使用的
+                mystyle: '@'  // 以“@”开始头表示获取自定义指令属性的值，tmp:'@mystyle'在对应的模版里面使用{{tmp}}来得到mystyle对应的值
+            },
+            link: function(scope, element, attributes){
+                scope.msg = '这是link方法的scope参数的属性msg';
+                element.on('click', function(){ //element指向模版template最外层的对象
+                    console.log('link方法的element参数可以给模版中每个dom元素绑定事件！');
+                });
+                console.log(attributes); //attributes这个对象里的属性就是自定义指令所在标签的属性
+            }
+        };
+    }]);
+
+
+</script>
+</body>
+</html>

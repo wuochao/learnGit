@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>隔行换色</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        ul li {
+            line-height: 35px;
+            padding-left: 10px;
+            color: #fff;
+            margin-top: 2px;
+        }
+
+        .red {
+            background-color: #f46060;
+        }
+
+        .green {
+            background-color: greenyellow;
+        }
+
+        .blue {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="demoController">
+    <h1>使用id</h1>
+    <ul>
+        <li class="{{item.id%2? 'red':'green'}}" ng-repeat="item in data">
+            {{item.name}}, {{item.age}}
+        </li>
+    </ul>
+    <h1>使用$index</h1>
+    <ul>
+        <li class="{{$index%2? 'red':'green'}}" ng-repeat="item in data">
+            {{item.name}}, {{item.age}}
+        </li>
+    </ul>
+    <h1>使用$odd $even</h1>
+    <ul>
+        <li class="{{$odd?'red':'green'}}" ng-repeat="item in data">
+            {{item.name}}, {{item.age}}
+        </li>
+    </ul>
+    <h1>使用ng-class改变元素的样式</h1>
+    <ul>
+        <li ng-class="{red:item.age>=20, green: item.age<20 && item.age>=10, blue: item.age<10}"
+            ng-repeat="item in data">
+            {{item.name}}, {{item.age}}
+        </li>
+    </ul>
+</div>
+<script src="./angular.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('demoController', ['$scope', function ($scope) {
+        $scope.data = [
+            {id: 1, name: 'zhangsan1', age: 18},
+            {id: 2, name: 'zhangsan2', age: 19},
+            {id: 3, name: 'zhangsan3', age: 28},
+            {id: 4, name: 'zhangsan4', age: 9},
+            {id: 5, name: 'zhangsan7', age: 3},
+            {id: 6, name: 'zhangsan5', age: 4}
+        ];
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>controller的第2个参数当作构造函数使用</title>
+</head>
+<body ng-app="myApp">
+<div ng-controller="demoController as obj">
+    <p>{{name}}</p>     <!--通过$scope.name赋值-->
+    <p>{{obj.name}}</p>  <!--通过this.name赋值-->
+</div>
+<script src="angular.js"></script>
+<script>
+    // 1.创建模块
+    var app = angular.module('myApp', []);
+    // 2.创建控制器： angular会把这2个参数当作构造函数使用
+    app.controller('demoController', function ($scope) {
+        $scope.name = "张三丰";
+        this.name = "张无忌";
+    });
+</script>
+</body>
+</html>

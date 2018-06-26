@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>route</title>
+</head>
+<body ng-app="myApp">
+    <div ng-view></div>
+    <script src="angular.js"></script>
+    <script src="angular-route.js"></script>
+    <script>
+        // 1 创建模块
+        var app = angular.module('myApp', ['ngRoute']);
+        // 2 配置路由：使用config方法
+        app.config(['$routeProvider', function($routeProvider){
+            // 当angular检测到url中锚点变为/ali里，就会把template对应的内容插入到页面拥有ng-view指令的标签中
+            // 在规则中以：号开始,后面跟上一个名字（就相当于变量名，表明当前位置可以写成任意的值）
+            // ?号表示当前位置如果没有值，也可以正则匹配到，前面的字符出现0次或者1次
+            $routeProvider.when('/company/:myName?',{
+                // 改变url锚点值时，会触发控制器的回调函数
+                template: '<div>{{msg}}</div>', //把template对应的内容插入到页面拥有ng-view指令的标签中
+                controller: 'myController'
+            }).otherwise({  //当以上规则都不满足时，匹配otherwise
+                redirectTo: '/company/alibaba' //相当于改变页面的锚点值 /company/ali
+            });
+        }]);
+        // 3 创建控制器
+        app.controller('myController', ['$scope', '$routeParams', function($scope, $routeParams){
+            // 假设有以下信息，实际开发中，数据是从数据库获取的。
+            $scope.data = {
+                'alibaba' : 'floor 2',
+                'baidu': 'floor 1',
+                'tencent':'floor 3',
+                'microsoft':'floor 4'
+            };
+            console.log($routeParams);
+            if($scope.data[$routeParams.myName] == undefined ){
+                $scope.msg = '您要找的公司不在本大厦，请确认您要查找的公司地址。';
+            } else {
+                $scope.msg = '您要找的公司在' + $scope.data[$routeParams.myName];
+            }
+        }]);
+
+    </script>
+</body>
+</html>

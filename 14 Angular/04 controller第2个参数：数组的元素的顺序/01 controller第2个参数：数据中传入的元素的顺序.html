@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>controller第2个参数：数组的元素的顺序</title>
+</head>
+<!-- 2.加上ng-app指令 -->
+<body ng-app="myApp">
+<div ng-controller="demoController">
+    {{msg}}
+</div>
+<!-- 1.引入angular.js文件 -->
+<script src="angular.js"></script>
+<script>
+    // 3.创建模块
+    var app = angular.module('myApp', []);
+    // 4.创建控制器：controller的第2个参数改成数组形式，并将回调函数放作为数组中最后一个元素
+    // *注意*  angular中的controller中会根据形参的名字传递参数
+    // *注意*：数据中传入的元素的顺序，要和function的中顺序一一对应
+    app.controller('demoController', ['$scope', '$log', function ($scope, $log) {
+        $scope.msg = '第1个传入参数-$scope';
+        $log.log('第2个传入参数-$log');
+    }]);
+</script>
+</body>
+</html>

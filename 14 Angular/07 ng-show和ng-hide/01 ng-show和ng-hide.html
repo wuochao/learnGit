@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-show和ng-hide</title>
+</head>
+<body ng-app="myApp">
+<div ng-controller="demoController">
+    <button ng-click="showOrHide()">显示/隐藏</button>
+    <!-- ng-show,控制元素的显示或隐藏,值为true时显示，为false隐藏-->
+    <p ng-show="isShowing">点击showOrHide可以显示或隐藏!</p>
+    <!-- ng-hide 值为true时，隐藏当前元素 -->
+    <p ng-hide="true">ng-hide为true是隐藏，为false是显示</p>
+    <p ng-hide="false">ng-hide为true是隐藏，为false是显示</p>
+</div>
+<script src="./angular.js"></script>
+<script>
+    // 1.创建模块
+    var app = angular.module('myApp', []);
+    // 2.创建控制器
+    app.controller('demoController', ['$scope', function ($scope) {
+        // 初始化数据模型
+        $scope.isShowing = true;
+        $scope.showOrHide = function () {
+            $scope.isShowing = !$scope.isShowing;
+        };
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册案例</title>
+</head>
+<body ng-app='myApp'>
+    <table ng-controller="registerController">
+        <tr>
+            <td>用户姓名：<input type="text" ng-model="username"/></td>
+        </tr>
+        <tr>
+            <td>用户类型：
+                <select name="usertype" ng-model="usertype">
+                    <option value="type00">选择用户类型...</option>
+                    <option value="type01">学生</option>
+                    <option value="type02">老师</option>
+                    <option value="type03">校长</option>
+                    <option value="type04">局长</option>
+                    <option value="type05">部长</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>用户密码：<input type="password" ng-model="userpwd"/></td>
+        </tr>
+        <tr>
+            <td>确认密码：<input type="password" ng-model="confirmpwd"/></td>
+        </tr>
+        <tr>
+            <td>注册协议：<input type="checkbox" ng-model="isAgree"/></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="注册" ng-click="register()"/></td>
+        </tr>
+        <tr>
+            <td>{{msg}}</td>
+        </tr>
+    </table>
+
+    <script src=angular.js></script>
+    <script>
+        //1 创建模块
+        var app = angular.module('myApp', []);
+        //2 创建控制器
+        app.controller('registerController',function($scope){
+            // 初始化数据，默认用户姓名、用户类型、用户密码、提示信息为空，同意协议默认为false
+            $scope.username = ''; // 要求不少于6个字符
+            $scope.usertype = '';
+            $scope.userpwd  = ''; // 要求不少于6个字符
+            $scope.confirmpwd = ''; // 首次密码和确认密码必须完全一致
+            $scope.isAgree = false; // 默认为false，不接受协议
+            $scope.msg = '';   //提示信息
+
+            //定义方法
+            $scope.register = function(){
+                //判断用户名是否少于6个字符，如果是，提示：用户名太短
+                if($scope.username.length < 6){
+                    $scope.msg = '用户名不能少于6个字符！';
+                    return;
+                }
+                //判断密码是否少于6个字符，如果是，提示：密码太短
+                if($scope.userpwd.length < 6){
+                    $scope.msg = '密码不能少于6个字符，否则不安全！';
+                    return;
+                }
+                //判断首次密码和确认密码是否完全一致，如果不是，提示用户
+                if( $scope.userpwd !== $scope.confirmpwd){
+                    $scope.msg = '两次输入的密码不一致，请重新输入!';
+                    return;
+                }
+
+                //如果上面判断都是符合要求，表示输入合法，准备存储数据，调用model方法
+                var u = new User($scope.username, $scope.userpwd, $scope.usertype);
+                var result = u.save();
+                if(result && $scope.isAgree ){
+                    $scope.msg = '注册成功';
+                } else {
+                    $scope.msg = '注册失败';
+                }
+
+            };
+        });
+
+        //创建用户的构造函数 和 并给原型上绑定存储数据的方法
+        function User(name, pwd, type){
+            this.name = name;
+            this.pwd = pwd;
+            this.type = type;
+        }
+        User.prototype.save = function(){
+            //判断用户姓名是否已经存在，如果存在不许注册，否则可以注册
+            var str = localStorage.getItem('myusers') || '[]';
+            var arr = JSON.parse(str);
+            for(var i=0; i<arr.length; i++){
+                //如果localStorage里面存在新输入的用户名，那么表示已经被注册过，不能重复注册，要求重新输入信息后，再注册；否则可以被注册
+                if( arr[i].name == this.name ){
+                    return ;
+                }
+            }
+            // 如果localStorage不存在该用户名，就把新输入的用户名保存起来，更新arr，并转成JSON格式的字符串，更新myusers
+            arr.push({
+                name: this.name,
+                pwd : this.pwd,
+                type: this.type
+            });
+            localStorage.setItem('myusers',JSON.stringify(arr));
+            return true;  // register返回值true，表示注册成功
+        }
+    </script>
+
+
+</body>
+</html>

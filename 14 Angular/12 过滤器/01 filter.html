@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>filter</title>
+</head>
+<body ng-app="filterApp" ng-controller="filterController">
+<div>
+    <input type="text" ng-model="search"/>
+    <h1>以completed为true属性过滤</h1>
+    <!-- 会到对应的todos中寻找，如果当前元素有completed属性且值 为true就会被显示出来。（只会到completed属性中寻找） -->
+    <ul>
+        <li ng-repeat="item in todos | filter: { completed: true }">
+            {{item.name}} ======> {{item.completed}}
+        </li>
+    </ul>
+    <h1>以只要含有true来过滤</h1>
+    <!-- 会到对应的todos中寻找，如果当前元素有true就会被显示出来 -->
+    <ul>
+        <li ng-repeat="item in todos | filter: '吃饭' ">
+            {{item.name}} ======> {{item.completed}}
+        </li>
+    </ul>
+</div>
+</body>
+<script src='angular.js'></script>
+<script>
+    // 1 创建模块
+    var app = angular.module('filterApp', []);
+    // 2 创建控制器
+    app.controller('filterController', ['$scope', function($scope){
+        $scope.search = ''; //初始化input的输入框
+        // 假设已经从后台获取到数据
+        $scope.todos = [
+            { id: 1, name: '吃饭', completed: true },
+            { id: 2, name: '先吃饭后睡觉', completed: true },
+            { id: 3, name: '打豆豆', completed: false },
+            { id: 4, name: '学习', completed: true },
+            { id: 5, name: '喝水 true', completed: false }
+        ];
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>其他ng指令</title>
+</head>
+<body ng-app="myApp">
+<div ng-controller="demoController">
+    <!--单项数据绑定只会数据模型影响view，view影响不到数据模型-->
+    <input type="radio" ng-checked="false">单选 <br/>
+    下拉列表
+    <select>
+        <option value="volvo">Volvo</option>
+        <option value="saab" ng-selected="true">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
+    <br/>
+    <button ng-disabled="true">ng-disabled为true的效果</button>
+    <br/>
+    <input type="text" placeholder="ng-readonly为true效果" ng-readonly="true"> <br/>
+    <input type="text" placeholder="focus" ng-focus="Focus()">
+    <input type="text" placeholder="blur" ng-blur="Blur()">
+    <input type="text" placeholder="change" ng-model="val" ng-change="Change()">
+    <input type="text" placeholder="copy" ng-copy="Copy()">
+    <button ng-dblclick="dblclick()">双击</button>
+</div>
+<script src="./angular.js"></script>
+<script>
+    // 1.创建模块
+    var app = angular.module('myApp', []);
+    // 2.创建控制器
+    app.controller('demoController', ['$scope', function ($scope) {
+        $scope.Blur = function () {
+            console.log('触发ng-blur');
+        };
+        $scope.Focus = function () {
+            console.log('触发ng-focus');
+        };
+        $scope.Change = function () {
+            console.log('触发ng-change');
+        };
+        $scope.Copy = function () {
+            console.log('触发ng-copy');
+        };
+        $scope.dblclick = function () {
+            console.log('触发dblclick');
+        };
+    }]);
+
+</script>
+</body>
+</html>

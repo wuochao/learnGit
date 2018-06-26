@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ng-if和ng-switch</title>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="demoController">
+		<h1>ng-if: false时，元素移除dom</h1>
+		<p ng-if="true">这是ng-if为true的效果</p>
+		<p ng-if="false">这是ng-if为false的效果：元素会被移除</p>
+		<h1>ng-switch</h1>
+		<div ng-switch="name">
+			<p ng-switch-when="one">我是张三丰</p>
+			<p ng-switch-when="two">你是风清扬</p>
+		</div>
+	</div>
+<script src='./angular.js'></script>
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('demoController', ['$scope', function($scope){
+		$scope.name = "two";
+		switch( $scope.name ){
+			case 'one':
+				console.log( 'one' );
+				break;
+			case 'two':
+				console.log( 'two' );
+				break;
+		}
+	}]);
+</script>
+</body>
+</html>

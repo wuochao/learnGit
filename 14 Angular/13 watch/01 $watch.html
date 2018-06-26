@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$watch</title>
+</head>
+<body ng-app="watch">
+    <div ng-controller="watchController">
+        <input type="text" ng-model="name">
+        <input type="text" ng-model="age">
+        <button>$watch测试，在console中观察input输入框里面值改变时，控制台打印输出</button>
+    </div>
+<script src="angular.js"></script>
+<script>
+    // 1.创建模块
+    var app = angular.module('watch', []);
+    // 2.创建控制器
+    app.controller('watchController', ['$scope', function ($scope) {
+        $scope.name = '张三';
+        $scope.age = 18;
+
+        // $watch可以用来监视数据模型的变化，只能监视$scope的属性
+        // 第1个参数: 数据模型对应的名字（字符串形式）；第2个参数: 相应的数据模型变化就会调用这个函数
+        // 默认会直接执行一次回调函数
+        $scope.$watch('name', function (now, old) {
+            // 第1个参数是变化后的值，第2个参数是变化前的值
+            // console.log(now,old)
+        });
+
+        //getAge是$scope上的方法，因此可以被监视
+        $scope.getAge = function () {
+            return $scope.age;
+        }
+
+        // 也能够监视$scope属性中的方法的返回值
+        $scope.$watch('getAge()', function (now, old) {
+            console.log(now, old);
+        });
+
+        //$watch监视的是$scope的属性，如果是一个普通变量是无法监视的，getName不是$scope上的属性或者方法，因此无法监视
+        function getName() {
+            return $scope.name;
+        }
+
+        // 如果需要监视getName需要给$scope上添加一个tmp方法，指向getName即可
+        $scope.tmp = getName;
+        $scope.$watch('tmp()', function (now, old) {
+            console.log(now, old);
+        });
+    }]);
+
+</script>
+</body>
+
+</html>

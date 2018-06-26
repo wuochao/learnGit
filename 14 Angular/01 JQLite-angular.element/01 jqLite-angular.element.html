@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jqLite与jQuery类似</title>
+    <style>
+        .blue {
+            color: blue;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<script src="angular.js"></script>
+<script>
+    angular.element(document).ready(function () {
+        var div1 = angular.element(document.getElementById('box1'));
+        div1.html('<div>第1个div</div>');
+        div1.addClass('blue');
+    });
+
+    angular.element(document).ready(function () {
+        var div2 = angular.element(document.getElementById('box2'));
+        div2.html('<div>第2个div</div>');
+        div2.addClass('red');
+    });
+
+    //两次定义angular.element(document).ready(function () {} 入口函数，不会出现后者覆盖前者，这和jQuery一样
+</script>
+<div id="box1"></div>
+<div id="box2"></div>
+
+</body>
+</html>
