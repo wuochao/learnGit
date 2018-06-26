@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>携程旅行</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .header{
+            width: 100%;
+        }
+        .header>a{
+            display: block;
+            width: 100%;
+        }
+        .header>a>img{
+            display: block;
+            width: 100%;
+        }
+        .main{
+
+        }
+        .section{
+            height: 100px;
+            display: flex;
+            margin: 5px 0;
+        }
+        .section .add{
+            flex: 1;
+            background-color: orange;
+            margin-right: 5px;
+
+        }
+        .section .list{
+            flex: 2;
+            background-color: orange;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .section .list a{
+            width: 50%;
+            text-decoration: none;
+            text-align: center;
+            font: bold 20px/50px "Microsoft Yahei";
+            color: white;
+            border: 1px solid white;
+            box-sizing: border-box;
+        }
+        .section:last-child .list a{
+            width: 33.33333%;
+        }
+        .footer{
+            display: flex;
+        }
+        .footer a{
+            display: block;
+            flex: 1;
+            width: 100%;
+        }
+        .footer a img{
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="#"><img src="images/banner.jpg" alt=""/></a>
+        </div>
+        <div class="main">
+            <div class="section">
+                <div class="add"></div>
+                <div class="list">
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                </div>
+            </div>
+            <div class="section">
+                <div class="add"></div>
+                <div class="list">
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                </div>
+            </div>
+            <div class="section">
+                <div class="add"></div>
+                <div class="list">
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                </div>
+            </div>
+            <div class="section">
+                <div class="list">
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                    <a href="#">住哪儿？？？</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="#"><img src="images/extra_1.png" alt=""/></a>
+            <a href="#"><img src="images/extra_2.png" alt=""/></a>
+        </div>
+    </div>
+</body>
+</html>

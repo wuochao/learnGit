@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>元素拖拽</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrap{
+            margin: 100px auto;
+            display: flex;
+            justify-content: center;
+        }
+        .container1, .container2{
+            width: 400px;
+            height: 400px;
+            background-color: lightblue;
+            border: 1px solid #ccc;
+            margin: 0 10px;
+        }
+        .container2{
+            background-color: lightgreen;
+        }
+        .container1>div, .container2>div {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #2632ff;
+            color: white;
+            font: bold 40px/60px "Arial";
+            text-align: center;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="container1">
+        <div draggable="true">1</div>
+        <div draggable="true">2</div>
+        <div draggable="true">3</div>
+        <div draggable="true">4</div>
+        <div draggable="true">5</div>
+        <div draggable="true">6</div>
+        <div draggable="true">7</div>
+        <div draggable="true">8</div>
+    </div>
+    <div class="container2"></div>
+</div>
+<script type="text/javascript">
+    //获取操作的元素对象
+    var container1 = document.querySelector('.container1');
+    var container2 = document.querySelector('.container2');
+    var balls = document.querySelectorAll('.container1 div');
+    //记录当前被拖拽的元素
+    var temp = null;
+    //遍历所有balls绑定开始拖拽dragstart事件、结束拖拽事件dragend事件
+    for(var i=0; i<balls.length; i++) {
+        balls[i].ondragstart = function(){
+            temp = this;
+        };
+        balls[i].ondragend = function(){
+            temp = null;
+        };
+    }
+
+    //container2绑定拖拽悬停 dragover 和 ondrop事件
+    //dragover要阻止默认事件（默认无法将数据/元素放置到其他元素中）
+    //ondrop 添加被拖拽元素到container2中，并清空临时记录变量temp
+    container2.addEventListener('dragover', function(e){
+        e.preventDefault();
+    });
+
+    container2.addEventListener('drop', function(){
+        this.appendChild(temp);
+        temp = null;
+    });
+
+
+
+
+
+
+</script>
+</body>
+</html>

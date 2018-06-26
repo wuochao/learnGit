@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>C3的无缝滚动</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .container{
+            width: 882px;   /*每张图片126*86px 长度： 126*7=882px*/
+            height: 86px;
+            border: 1px solid #ccc;
+            margin: 200px auto;
+            background-color: blue;
+            overflow: hidden;
+            position: relative;
+        }
+        .box{
+            list-style: none;
+            width: 200%;
+            height: 100%;
+            position: absolute;
+            left:0;
+            top:0;
+            animation: roll 5s linear infinite;
+        }
+        .box li{
+            float: left;
+        }
+        @keyframes roll {
+            from{
+                transform: translate(0);
+            }
+            to{
+                transform: translate(-882px);
+            }
+        }
+        /*鼠标悬停时，图片停止轮播*/
+        ul:hover{
+            animation-play-state: paused;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="box">
+            <li><img src="images/1.jpg" alt=""/></li>
+            <li><img src="images/2.jpg" alt=""/></li>
+            <li><img src="images/3.jpg" alt=""/></li>
+            <li><img src="images/4.jpg" alt=""/></li>
+            <li><img src="images/5.jpg" alt=""/></li>
+            <li><img src="images/6.jpg" alt=""/></li>
+            <li><img src="images/7.jpg" alt=""/></li>
+            <!-- 再复制一套图片实现无缝轮播效果-->
+            <li><img src="images/1.jpg" alt=""/></li>
+            <li><img src="images/2.jpg" alt=""/></li>
+            <li><img src="images/3.jpg" alt=""/></li>
+            <li><img src="images/4.jpg" alt=""/></li>
+            <li><img src="images/5.jpg" alt=""/></li>
+            <li><img src="images/6.jpg" alt=""/></li>
+            <li><img src="images/7.jpg" alt=""/></li>
+        </ul>
+
+    </div>
+</body>
+</html>

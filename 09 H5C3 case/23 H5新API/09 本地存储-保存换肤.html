@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .container > div {
+            height: 100px;
+            width: 100px;
+            margin: 10px 10px;
+            border: 1px solid gray;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .orange {
+            background-color: orange;
+        }
+
+        .yellowgreen {
+            background-color: yellowgreen;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        input {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <div class='red'></div>
+    <div class='orange'></div>
+    <div class='yellowgreen'></div>
+</div>
+<input type="button" value='localStorage保存'/>
+<input type="button" value='localStorage读取'/>
+<input type="button" value='localStorage清除'/>
+<input type="button" value='localStorage清除所有'/>
+<hr/>
+<input type="button" value='sessionStorage保存'/>
+<input type="button" value='sessionStorage读取'/>
+<input type="button" value='sessionStorage清除'/>
+<input type="button" value='sessionStorage清除所有'/>
+</body>
+</html>
+<script type="text/javascript">
+    //获取三个颜色块的div
+    var colorDivs = document.querySelectorAll('.container>div');
+    //给每个颜色块绑定点击改变body的背景色的事件，注意body要写成document.body对象，backgroundColor要写上style
+    for(var i=0; i<colorDivs.length; i++)
+    {
+        colorDivs[i].onclick = function(){
+            document.body.style.backgroundColor = getComputedStyle(this).backgroundColor;
+        };
+    }
+    //获取localStorage4个按钮
+    var saveBtn1 = document.querySelector('input[value="localStorage保存"]');
+    var readBtn1 = document.querySelector('input[value="localStorage读取"]');
+    var clearBtn1 = document.querySelector('input[value="localStorage清除"]');
+    var clearAllBtn1 = document.querySelector('input[value="localStorage清除所有"]');
+    //获取sessionStorage4个按钮
+    var saveBtn2 = document.querySelector('input[value="sessionStorage保存"]');
+    var readBtn2 = document.querySelector('input[value="sessionStorage读取"]');
+    var clearBtn2 = document.querySelector('input[value="sessionStorage清除"]');
+    var clearAllBtn2 = document.querySelector('input[value="sessionStorage清除所有"]');
+    //给saveBtn绑定点击事件：保存颜色
+    saveBtn1.onclick = function(){
+        window.localStorage.setItem('myColor1', getComputedStyle(document.body).backgroundColor);
+        console.log("使用localStorage保存！");
+    };
+    saveBtn2.onclick =function(){
+        window.sessionStorage.setItem('myColor2',getComputedStyle(document.body).backgroundColor);
+        console.log("使用sessionStorage保存！");
+    };
+
+    //给readBtn绑定点击事件：获取（读取）颜色
+    readBtn1.onclick = function(){
+        var result1 = window.localStorage.getItem('myColor1');
+        console.log("读取localStorage保存的颜色");
+        document.body.style.backgroundColor = result1;
+    };
+    readBtn2.onclick = function(){
+        var result2 = window.sessionStorage.getItem('myColor2');
+        console.log("读取sessionStorage保存的颜色");
+        document.body.style.backgroundColor = result2;
+    };
+
+    //给clearBtn绑定点击事件：清除颜色
+    clearBtn1.onclick = function(){
+        window.localStorage.removeItem('myColor1');
+        console.log("清除localStorage保存的颜色");
+    };
+    clearBtn2.onclick = function(){
+        window.sessionStorage.removeItem('myColor2');
+        console.log("清除sessionStorage保存的颜色");
+    };
+
+    //给clearAllBtn绑定点击事件：清除所有保存的颜色
+    clearAllBtn1.onclick = function(){
+        window.localStorage.clear();
+        console.log("清除localStorage保存的所有颜色");
+    };
+    clearAllBtn2.onclick = function(){
+        window.sessionStorage.clear();
+        console.log("清除sessionStorage保存的所有颜色");
+    };
+
+    //不能使用localStorage 或者 sessionStorage保存用户的私人数据
+    //localStorage 保存的值 关闭浏览器之后 还是存在的
+    //sessionStorage 保存的值 关闭浏览器之后 就没有了
+
+    // 打开浏览器 如果保存了颜色 那么直接加载改颜色
+    window.onload = function () {
+        var color = window.localStorage.getItem('myColor1');
+        if (color != null) {
+            document.body.style.backgroundColor = color;
+        } else {
+            alert("没有保存颜色哦");
+        }
+    }
+</script>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>clock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            background-color: #eee;
+        }
+
+        .clock {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            box-shadow: 1px 1px 8px #ccc;
+            margin: 100px auto;
+            background-color: #fff;
+            position: relative;
+        }
+
+        div[class^= "line"] {
+            width: 4px;
+            height: 100%;
+            background-color: gray;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -2px;
+            margin-top: -50%;
+        }
+
+        .line2 {
+            transform: rotate(30deg);
+        }
+
+        .line3 {
+            transform: rotate(60deg);
+        }
+
+        .line4 {
+            transform: rotate(90deg);
+            background-color: red;
+        }
+
+        .line5 {
+            transform: rotate(120deg);
+        }
+
+        .line6 {
+            transform: rotate(150deg);
+        }
+
+        .line1, .line4 {
+            width: 6px !important;
+        }
+
+        .cover {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background-color: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -85px;
+            margin-top: -85px;
+        }
+
+        .hour {
+            width: 6px;
+            height: 60px;
+            border-radius: 2px;
+            background-color: red;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -3px;
+            margin-top: -60px;
+            transform-origin: center bottom;
+            animation: start 43200s steps(60) infinite;
+        }
+
+        .minute {
+            width: 4px;
+            height: 70px;
+            background-color: blue;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -2px;
+            margin-top: -70px;
+            transform-origin: center bottom;
+            animation: start 3600s steps(60) infinite;
+        }
+
+        .second {
+            width: 2px;
+            height: 80px;
+            background-color: olive;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -1px;
+            margin-top: -80px;
+            transform-origin: center bottom;
+            animation: start 60s steps(60) infinite;
+        }
+
+        .point {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #000;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -4px;
+            margin-top: -4px;
+        }
+
+        @keyframes start {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="clock">
+    <!-- 12个钟点的刻度线，用6条线段 + 一个圆形遮罩 组合而成-->
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+    <div class="line4"></div>
+    <div class="line5"></div>
+    <div class="line6"></div>
+    <div class="cover"></div>
+    <!-- 时针、分针、秒针，中心点-->
+    <div class="hour"></div>
+    <div class="minute"></div>
+    <div class="second"></div>
+    <div class="point"></div>
+</div>
+</body>
+</html>

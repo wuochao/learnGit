@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>universe-earth和moon在同一盒子</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body, html{
+            background-color: #000;
+            /*height: 100%;*/
+        }
+        .container{
+            width: 1000px;
+            height: 1000px;
+            /*border: 1px solid #ccc;*/
+            margin: 300px auto;
+            position: relative;
+        }
+        .sun{  /*定义太阳在container中心的位置，不用旋转，但是要有box-shadow效果*/
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            border-radius: 50%;
+            position: absolute;
+            left:50%;
+            top:50%;
+            margin-left: -50px;
+            margin-top: -50px;
+            box-shadow: 0 0 30px 2px yellow;
+        }
+        .box{ /*定义earth的运动轨迹*/
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px dashed #ccc;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -150px;
+            animation: autoRotate 5s linear infinite;
+        }
+        .earth{
+            width: 30px;
+            height: 30px;
+            background-color: skyblue;
+            border-radius: 50%;
+            position: absolute;
+            left:0;
+            top: 50%;
+            margin-left: -15px;
+            margin-top: -15px;
+            box-shadow: 0 0 10px 3px lightskyblue;
+        }
+        .moon{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            /*border: 1px dashed #ccc;*/
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-left: -30px;
+            margin-top: -30px;
+            animation: autoRotate 3s linear infinite;
+        }
+        .moon::before{
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #fffc73;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-left: -5px;
+            margin-top: -5px;
+            box-shadow: 0 0 3px 1px lightyellow;
+        }
+
+        .mars{ /*定义mars的运动轨迹*/
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            border: 1px dashed #ccc;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -200px;
+            margin-top: -200px;
+            animation: autoRotate 7s linear infinite;
+        }
+        .mars::before{
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: gold;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            box-shadow: 0 0 2px 2px #ccae32;
+        }
+        .venus{ /*定义venus的运动轨迹*/
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            border: 1px dashed #ccc;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -250px;
+            margin-top: -250px;
+            animation: autoRotate 9s linear infinite;
+        }
+        .venus::before{
+            content: '';
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ff606f;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-left: -20px;
+            margin-top: -20px;
+            box-shadow: 0 0 2px 2px #cc5e15;
+        }
+
+        @keyframes autoRotate {
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="sun"></div>
+    <div class="box">
+        <div class="earth"></div>
+        <div class="moon"></div>
+    </div>
+    <div class="mars"></div>
+    <div class="venus"></div>
+</div>
+</body>
+</html>

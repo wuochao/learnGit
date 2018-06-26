@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>骰子-5个点</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+            width: 90px;
+            height: 90px;
+            border: 1px solid gray;
+            background-color: whitesmoke;
+            border-radius: 10px;
+            float: left;
+            margin: 10px;
+            display: flex;
+        }
+        li {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: black;
+            margin: 5px;
+        }
+        .five ul{
+            flex-wrap: wrap;
+        }
+        .five ul:nth-child(1){
+            justify-content: flex-start;
+            align-content: flex-start;
+        }
+        .five ul:nth-child(2){
+            justify-content: space-between;
+            align-content: space-between;
+        }
+        .five ul:nth-child(2) li:nth-child(2){
+            margin-top: 35px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="five">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
+
+</body>
+</html>

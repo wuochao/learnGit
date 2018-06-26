@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击旋转图片</title>
+    <style>
+        * {
+            margion: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 240px;
+            height: 240px;
+            margin: 100px auto;
+            background: url(zhuan.jpg) no-repeat;
+            transition: all 1s;
+        }
+        .rot{
+            transform: rotate(360deg);
+        }
+
+    </style>
+</head>
+<body>
+<div class="box"></div>
+
+<script src="jquery-1.11.1.min.js"></script>
+<script>
+    $(function(){
+        $(".box").click(function(){
+            $(this).toggleClass("rot");
+        });
+    });
+
+</script>
+</body>
+</html>

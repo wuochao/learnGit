@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全屏的开启与取消</title>
+	<style>
+		.box{
+			width: 200px;
+			height: 200px;
+			background-color: orange;
+			margin: 100px auto;
+		}
+	</style>
+</head>
+<body>
+<div class="box">
+	<button id="open">开启全屏</button>
+	<br/>
+	<button id="cancel">取消全屏</button>
+	<br/>
+	<button id="check">检测全屏</button>
+</div>
+<script>
+	var box = document.querySelector('.box');
+	var open = document.querySelector('#open');
+	var cancel = document.querySelector('#cancel');
+	var check = document.querySelector('#check');
+	/*开启全屏*/
+	open.onclick =function(){
+		if(box.requestFullscreen)
+			box.requestFullscreen();
+		else if(box.webkitRequestFullScreen)
+			box.webkitRequestFullScreen();
+		else if(box.mozRequestFullScreen)
+			box.mozRequestFullScreen();
+		else if(box.msRequestFullScreen)
+			box.msRequestFullScreen();
+	};
+	/*取消全屏*/
+	cancel.onclick = function(){
+		if(document.cancelFullscreen)
+			document.cancelFullscreen();
+		else if(document.webkitCancelFullScreen)
+			document.webkitCancelFullScreen();
+		else if(document.mozCancelFullScreen)
+			document.mozCancelFullScreen();
+		else if(document.msCancelFullScreen)
+			document.mzCancelFullScreen();
+	};
+	/*检测全屏*/
+	check.onclick = function(){
+		if(document.fullscreenElement || document.webkitFullscreenElement ||
+				document.mozFullScreenElement || document.msFullscreenElement){
+			alert(true);
+		}
+		else{
+			alert(false);
+		}
+	};
+
+</script>
+</body>
+</html>

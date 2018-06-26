@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发光的立方体-用背景做</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        html, body{
+            height: 100%;
+            background-color: black;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            border-radius: 30px;
+            margin: 150px auto;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-45deg) rotateY(-45deg);
+            animation: rot 20s linear infinite;
+        }
+        @keyframes rot {
+            0% {
+                transform: rotateX(-45deg) rotateY(-45deg) rotateZ(-45deg);
+            }
+            20% {
+                transform: rotateX(-90deg) rotateY(-90deg) rotateZ(45deg);
+            }
+            40% {
+                transform: rotateX(-135deg) rotateY(-125deg) rotateZ(-135deg);
+            }
+            60% {
+                transform: rotateX(-160deg) rotateY(90deg) rotateZ(-180deg);
+            }
+            80% {
+                transform: rotateX(-60deg) rotateY(-25deg) rotateZ(-105deg);
+            }
+            100% {
+                transform: rotateX(50deg) rotateY(-45deg) rotateZ(-45deg);
+            }
+        }
+        .box>div{
+            width: 100%;
+            height: 100%;
+            border-radius: 30%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .box .s1{
+            background: url(1.jpg) no-repeat;
+            background-size: 300px 300px;
+            transform: translateZ(150px);
+        }
+        .box .s2{
+            background: url(2.jpg) no-repeat;
+            background-size: 300px 300px;
+            transform: rotateY(90deg) translateZ(150px);
+        }
+        .box .s3{
+            background: url(3.jpg) no-repeat;
+            background-size: 300px 300px;
+            transform: rotateY(-90deg) translateZ(150px);
+        }
+        .box .s4{
+            background: url(4.jpg) no-repeat;
+            background-size: 300px 300px;
+            transform: rotateY(180deg) translateZ(150px);
+        }
+        .box .s5{
+            background: url(5.jpg) no-repeat;
+            background-size: 300px 300px;
+            transform: rotateX(90deg) translateZ(150px);
+        }
+        .box .s6{
+            background: url(6.jpg) no-repeat;
+            background-size: 300px 300px;
+            transform: rotateX(-90deg) translateZ(150px);
+        }
+    </style>
+
+</head>
+<body>
+<div class="box">
+    <div class="s1"></div>
+    <div class="s2"></div>
+    <div class="s3"></div>
+    <div class="s4"></div>
+    <div class="s5"></div>
+    <div class="s6"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>切割轮播图-单页分割4部分</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style:none;
+            display: flex;   /*设置成弹性布局，才能让li放在一个盒子里面*/
+        }
+        .container{
+            width: 560px;
+            height: 380px;
+            border: 1px solid lightblue;
+            margin: 100px auto;
+            position: relative;
+
+        }
+        .container>ul{
+            width: 100%;
+            height: 100%;
+        }
+        .container>ul>li{
+            width: 25%;
+            height: 100%;
+            position:relative;
+            transform-style: preserve-3d; /* 让div在3d空间中 能够看到效果 */
+            transition: all 0.5s;
+        }
+        .container>ul>li>div{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        .container>ul>li>div:nth-child(1){
+            background: url(imgs/01.jpg) no-repeat;
+            transform: rotateX(0deg) translateZ(190px);
+        }
+        .container>ul>li>div:nth-child(2){
+            background: url(imgs/02.jpg) no-repeat;
+            transform: rotateX(90deg) translateZ(190px);
+        }
+        .container>ul>li>div:nth-child(3){
+            background: url(imgs/03.jpg) no-repeat;
+            transform: rotateX(-90deg) translateZ(190px);
+        }
+        .container>ul>li>div:nth-child(4){
+            background: url(imgs/04.jpg) no-repeat;
+            transform: rotateX(180deg) translateZ(190px);
+        }
+
+        .container>ul>li:nth-child(2){
+            transition-delay: .1s;
+        }
+        .container>ul>li:nth-child(3){
+            transition-delay: .3s;
+        }
+        .container>ul>li:nth-child(4){
+            transition-delay: .5s;
+        }
+        .container>ul>li:nth-child(2)>div{
+            background-position: -140px 0;
+        }
+        .container>ul>li:nth-child(3)>div{
+            background-position: -280px 0;
+        }
+        .container>ul>li:nth-child(4)>div{
+            background-position: -420px 0;
+        }
+
+        .arr{
+            display: block;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(120,120,120,.3);
+            font: bold 30px/40px "SimSun";
+            color: orange;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+        }
+        .left{
+            transform: translateX(-40px);
+        }
+        .right{
+            transform: translateX(561px);
+        }
+    </style>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script>
+        $(function(){
+            //绑定点击事件，先写右键点击
+            //设置图片指针
+            var picIndex = 0;
+            //设置节流阀
+            var flag = true;
+            $('#right').click(function(){
+                if(flag)
+                {
+                    flag = false;
+                    picIndex++;
+                    $('li').css({
+                        "transform":"rotateX("+ picIndex*90 +"deg)"
+                    });
+                    //设置节流阀延迟时间1s，延时结束后，将节流阀打开
+                    setTimeout(function(){
+                        flag = true;
+                    },1000);
+                }
+            });
+
+            $('#left').click(function(){
+                if(flag)
+                {
+                    flag = false;
+                    picIndex--;
+                    $('li').css({
+                        "transform":"rotateX("+ picIndex*90 +"deg)"
+                    });
+                    //设置节流阀延迟时间1s，延时结束后，将节流阀打开
+                    setTimeout(function(){
+                        flag = true;
+                    },1000);
+                }
+
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+<div class="container">
+    <ul>
+        <li>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </li>
+    </ul>
+    <a href="javascript:void(0)" class="arr left" id="left">&lt;</a>
+    <a href="javascript:void(0)" class="arr right" id="right">&gt;</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>游动的鱼</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html, body{
+            height: 100%;
+        }
+        body{
+            background-color: lightblue;
+            overflow: hidden;
+        }
+        .fishbox{
+            width: 200px;
+            height: 200px;
+            /*background-color: orange;*/
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: fishMove 20s linear infinite;
+        }
+        .fish{
+            width: 174px;
+            height: 126px;
+            background: url(image/fish.png) no-repeat left top;
+            position: absolute;
+            left: 35%;
+            top: 0;
+            animation: fishActive 0.5s steps(8) infinite;
+        }
+        .sharkbox{
+            width: 509px;
+            height: 270px;
+            /*background-color: hotpink;*/
+            animation: sharkMove 16s linear infinite;
+        }
+        .shark{
+            width: 509px;
+            height: 270px;
+            background: url(image/shark.png) no-repeat ;
+            animation: sharkActive 1s steps(8) infinite;
+
+        }
+
+        @keyframes fishActive{
+            from{
+
+            }
+            to{
+                background-position: left -1008px;
+            }
+        }
+        @keyframes fishMove {
+            0%{
+
+            }
+            25%{
+                transform: translate(1000px, 0) rotate(45deg);
+            }
+            50%{
+                transform: translate(1000px, 300px) rotate(135deg);
+            }
+            75%{
+                transform: translate(50px, 400px) rotate(235deg);
+            }
+            100%{
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        @keyframes sharkActive {
+            from{
+
+            }
+            to{
+                background-position: left -2160px;
+            }
+        }
+        @keyframes sharkMove{
+            from{
+                transform:translateX(-600px);
+            }
+            to{
+                transform: translateX(1500px);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="fishbox">
+        <div class="fish"></div>
+    </div>
+    <div class="sharkbox">
+        <div class="shark"></div>
+    </div>
+</body>
+</html>

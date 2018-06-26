@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标悬停旋转导航栏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        nav {
+            display: inline-block;
+            margin-top: 100px;
+        }
+
+        nav a {
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            perspective: 200px;
+        }
+
+        nav a span {
+            display: inline-block;
+            background-color: #2195de;
+            width: 100px;
+            padding: 0 10px;
+            line-height: 40px;
+            position: relative;
+            transform-origin: top;
+            transform-style: preserve-3d;
+            transition: all 1s;
+        }
+
+        nav a span::after {
+            content: attr(data-hover);  /*获取span的自定义属性*/
+            width : 100%;
+            height: 100%;
+            background-color: #0965a0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            transform-origin: top;
+            transform: rotateX(-90deg); /*往下翻转：负值 --左手法则*/
+        }
+        nav a:hover span{
+            transform: rotateX(90deg) translateY(-20px);
+        }
+
+    </style>
+
+</head>
+<body>
+<nav>
+    <a href="#">
+        <span data-hover="前端弟弟">web前端</span>
+    </a>
+    <a href="#">
+        <span data-hover="后台哥哥">C++</span>
+    </a>
+    <a href="#">
+        <span data-hover="扫地阿姨">Python</span>
+    </a>
+    <a href="#">
+        <span data-hover="保安大哥">PHP</span>
+    </a>
+    <a href="#">
+        <span data-hover="总服务员">JavaScript</span>
+    </a>
+</nav>
+
+</body>
+</html>

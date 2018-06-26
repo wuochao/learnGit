@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全屏切换</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .container .img-box{
+            width: 100%;
+            height: 100%;
+            transition: all 1s;
+            overflow: hidden;
+            position: relative;
+        }
+        .container .img-box li img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .container ul li img:target {
+            z-index: 5;
+        }
+
+        .container ul li:nth-child(1) img:target {
+            animation: fromLeft 1s;
+        }
+        .container ul li:nth-child(2) img:target {
+            animation: fromRight 1s;
+        }
+        .container ul li:nth-child(3) img:target {
+            animation: fromTop 1s;
+        }
+        .container ul li:nth-child(4) img:target {
+            animation: fromBottom 1s;
+        }
+        .container ul li:nth-child(5) img:target {
+            animation: rotateAround 1s;
+        }
+        .container ul li img {
+            z-index: 1;
+        }
+        ol {
+            width: 200px;
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            margin-left: -100px;
+            z-index: 10;
+            text-align: center;
+        }
+
+        ol li {
+            float: left;
+        }
+
+        ol li a {
+            text-decoration: none;
+            display: block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: gray;
+            font: bold 24px/30px "Microsoft Yahei";
+            color: whitesmoke;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        @keyframes fromLeft {
+            from {
+                transform: translateX(-1000px);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fromRight {
+            from {
+                transform: translateX(1000px);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fromTop {
+            from {
+                transform: translateY(-1200px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fromBottom {
+            from {
+                transform: translateY(800px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotateAround {
+            from {
+                transform: scale(0) rotate(360deg);
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="img-box">
+            <li><img src="images/bg1.jpg" id="img1" alt=""/></li>
+            <li><img src="images/bg2.jpg" id="img2" alt=""/></li>
+            <li><img src="images/bg3.jpg" id="img3" alt=""/></li>
+            <li><img src="images/bg4.jpg" id="img4" alt=""/></li>
+            <li><img src="images/bg5.jpg" id="img5" alt=""/></li>
+        </ul>
+        <ol class="order">
+            <li><a href="#img1">1</a></li>
+            <li><a href="#img2">2</a></li>
+            <li><a href="#img3">3</a></li>
+            <li><a href="#img4">4</a></li>
+            <li><a href="#img5">5</a></li>
+        </ol>
+    </div>
+</body>
+</html>

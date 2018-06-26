@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>videoplayer</title>
+    <link rel="stylesheet" href="css/font-awesome.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 500px;
+            height: 300px;
+            background-color: black;
+            margin: 100px auto;
+        }
+        .container .video {
+            width: 100%;
+            height: 90%;
+            /*background-color: orange;*/
+        }
+        .container .video video {
+            width: 100%;
+            height: 100%;
+        }
+        .container .controller {
+            display: flex;
+            align-items: center;
+        }
+        .container .controller .progress {
+            height: 10px;
+            flex: 1;
+            background-color: #bbb;
+            cursor: pointer;
+        }
+        .container .controller .progress .step {
+            width: 0;
+            height: 100%;
+            background-color: orange;
+        }
+        .container .controller a {
+            text-decoration: none;
+            color: #ccc;
+            font-size: 15px;
+            margin: 0 5px;
+        }
+        .container .timer{
+            width: 130px;
+            height: 20px;
+            font: 14px/20px "Arial";
+            color: #333;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="video">
+        <video src="movie/bglb.mp4"></video>
+    </div>
+    <div class="controller">
+        <a href="#" class="icon-play-circle" id="play"></a>
+        <div class="progress" id="progress">
+            <div class="step" id="step"></div>
+        </div>
+        <!-- 时间 -->
+        <div class="timer">
+            <span class="current">00:00:00</span>/<span class="total">00:00:00</span>
+        </div>
+        <a href="#" class="icon-fullscreen" id="fullscreen"></a>
+    </div>
+</div>
+<script type="text/javascript">
+    window.onload = function(){
+        //获取元素，播放器对象（DOM对象）
+        var videoDom = document.querySelector('video');
+        var play = document.querySelector('#play');
+        var fullscreen = document.querySelector('#fullscreen');
+        var progress = document.querySelector('#progress');
+        var step = document.querySelector('#step');
+        var current = document.querySelector('.current');
+        var total = document.querySelector('.total');
+        //设置时间的三个变量：小时h、分钟m、秒钟s
+        var h, m, s;
+        //计算总时间的各个变量数字
+        h = Math.floor(videoDom.duration/3600);
+        m = Math.floor((videoDom.duration%3600)/60);
+        s = Math.floor(videoDom.duration%60);
+        //如果h, m, s是单位数，那么要加个“0”
+        h = h<10 ? "0"+h : h;
+        m = m<10 ? "0"+m : m;
+        s = s<10 ? "0"+s : s;
+        //总时间拼接
+        total.innerHTML = h + ":" + m + ":" + s;
+         console.log(videoDom);
+         console.dir(videoDom);
+         console.log(videoDom.duration);
+
+        //1、播放与暂停 ： 根据当前状态判定是播放还是暂停，再来做切换
+        play.onclick = function () {
+            if (this.classList.contains('icon-pause')) {
+                //如果play有暂停的图标，那么点击时，视频暂停，并将图标改成 播放类名
+                videoDom.pause();
+                this.classList.remove('icon-pause');
+                this.classList.add('icon-play-circle');
+            }
+            else {
+                //如果play没有暂停的图标，那么点击时，视频播放，并将图标改成 暂停类名
+                videoDom.play();
+                this.classList.remove('icon-play-circle');
+                this.classList.add('icon-pause');
+            }
+        };
+
+        //2、全屏切换
+        fullscreen.onclick = function () {
+            if (videoDom.requestFullscreen)
+                videoDom.requestFullscreen();
+            else if (videoDom.webkitRequestFullScreen)
+                videoDom.webkitRequestFullScreen();
+            else if (videoDom.mozRequestFullScreen)
+                videoDom.mozRequestFullScreen();
+            else if (videoDom.msRequestFullScreen)
+                videoDom.msRequestFullScreen();
+        };
+
+        //3、实时更新进度条的进度，当前时间和总时间的比例 * 进度条长度
+        videoDom.ontimeupdate = function () {
+            //计算进度信息
+            var percent = this.currentTime / this.duration * 100 + "%";
+            //按照百分比设置step的宽度
+            step.style.width = percent;
+            //计算已经播放时间的各个变量数字
+            h = Math.floor(videoDom.currentTime/3600);
+            m = Math.floor((videoDom.currentTime%3600)/60);
+            s = Math.floor(videoDom.currentTime%60);
+            //如果h, m, s是单位数，那么要加个“0”
+            h = h<10 ? "0"+h : h;
+            m = m<10 ? "0"+m : m;
+            s = s<10 ? "0"+s : s;
+            //总时间拼接
+            current.innerHTML = h + ":" + m + ":" + s;
+
+        };
+
+        //4、点击进度条某处，切换视频播放的时间位置
+        progress.onclick = function (event) {
+            var percent = event.offsetX / this.offsetWidth * 100 + "%";
+            step.style.width = event.offsetX +"px";
+            //修改当前视频播放的时间点为： 当前播放比例 * 视频的总时间
+            videoDom.currentTime = videoDom.duration * event.offsetX / this.offsetWidth;
+
+            //计算已经播放时间的各个变量数字
+            h = Math.floor(videoDom.currentTime/3600);
+            m = Math.floor((videoDom.currentTime%3600)/60);
+            s = Math.floor(videoDom.currentTime%60);
+            //如果h, m, s是单位数，那么要加个“0”
+            h = h<10 ? "0"+h : h;
+            m = m<10 ? "0"+m : m;
+            s = s<10 ? "0"+s : s;
+            //总时间拼接
+            current.innerHTML = h + ":" + m + ":" + s;
+        };
+
+        //播放完后，要将进度条调回到最前面
+        videoDom.onended = function(){
+            //当播放完整个视频时，将播放暂停键换成播放键
+            play.classList.remove('icon-play-circle');
+            play.classList.add('icon-pause');
+            //将step步进指针调到最前面
+            step.style.width = 0;
+            //将当前时间调回最前面
+            videoDom.currentTime = 0;
+        };
+    };
+</script>
+</body>
+</html>

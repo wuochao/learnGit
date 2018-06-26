@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="textml; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <style type="text/css">
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=ZuSbFihUuxRyEfO7ZqL8rGXKPRVuDmQ8"></script>
+    <title>添加动画标注点</title>
+</head>
+<body>
+<div id="allmap"></div>
+</body>
+
+<script type="text/javascript">
+    window.navigator.geolocation.getCurrentPosition(function (position) {
+        //console.log(position);
+        console.log('位置获取成功');
+        console.log('经度:' + position.coords.longitude);
+        console.log('纬度:' + position.coords.latitude);
+
+        // 百度地图API功能
+        var map = new BMap.Map("allmap");
+        // 设置地图 标注点的位置
+        var point = new BMap.Point(position.coords.longitude, position.coords.latitude);
+        map.centerAndZoom(point, 15);
+        var marker = new BMap.Marker(point);  // 创建标注
+        map.addOverlay(marker);               // 将标注添加到地图中
+        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+    })
+</script>
+</html>

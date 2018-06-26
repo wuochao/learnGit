@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>发光的立方体-用img做</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            background-color: black;
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+            border-radius: 30px;
+            position: relative;
+            transform: rotateX(-45deg) rotateY(-45deg);
+            animation: rotate 20s linear infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateX(-45deg) rotateY(-45deg) rotateZ(-45deg);
+            }
+            20% {
+                transform: rotateX(-90deg) rotateY(-90deg) rotateZ(45deg);
+            }
+            40% {
+                transform: rotateX(-135deg) rotateY(-125deg) rotateZ(-135deg);
+            }
+            60% {
+                transform: rotateX(-160deg) rotateY(90deg) rotateZ(-180deg);
+            }
+            80% {
+                transform: rotateX(-60deg) rotateY(-25deg) rotateZ(-105deg);
+            }
+            100% {
+                transform: rotateX(50deg) rotateY(-45deg) rotateZ(-45deg);
+            }
+        }
+
+        .box>div {
+            width: 300px;
+            height: 300px;
+            border-radius: 30%;
+            line-height: 300px;
+            font-size: 160px;
+            text-align: center;
+            color: white;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 1;
+            box-shadow: 0 0 100px purple;
+            overflow: hidden;  /*圆角*/
+        }
+
+        .box div:nth-child(1) {
+            transform: translateZ(150px);
+        }
+
+        .box div:nth-child(2) {
+            transform: rotateY(90deg) translateZ(150px);
+        }
+
+        .box div:nth-child(3) {
+            transform: rotateY(-90deg) translateZ(150px);
+        }
+
+        .box div:nth-child(4) {
+            transform: rotateY(180deg) translateZ(150px);
+        }
+
+        .box div:nth-child(5) {
+            transform: rotateX(90deg) translateZ(150px);
+        }
+
+        .box div:nth-child(6) {
+            transform: rotateX(-90deg) translateZ(150px);
+        }
+
+        .box div img {
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="surface1"><img src="1.jpg" alt=""/></div>
+    <div class="surface2"><img src="2.jpg" alt=""/></div>
+    <div class="surface3"><img src="3.jpg" alt=""/></div>
+    <div class="surface4"><img src="4.jpg" alt=""/></div>
+    <div class="surface5"><img src="5.jpg" alt=""/></div>
+    <div class="surface6"><img src="6.jpg" alt=""/></div>
+</div>
+</body>
+</html>

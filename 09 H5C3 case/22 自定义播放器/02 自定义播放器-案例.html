@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+		<style type="text/css">
+			.container{
+				width: 500px;
+				height: 300px;
+				background-color: black;
+				margin: 100px auto;
+			}
+			.video{
+				width: 100%;
+				height: 90%;
+			}
+			.video video{
+				width: 100%;
+				height: 100%;
+			}
+			.controller{
+				display: flex;
+				align-items: center;
+			}
+			.controller .progress {
+				height: 15px;
+				background: white;
+				flex:1;
+			}
+			.controller .progress .step{
+				width: 0%;
+				height: 100%;
+				background: gray;
+			}
+			.controller a{
+				font-size:20px;
+				color:whitesmoke;
+				margin:0 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="video">
+				<video src="movie/bglb.mp4"></video>
+			</div>
+			<div class="controller">
+				<a href="#" class='icon-play-circle' id='play'></a>
+				<div class="progress">
+					<div class="step"></div>
+				</div>
+				<a href="#" class='icon-fullscreen' id='fullScreen'></a>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	// 获取video标签
+	var videoDom = document.querySelector('video');
+	
+	// 播放暂停
+	document.querySelector('#play').onclick = function (){
+		//		videoDom.play();
+			if(this.classList.contains('icon-pause')){
+				// 暂停视频播放
+				videoDom.pause();
+				// 移除 暂停class即可
+				this.classList.remove('icon-pause');
+			}else{
+					// 播放
+				videoDom.play();
+				// 添加 暂停图标
+				this.classList.add('icon-pause');
+			}
+	
+	}
+	
+	// 更新进度 测试事件 触发一次
+	// videoDom.onplay = function (){
+	// 	console.log('播放中');
+	// }
+	videoDom.ontimeupdate = function(){
+		console.log('播放中1111')
+		// 计算进度信息
+		console.log(videoDom.currentTime)
+		console.log(videoDom.duration)
+		
+		console.log(videoDom.currentTime / videoDom.duration);
+		// 换算成百分比 设置给 进度条 底部的 进度信息即可
+		var percent = videoDom.currentTime / videoDom.duration *100 +'%';
+		document.querySelector('.step').style.width =percent;
+	}
+	
+	// 进度条 添加点击事件
+	document.querySelector('.progress').onclick = function (e){
+		console.log(e.offsetX);
+		console.log(this.clientWidth);
+		
+		// 修改 进度信息 即可
+		// 这个值是字符串
+		var percent = e.offsetX / this.clientWidth *100 +"%";
+		document.querySelector('.step').style.width =percent;
+		
+		// 修改 视频当前播放的一个 时间
+		videoDom.currentTime = videoDom.duration * e.offsetX / this.clientWidth;
+	}
+	
+	// 切换全屏
+	document.querySelector('#fullScreen').onclick = function (){
+		if(videoDom.requestFullscreen){
+			videoDom.requestFullscreen();
+		}else if(videoDom.webkitRequestFullScreen){
+			videoDom.webkitRequestFullScreen()
+		}else if(videoDom.msRequestFullscreen){
+			videoDom.msRequestFullscreen();
+		}else if(this.mozRequestFullScreen){
+			videoDom.mozRequestFullScreen();
+		}
+	}
+</script>

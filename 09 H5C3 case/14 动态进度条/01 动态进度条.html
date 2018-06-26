@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态进度条</title>
+    <style>
+        body, html{
+            margin: 0;
+            padding: 0;
+            background-color: #eee;
+        }
+        .bar{
+            width: 1000px;
+            height: 100px;
+            margin: 100px auto;
+            background-image: linear-gradient(
+                    135deg,
+                    black 25%,
+                    transparent 25%,
+                    transparent 50%,
+                    black 50%,
+                    black 75%,
+                    transparent 75%
+            );
+            background-size: 100px 100px;
+            animation: move 1s linear infinite;
+        }
+        @keyframes move {
+            from{
+                background-position: -200px 0;
+            }
+            to{
+                background-position: 0 0;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <section id="progressBar">
+        <div class="bar"></div>
+    </section>
+</body>
+</html>

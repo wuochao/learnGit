@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>锤子3D banner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        .banner {
+            margin: 20px auto;
+            width: 1340px;
+            height: 620px;
+            /*border: 1px solid blue;*/
+            perspective: 2000px;
+        }
+
+        .item {
+            width: 1340px;
+            height: 620px;
+            border-radius: 20px;
+            /*border: 1px solid red;*/
+            position: relative;
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+
+        .item:hover {
+            box-shadow: 0 0 50px 2px rgba(100, 100, 100, 0.7);
+        }
+
+        .item > div {
+            width: 1220px;
+            height: 500px;
+            border-radius: 20px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -610px;
+            margin-top: -250px;
+            overflow: hidden;
+            /*border: 1px solid red;*/
+        }
+
+        .item1 > .shadow {
+            width: 1340px;
+            height: 620px;
+            background: url(shadow.png) center no-repeat;
+            left: 50%;
+            top: 50%;
+            margin-left: -670px;
+            margin-top: -310px;
+            opacity: 0;
+
+        }
+
+        .item1 .bottom {
+            background: url(banner2-b.png) center no-repeat;
+        }
+
+        .item1 .center {
+            background: url(banner2-c.png) center no-repeat;
+        }
+
+        .item1 .top {
+            background: url(banner2-t.png) center no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div class="banner">
+    <div class="item item1">
+        <!--写页面结构时，最上层写在最下面，注意顺序-->
+        <div class="shadow"></div>
+        <div class="bottom"></div>
+        <div class="center"></div>
+        <div class="top"></div>
+    </div>
+</div>
+
+<script>
+    /**
+     * 思路：
+     * 0.使用CSS3的transform-style: preserve-3d构建一个3D透视空间。
+     * 1.获取鼠标X，Y轴线性运动变量。
+     * 2.为了使鼠标左右移动图片产生左右偏转，得把鼠标运动到banner图中间点为“0,0”，这样的话往左为负，往右为正。
+     * 3.把变量赋值给CSS3的rotateX,rotateY。
+     * */
+    //获取操作的元素
+    //外边框，实现3D效果的最外层盒子 perspective: 1000;
+    var banner = document.querySelector('.banner');
+    //大盒子，放置页面各个图片，并让各个图片显示成3D效果 transform-style: perserve-3d;
+    var item = document.querySelector('.item1');
+    //耳机图片：第1层
+    var top1 = document.querySelector('.top');
+    //手机图片：第2层
+    var center = document.querySelector('.center');
+    //文字图片：第3层
+    var bottom = document.querySelector('.bottom');
+    //阴影：第4层
+    var shadow = document.querySelector('.shadow');
+
+    //获取大盒子item的宽高
+    var w = item.offsetWidth;
+    var h = item.offsetHeight;
+
+    //计算中心点距离盒子左上角的坐标
+    var centerX = w / 2;
+    var centerY = h / 2;
+
+    //给banner帮定鼠标移动onmousemove事件
+    banner.onmousemove = function (e) {
+        //获取鼠标当前坐标值
+        var moveX = e.offsetX;
+        var moveY = e.offsetY;
+
+        //获取鼠标距离item盒子中心点的距离，在中心点右侧为正，在中心点上方为正，注意centerY和moveY都是相对于盒子左上角的距离
+        var deltaX1 = moveX - centerX;
+        var deltaY1 = centerY - moveY;
+
+        //第1层旋转角度计算方法：
+        //在水平方向上，deltaX/centerX就是元素要旋转的度数比例，距离中心点越远旋转角度越大
+        //在垂直方向上，deltaY/centerY就是元素要旋转的度数比例，距离中心点越远旋转角度越大
+        var rx1 = deltaX1 / centerX;
+        var ry1 = deltaY1 / centerY;
+
+        //假设约定item的旋转角度的扩大系数，在水平方向扩大6倍，在垂直方向扩大8倍
+        var rotX = rx1 * 6;
+        var rotY = ry1 * 8;
+        item.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+
+
+        //shadow: 30 15
+        //  rotate  x:8  y:6
+        //  第2层  x:3 y:0.6
+        //  第3层： x:4  y:1
+
+        //间隔1s
+        setTimeout(function () {
+            //item旋转不要过渡，瞬间完成
+            item.style.transition = 'all 0s';
+        }, 1000);
+        //第2层，第3层移动处理
+        var deltaX2 = moveX - centerX;
+        var deltaY2 = moveY - centerY;
+        //第2层位移计算方法：
+        //在水平方向上，deltaX/centerX就是元素要位移比例，距离中心点越远位移越大
+        //在垂直方向上，deltaY/centerY就是元素要位移比例，距离中心点越远位移越大
+        var mrx = deltaX2 / centerX;
+        var mry = deltaY2 / centerY;
+
+        //假设约定第2层的位移的扩大系数，在水平方向扩大3倍，在垂直方向扩大1倍
+        var mx2 = mrx * 3;
+        var my2 = mry * 1;
+        //假设约定第3层的位移的扩大系数，在水平方向扩大1.5倍，在垂直方向扩大5倍
+        var my3 = mry * 1.5;
+        var mx3 = mrx * 5;
+        //假设约定第4层（阴影）的位移的扩大系数，在水平方向扩大30倍，在垂直方向扩大15倍
+        var mx0 = mrx * 30;
+        var my0 = mry * 15;
+
+        //设置各个层的位移，层与层之间的位移没有延时间隔
+        center.style.transform = 'translateX(' + (-mx2) + 'px) translateY(' + (-my2) + 'px)';
+        top1.style.transition = 'none';
+        top1.style.transform = 'translateX(' + mx3 + 'px) translateY(' + my3 + 'px)';
+        shadow.style.transition = "none";
+        shadow.style.opacity = 1;
+        shadow.style.transform = 'translateX(' + (-mx0) + 'px) translateY(' + (-my0) + 'px)';
+    };
+
+    //给banner帮定鼠标离开onmouseout事件
+    banner.onmouseout = function () {
+        item.style.transition = 'all 0.3s ease-in-out';
+        top1.style.transition = 'all 0.3s ease-in-out';
+        center.style.transition = 'all 0.3s ese-in-out';
+        //鼠标离开时，各层状态归零
+        item.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        top1.style.transform = 'none';
+        center.style.transform = 'none';
+    };
+</script>
+</body>
+</html>

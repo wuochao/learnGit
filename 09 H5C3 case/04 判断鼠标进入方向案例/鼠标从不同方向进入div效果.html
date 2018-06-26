@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        .box{
+            width: 1030px;
+            margin: 20px auto;
+        }
+        .list{
+            width: 300px;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            float: left;
+            margin: 10px;
+            position: relative;
+        }
+        .list div{
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: left top;  /*旋转中心点*/
+            transform: rotate(-100deg);
+            transition: transform .8s;
+        }
+        .current div{
+            transform: rotate(0deg);
+        }
+        .list div.top{
+            transform-origin: top left;
+        }
+        .list div.right{
+            transform-origin: top right;
+        }
+        .list div.bottom{
+            transform-origin: bottom right;
+        }
+        .list div.left{
+            transform-origin: bottom left;
+        }
+
+    </style>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function(){
+            //直接拷贝并使用判断鼠标从哪个方向进入div的代码
+            $(".list").on("mouseenter mouseleave",function(e) {
+                var that = $(this);      //存下当前的对象
+                var w = $(this).width(); // 得到盒子宽度
+                var h = $(this).height();// 得到盒子高度
+                // 获取x值
+                var x = (e.pageX - this.offsetLeft - (w / 2)) * (w > h ? (h / w) : 1);
+                // 获取y值
+                var y = (e.pageY - this.offsetTop - (h / 2)) * (h > w ? (w / h) : 1);
+                // 核心算法：获得进入角度并对应值0,1,2,3 （上、右、下、左）
+                var direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+                //direction的值为“0,1,2,3”分别对应着“上，右，下，左”
+                // 将点的坐标对应的弧度值换算成角度度数值
+/*                var dirName = new Array('上方','右侧','下方','左侧');
+                if(e.type == 'mouseenter'){
+                    $(this).html(dirName[direction]+'进入');
+                }else{
+                    $(this).html(dirName[direction]+'离开');
+                }*/
+                if(e.type == "mouseenter")
+                {
+                    switch(direction)
+                    {
+                        case 0:
+                            //console.log("up");
+                            //鼠标从上面进来，添加top类名
+                            comeIn("top");
+                            break;
+                        case 1:
+                            //console.log("right");
+                            comeIn("right");
+                            break;
+                        case 2:
+                            //console.log("bottom");
+                            comeIn("bottom");
+                            break;
+                        case 3:
+                            //console.log("left");
+                            comeIn("left");
+                            break;
+                    }
+                }
+                else
+                {
+                    switch(direction)
+                    {
+                        case 0:
+                            //console.log("up");
+                            //鼠标从上面出去，删除top类名
+                            getOut("top");
+                            break;
+                        case 1:
+                            //console.log("right");
+                            getOut("right");
+                            break;
+                        case 2:
+                            //console.log("bottom");
+                            getOut("bottom");
+                            break;
+                        case 3:
+                            //console.log("left");
+                            getOut("left");
+                            break;
+                    }
+                }
+
+                //定义函数comeIn 和 getOut 描述鼠标进入和离开的类名变化
+                function comeIn(str)
+                {
+                    that.addClass("current");
+                    that.children("div").removeClass().addClass(str);
+                }
+
+                function getOut(str)
+                {
+                    that.removeClass("current");
+                    that.children("div").removeClass().addClass(str);
+                }
+            });
+        });
+    </script>
+
+</head>
+<body>
+<div class="box">
+    <div class="list">
+        <img src="images/00.jpg" alt=""/>
+        <div>
+            <img src="images/1.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="list">
+        <img src="images/00.jpg" alt=""/>
+        <div>
+            <img src="images/2.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="list">
+        <img src="images/00.jpg" alt=""/>
+        <div>
+            <img src="images/3.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="list">
+        <img src="images/00.jpg" alt=""/>
+        <div>
+            <img src="images/4.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="list">
+        <img src="images/00.jpg" alt=""/>
+        <div>
+            <img src="images/5.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="list">
+        <img src="images/00.jpg" alt=""/>
+        <div>
+            <img src="images/6.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="list">
+        <img src="images/00.jpg" alt=""/>
+        <div>
+            <img src="images/7.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="list">
+        <img src="images/00.jpg" alt=""/>
+        <div>
+            <img src="images/8.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="list">
+        <img src="images/00.jpg" alt=""/>
+        <div>
+            <img src="images/9.jpg" alt=""/>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

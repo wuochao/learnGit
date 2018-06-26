@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            /*body元素 默认就是一个盒子 是没有高度的*/
+            border: 10px dashed gray;
+        }
+    </style>
+</head>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+
+    //阻止拖拽文件到body中的默认行为
+    //（1）ondragover的目的是为了让被拖拽元素的ondrag事件能够被触发
+    //（2）ondrag想要被触发，必须在ondragover事件中阻止默认行为。
+    document.body.ondragover = function(event){
+        var event = event || window.event;
+        event.preventDefault();
+    };
+    document.body.ondrag = function(event){
+        var event = event || window.event;
+        event.preventDefault();
+        //step1： 创建文件读取器，获取event中dataTransfer的files[0]内容
+        var fr = new FileReader();
+        var content = event.dataTransfer.files[0]
+        //step2：调用文件读取方法readerAsDataURL，文件读取是要耗时的，不是一瞬间完成
+        fr.readAsDataURL(content);
+        //step3：监听文件读取，一旦读取完成，就可以做后续操作：如设置body的背景
+        fr.onload = function(){
+            document.body.style.background = "url("+ fr.result +") no-repeat center/cover";
+        };
+    };
+
+</script>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        ul{list-style:none;}
+        nav{
+            width: 800px;
+            height:35px;
+            border:1px solid #ccc;
+            margin: 100px auto;
+        }
+        nav li{
+            width: 99px;
+            height:35px;
+            border-right:1px dashed #ccc;
+            float:left;
+            text-align: center;
+            line-height: 35px;
+            position: relative;
+            /*overflow: hidden;*/
+        }
+        nav li ins{
+            position: absolute;
+            top:35px;
+            left:0;
+            width:100%;
+            height:100%;
+            background-color: pink;
+            z-index: -1;
+        }
+    </style>
+     <script src="jquery-1.11.1.min.js"></script>
+     <script type="text/javascript">
+
+         /**
+          * 思路：
+          * 1、先根据ul中li的数量动态生成彩色小方块，<ins></ins>，并添加到ul中相应的li中，再给<ins>添加背景颜色
+          * 2、给每个li绑定mouseenter事件，当鼠标经过时，li中的ins移动到li的小方框中，并播放对应的音乐
+          * 3、给每个li绑定键盘点击事件（要求数字0-8），通过event.keyCode识别键盘码，0对应49,8对应56
+          * 注意：
+          * 1、音乐的加载和播放要用DOM对象来完成，因此要先将jQuery对象转化成DOM对象才行
+          * 2、每个li之间要有延迟，使用延时定时器setTimerOut
+          */
+         $(function(){
+             //先获取要操作的li
+             $("nav ul li").append("<ins></ins>");
+             //设置一个颜色数组，使用each方法遍历li的ins添加背景颜色
+             var arr = ["olive","blue","green","red","gray","orange","pink","cyan"];
+             $("nav ul li ins").each(function(index,element){
+                 $(element).css("background",arr[index]);
+             });
+             //给每个li绑定mouseenter事件，当鼠标经过时，ins小方块移动到li的top：0，并且加载、播放音乐
+             $("nav ul li").mouseenter(function(){
+                 $(this).children("ins").stop().animate({"top":0},200);
+                 //在ins向上移动时，要加载、播放音乐，注意要先转换成DOM对象才能调用加载、播放音乐的操作
+                 $("audio").get($(this).index()).load();
+                 $("audio").get($(this).index()).play();
+             });
+
+             //当鼠标离开li时，ins小方块要回归原位（top：35px）
+             $("nav ul li").mouseleave(function(){
+                 $(this).children("ins").stop().animate({"top":35},200);
+             });
+
+             //绑定键盘点击事件
+             var key = 0; //用来记录当前点击的keyCode对应的数字
+             $(window).keydown(function(event){
+                 if(event.keyCode>=49 && event.keyCode<=56)
+                 {
+                     num = event.keyCode - 49;
+                     //给点击的数字键，触发相应的mouseenter函数，并延迟一小段时间，触发mouseleave事件
+                     $("nav ul li").eq(num).trigger("mouseenter");
+                     setTimeout(function(){
+                         $("nav ul li").eq(num).trigger("mouseleave");
+                     },200);
+                 }
+             });
+
+         });
+
+ </script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li>
+            邓紫棋
+            <ins></ins>
+        </li>
+        <li>邓紫棋
+        </li>
+        <li>邓紫棋</li>
+        <li>邓紫棋</li>
+        <li>邓紫棋</li>
+        <li>邓紫棋</li>
+        <li>邓紫棋</li>
+        <li>邓紫棋</li>
+    </ul>
+</nav>
+<audio src="music/1.ogg"></audio>
+<audio src="music/2.ogg"></audio>
+<audio src="music/3.ogg"></audio>
+<audio src="music/4.ogg"></audio>
+<audio src="music/5.ogg"></audio>
+<audio src="music/6.ogg"></audio>
+<audio src="music/7.ogg"></audio>
+<audio src="music/8.ogg"></audio>
+</body>
+</html>

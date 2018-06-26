@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>骰子-6个点</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+            width: 90px;
+            height: 90px;
+            border: 1px solid gray;
+            background-color: whitesmoke;
+            border-radius: 10px;
+            float: left;
+            margin: 10px;
+            display: flex;
+        }
+        li {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: black;
+            margin: 5px;
+        }
+        .six ul{
+            flex-wrap: wrap;
+        }
+        .six ul:nth-child(1){
+            justify-content: flex-start;
+            align-content: flex-start;
+        }
+        .six ul:nth-child(2){
+            justify-content: space-between;
+            align-content: space-around;
+        }
+        .six ul:nth-child(3){
+            flex-direction: column;
+            justify-content: space-between;
+            align-content: space-around;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="six">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
+
+</body>
+</html>

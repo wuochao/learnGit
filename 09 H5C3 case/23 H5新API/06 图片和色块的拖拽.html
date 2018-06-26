@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>图片和色块的拖拽案例</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .colorBox {
+            width: 100px;
+            height: 100px;
+            border: 1px solid gray;
+            margin: 10px 20px;
+        }
+
+        .showBox {
+            width: 100px;
+            height: 100px;
+            border: 5px dashed gray;
+            margin: 10px auto;
+        }
+
+        .colorBox:nth-child(1) {
+            background-color: orange;
+        }
+
+        .colorBox:nth-child(2) {
+            background-color: skyblue;
+        }
+
+        .colorBox:nth-child(3) {
+            background-color: yellowgreen;
+        }
+
+        img {
+            border: 1px solid gray;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--h1{支持拖拽的元素}+img[src='images/lf.jpg']*3+h1{需要开启拖拽的元素}+div.colorBox*3+h1{展示框}+div.showBox-->
+    <h1>支持拖拽的元素</h1>
+    <img src="images/lf.jpg" alt=""/>
+    <img src="images/nm.jpg" alt=""/>
+    <img src="images/sl.jpg" alt=""/>
+
+    <h1>需要开启拖拽的元素</h1>
+    <div class='container'>
+        <!--添加开启拖拽属性-->
+        <div class="colorBox" draggable="true"></div>
+        <div class="colorBox" draggable="true"></div>
+        <div class="colorBox" draggable="true"></div>
+    </div>
+
+    <h1>展示框</h1>
+    <div class="showBox"></div>
+</body>
+</html>
+<script type="text/javascript">
+    //获取showBox、imgs、colorBlocks
+    var showBox = document.querySelector('.showBox');
+    var imgs = document.querySelectorAll('img');
+    var colorBlocks = document.querySelectorAll('.container .colorBox')
+    //定义全局变量，保存被拖拽元素（图片 或 色块）
+    var moveDom = null;
+
+    // 给每个图片绑定ondragstart和ondragend事件
+    for (var i = 0; i < imgs.length; i++) {
+        imgs[i].ondragstart = function () {
+            moveDom = this;
+        };
+        imgs[i].ondragend = function () {
+            moveDom = null;
+        };
+    }
+
+    // 给每个色块绑定ondragstart和ondragend事件
+    for (var i = 0; i < colorBlocks.length; i++) {
+        colorBlocks[i].ondragstart = function () {
+            moveDom = this;
+        };
+        colorBlocks[i].ondragend = function () {
+            moveDom = null;
+        };
+    }
+
+    // 让元素 能够被 拖放的内容 丢进去，阻止默认事件（默认无法将数据/元素放置到其他元素中）
+    showBox.ondragover = function (e) {
+        e.preventDefault();
+    };
+
+    // 拖放元素 丢到 容器内 会触发 ondrop事件
+    // 如果没有在 ondragover中 阻止默认行为 那么 无法触发 ondrop事件
+    showBox.ondrop = function () {
+        //console.log(moveDom);
+        if (moveDom.src)        {
+            // 如果src有值，说明拖拽元素是图片，那么设置showBox的背景图片url为src属性值
+            this.style.background = 'url(' + moveDom.src + ')no-repeat center/cover';
+        } else {
+            // 如果src没有值，说明拖拽元素是色块，那么设置showBox的背景颜色为色块的背景颜色
+            // getComputedStyle 能够获取 style标签中 写的样式
+            this.style.backgroundColor = window.getComputedStyle(moveDom).backgroundColor;
+        }
+    };
+
+
+</script>
