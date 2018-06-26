@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax-post</title>
+    <script src="vue1026.js"></script>
+    <script src="vue-resource121.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="postdata">先post提交数据</button>
+    <button @click="getdata">再get提交数据</button>
+    <br/>
+    {{obj | json }}
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            obj :null
+        },
+        methods:{
+            postdata: function(){
+                //将数据通过vue-resouce的post方式提交给http://www.lovegf.cn:8899/api/getprodlist
+                var url = 'http://www.lovegf.cn:8899/api/addproduct';
+                //调用$http.post(url, 传入到服务器的请求报文体的数据, {emulateJSON, true}方法
+                this.$http.post(url, {name:'How many roads must a man walk before we called him a man.'},{emulateJSON:true}).then(function(response){
+                    alert(response.body.message);
+                });
+            },
+            getdata: function(){
+                // 1 请求url
+                var url = 'http://www.lovegf.cn:8899/api/getprodlist';
+                // 2 利用vue-resouce发出ajax的get请求
+                this.$http.get(url).then(function(response){  //获取服务器响应的数据
+                    this.obj = response.body;
+                });
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>

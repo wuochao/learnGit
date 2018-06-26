@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0结合css实现动画</title>
+    <style>
+        /*
+          因为.show-enter-active,.show-leave-active在整个动画过程中都是存在于元素上面的，所以
+          transition:all 1s ease;必须写在这个上面才能持续作用于元素，才能产生动画效果
+         */
+        .show-enter-active, .show-leave-active {
+            transition: all 1s ease;
+        }
+
+        /*
+        .show-enter：标记动画开始的位置为padding-left: 100px;
+        .show-leave-to:标记动画离开的结束位置为padding-left: 100px
+
+         */
+        .show-enter, .show-leave-to {
+            padding-left: 500px;
+        }
+
+        /*
+        .show-leave:标记动画离开时的初始位置为：padding-left: 10px;;
+        .show-enter-to：标记动画开始的结束位置为：padding-left: 10px;;
+
+         */
+        .show-enter-to, .show-leave {
+            padding-left: 10px;
+        }
+    </style>
+    <script src="vue221.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="toggle">隐藏和显示</button><br />
+    <!-- 加上动画步骤1.0 利用<transition>元素包括住需要实现过渡动画的元素  -->
+    <transition name="show">
+        <span v-show="isshow">{{msg}}</span>
+    </transition>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            isshow: false,
+            msg: 'vue2.0结合css实现动画'
+        },
+        methods: {
+            toggle: function () {
+                this.isshow = !this.isshow;
+            }
+        }
+    });
+</script>
+</html>

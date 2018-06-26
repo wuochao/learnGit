@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue V2.0生命周期</title>
+	<script src="vue221.js"></script>
+</head>
+<body>
+	<div id="app">
+
+	</div>
+</body>
+<script>
+new Vue({
+	el:'#app',
+	data:{
+		msg:'hello vuejs'
+	},
+	beforeCreate:function(){
+		console.log('1.0 beforeCreate',this.msg);
+	}
+	,
+	created:function(){
+		console.log('2.0 created',this.msg);
+	}
+	,
+	beforeMount:function(){
+		console.log('3.0 beforeMount',this.msg);
+	}
+	,
+	mounted:function(){
+		console.log('4.0 mounted',this.msg);
+	}
+});
+</script>
+</html>

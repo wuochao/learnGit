@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>v-for遍历生成品牌数据表格</title>
+    <style>
+        #op {
+            margin: 10px auto;
+            text-align: center;
+            /*background-color: lightblue;*/
+        }
+
+        #tb {
+            width: 800px;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        #tb th {
+            background-color: #0094ff;
+            color: #fff;
+            font-size: 16px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        #tb td {
+            padding: 5px;
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="vue221.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="op">
+            <input type="text" v-model="id" />
+            <input type="text" v-model="pName" @keydown.enter="add" />
+            <button @click="add">add Data</button>
+            <br/> 筛选条件：
+            <input type="text" v-model='screen' v-focus v-color='color' placeholder="please input your keywords" />
+        </div>
+        <table id="tb">
+            <tr>
+                <th>NO.</th>
+                <th>Brand Name</th>
+                <th>Create Time</th>
+                <th>Operation</th>
+            </tr>
+            <tr v-if="list.length == 0">
+                <td colspan='4'>there is no data in here</td>
+            </tr>
+            <tr v-for="item in list">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.ctime | datefmt('yyyy-mm-dd HH:mm:ss')}}</td>
+                <td>
+                    <a href="javascript:void(0)" @click="del(item.id)">delete</a>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+    <script>
+        // 自定义指令focus实现让筛选框自动获取焦点，分为V1.0和V2.0，一般开发只写V2.0
+        // V1.O实现代码
+        //Vue.directive('focus', function(){
+        //    this.el.focus();
+        //});
+        // V2.0实现代码
+        Vue.directive('focus', {
+            inserted: function (el, binding) {
+                el.focus();
+            }
+        });
+
+        // 自定义指令color实现改变颜色，分为V1.0和V2.0，一般开发只写V2.0
+        // V1.O实现代码
+        //Vue.directive('color', function(){
+        //    setTimeout(function(){
+        //        this.el.style.color = this.vm[this.expression];
+        //    }, 0);
+        //    //this.vm[binding.expression]本质上想获取vue实例中定义的data
+        //    el.style.color = binding.value;
+        //});
+
+        // V2.0实现代码
+        Vue.directive('color', {
+            bind: function (el, binding) {
+                console.log(el);
+                el.style.color = binding.value;
+            }
+        });
+
+        //this 表示当前自定义的指令对象
+        //this.vm 表示当前自定义指令所在托管区域的vue实例对象
+        //this.expession 表示当前自定义属性指令的属性值（当前指令等号右边的表达式）
+        //this.el 表示当前指令所在的元素对象
+
+        // 自定义按键修饰符
+        //Vue.directive('on').keyCodes.f2 = 113; // V1.0写法
+        Vue.config.keyCodes.f2 = 113; // V2.0写法
+
+
+
+        // 自定义全局过滤器
+        Vue.filter('datefmt', function (input, formatstring) {
+            var res = '';
+            var year = input.getFullYear();
+            var month = input.getMonth() + 1;
+            var day = input.getDate();
+            var h = input.getHours();
+            var m = input.getMinutes();
+            var s = input.getSeconds();
+            h = h < 10 ? '0' + h : h;
+            m = m < 10 ? '0' + m : m;
+            s = s < 10 ? '0' + s : s;
+
+            if (formatstring == 'yyyy-mm-dd') {
+                res = year + '-' + month + '-' + day;
+            } else {
+                res = year + '-' + month + '-' + day + ' ' + h + ':' + m + ':' + s;
+            }
+            return res;
+        });
+
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: [{
+                        id: 1,
+                        name: 'Benz',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 2,
+                        name: 'BMW',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 3,
+                        name: 'Audi',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 4,
+                        name: 'Tesla',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 5,
+                        name: 'Landrover',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 6,
+                        name: 'Lamborghini',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 7,
+                        name: 'Lincoln',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 8,
+                        name: 'Maserati',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 9,
+                        name: 'Pagani',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 10,
+                        name: 'Maybach',
+                        ctime: new Date()
+                    },
+                ],
+                id: '',
+                pName: '',
+                screen: '', //用户输入的筛选条件
+                color: 'red'
+            },
+            methods: {
+                add: function () {
+                    // 对id和pName有无数据先判断，若无就return
+                    if (this.id == "" || this.pName == "") {
+                        return;
+                    }
+                    // 包装成list要求的对象
+                    var p = {
+                        id: this.id,
+                        name: this.pName,
+                        ctime: new Date()
+                    };
+                    // 将p追加到list末尾
+                    this.list.push(p);
+                    // 清空页面input输入的数据
+                    this.id = '';
+                    this.pName = '';
+                },
+                del: function (id) {
+                    // 提醒用户是否要删除数据
+                    if (!confirm('是否要删除数据？')) {
+                        //当前用户点击的取消时，阻止当前操作
+                        return;
+                    }
+                    // 调用list.findIndex()方法，找到要删除的id，传给del
+                    // findIndex()内部会对数组进行遍历，遍历过程中执行回调函数，只要当前遍历的这一项数据满足了回调函数中的条件，那么就会终止循环，同时会把当前遍历的这个元素的索引进行返回。
+                    var index = this.list.findIndex(function (item) {
+                        return item.id = id;
+                    });
+                    // 调用数据的splice方法删除该数据
+                    this.list.splice(index, 1);
+                },
+
+            }
+        });
+    </script>
+
+</body>
+
+</html>

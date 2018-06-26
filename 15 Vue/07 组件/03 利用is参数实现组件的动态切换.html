@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>利用component标签中的 :is 参数实现组件的动态切换</title>
+    <script src="vue1026.js"></script>
+</head>
+<body>
+<div id="app">
+    <a href="#" @click="comName='login'">登陆login</a> |
+    <a href="#" @click="comName='register'">注册register</a>
+    <br/>
+    <br/>
+    <br/>
+    <!-- 利用component标签中的 :is 参数来进行组件的切换， :is ==> v-bind:is -->
+    <component :is="comName"></component>
+
+</div>
+</body>
+<script>
+    // 注册全局的登录login组件和注册register组件
+    Vue.component('login',{
+        template: '登陆组件页面login'
+    });
+    Vue.component('register',{
+        template: '注册组件页面register'
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            comName: 'login'  //默认展示login组件的，当点击时切换
+        }
+    });
+
+</script>
+</html>

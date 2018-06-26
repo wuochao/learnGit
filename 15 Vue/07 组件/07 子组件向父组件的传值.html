@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子组件向父组件传值</title>
+    <script src="vue1026.js"></script>
+</head>
+<body>
+<!--父组件father的template-->
+<template id="fatherTpl">
+    <son v-on:send="getData"></son>
+</template>
+
+<!--子组件son的template-->
+<template id="sonTpl">
+    <button @click="sendData">向父组件father发送数据</button>
+</template>
+
+<div id="app">
+    <father></father>
+</div>
+
+</body>
+<script>
+    Vue.component('father', {
+        template: '#fatherTpl',
+        methods: {
+            getData: function (input) {
+                console.log(input);
+                alert(input);
+            }
+        },
+        components: {
+            'son': {
+                template: '#sonTpl',
+                methods: {
+                    sendData: function () {
+                        this.$emit('send', '这是子组件向父组件传递的数据内容');
+                    }
+                }
+            }
+        }
+
+    });
+
+    new Vue({
+        el: '#app'
+    });
+
+    // 子组件 传 父组件 小结（类比 微博的发布-订阅的模式）
+    // 1 在子组件中使用this.$emit('消息名称','需要发送的数据')进行发布消息，子组件发布一条消息，send是消息名，hello是消息携带的数据
+    // 2 在父组件中使用子组件时，父组件要订阅消息，在子组件注册一个和消息名称一致的事件，然后在父组件中给定一个事件处理函数
+    // 3 获取数据：需要传递的数据就在当前事件处理函数的第1个参数里面
+
+
+</script>
+</html>

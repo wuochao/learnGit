@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>品牌清单案例-ajax-get获取列表数据</title>
+    <style>
+        #app {
+            width: 800px;
+            margin: 20px auto;
+        }
+
+        #tb {
+            width: 800px;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        #tb th {
+            background-color: #0094ff;
+            color: white;
+            font-size: 16px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        #tb td {
+            padding: 5px;
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="vue1026.js"></script>
+    <script src="vue-resource121.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="id">
+    <input type="text" v-model="pname">
+    <button>添加数据</button>
+
+    <table id="tb">
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="item in list">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.ctime}}</td>
+            <td><a href="javascript:void(0)">删除</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    // Vue的生命周期
+    new Vue({
+        el:'#app',
+        data: {
+            list: []
+        },
+        created: function(){ // Vue实例对象创建后，自动调用created（Vue实例的生命周期）
+            this.getlist();
+        },
+        methods: {
+            getlist: function(){
+                this.$http.get('http://www.lovegf.cn:8899/api/getprodlist')
+                    .then(function(response){
+                        // 1 先判定是否出现服务器异常，如果有，弹出异常信息提示
+                        if(response.body.status != 0){
+                            alert(response.body.message);
+                            return; //终止后续代码执行
+                        }
+                        // 2 如果没有异常，处理正常的数据逻辑
+                        this.list = response.body.message;
+                        console.log( this.list );
+                    });
+            }
+        }
+    });
+</script>
+</html>

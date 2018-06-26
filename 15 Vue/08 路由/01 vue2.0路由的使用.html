@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0路由的使用</title>
+    <!-- 注意点：vue-router文件必须在vue文件导入之后再导入才有效 -->
+    <script src="vue221.js"></script>
+    <script src="vue-router231.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--定义导向不同的路径-->
+    <router-link to="/login">登陆</router-link>
+    <router-link to="/register">注册</router-link>
+    <br/>
+    <br/>
+    <br/>
+    <!--不同的路径渲染出来的组件内容展示到router-view中-->
+    <router-view></router-view>
+</div>
+<script>
+    //1 定义登录和注册组件
+    var login = Vue.extend({
+        template:'<div>登陆组件</div>'
+    });
+    var register = Vue.extend({
+        template:'<div>注册组件</div>'
+    });
+
+    //2 定义和配置vueRouter对象
+    var router = new VueRouter({
+        routes:[
+            {
+                path: '/login',
+                component: login
+            },
+            {
+                path: '/register',
+                component: register
+            }
+        ]
+
+    });
+
+    //3 在vue实例对象中绑定router
+    new Vue({
+        el: '#app',
+        router: router
+    });
+
+</script>
+</body>
+</html>

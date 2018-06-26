@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-resouce-jsonp</title>
+    <script src="vue1026.js"></script>
+    <script src="vue-resource121.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="getjsonp">vue-resouce-jsonp</button>
+    {{ obj | json }}
+</div>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            obj :null
+        },
+        methods: {
+            getjsonp: function(){
+                //利用vue-resouce中的jsonp方法实现跨域请求数据
+                //注意：url后面不需要跟callback=fn 这个参数，因为jsonp方法会自动加上
+                this.$http.jsonp('http://www.lovegf.cn:8899/api/jsonp').then(function(response){
+                    //将服务器中的数据获取，并赋值给obj
+                    this.obj = response.body;
+                    console.log(response.body);
+                }, function(err){
+                    console.log(err);
+                });
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

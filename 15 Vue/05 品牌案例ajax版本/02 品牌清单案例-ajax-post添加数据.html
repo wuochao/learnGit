@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>品牌清单案例-ajax-post添加数据</title>
+    <style>
+        #app {
+            width: 800px;
+            margin: 20px auto;
+        }
+
+        #tb {
+            width: 800px;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        #tb th {
+            background-color: #0094ff;
+            color: white;
+            font-size: 16px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        #tb td {
+            padding: 5px;
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="vue1026.js"></script>
+    <script src="vue-resource121.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="pname">
+    <button @click="addData">添加数据</button>
+    <table id="tb">
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="item in list">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.ctime}}</td>
+            <td><a href="javascript:void(0)">删除</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            pname: '',
+            list: []
+        },
+        created: function(){ // Vue对象实例创建成功以后就会自动调用这个方法
+            this.getlist();
+        },
+        methods: {
+            addData: function(){
+                if(this.pname.length == 0){
+                    return; // 如果输入框为空，不发送post请求
+                }
+                var url = 'http://www.lovegf.cn:8899/api/addproduct';
+                var postData = { name: this.pname };
+                var options = { emulateJSON: true };
+                this.$http.post(url, postData, options)
+                    .then(function(response){
+                        // 先判断是否状态异常，如果异常，弹出异常信息
+                        if(response.body.status !=0){
+                            alert(response.body.message);
+                            return;
+                        }
+                        // 如果状态正常，那么说明已经把数据发送给后端，此时要清空输入框
+                        this.pname = '';
+                        // 再次调用getlist，展示添加的数据列表
+                        this.getlist();
+                    });
+            },
+            getlist: function(){
+                var url = 'http://www.lovegf.cn:8899/api/getprodlist';
+                this.$http.get(url).then(function(response){
+                    // 1 先判断是否出现服务器异常，如果有，弹出异常信息
+                    if(response.body.status !=0){
+                        alert(response.body.message);
+                        return ; //终止后续代码执行
+                    }
+                    // 2 如果没有异常，处理正常的数据逻辑
+                    this.list = response.body.message;
+                    console.log(this.list);
+                });
+            }
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue V1.0生命周期</title>
+	<script src="vue1026.js"></script>
+</head>
+<body>
+	<div id="app">
+
+	</div>
+</body>
+<script>
+new Vue({
+	el:'#app',
+	data:{
+		msg:'hello vuejs'
+	},
+	init:function(){
+		console.log('1.0 init',this.msg);
+	}
+	,
+	created:function(){
+		console.log('2.0 created',this.msg);
+	}
+	,
+	beforeCompile:function(){
+		console.log('3.0 beforeCompile',this.msg);
+	}
+	,
+	compiled:function(){
+		console.log('4.0 compiled',this.msg);
+	}
+	,
+	attached:function(){
+		console.log('5.0 attached',this.msg);
+	}
+	,
+	ready:function(){
+		console.log('6.0 ready',this.msg);
+	}
+});
+</script>
+</html>

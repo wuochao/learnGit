@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0路由的传参</title>
+    <!--注意点：vue-router文件必须在vue文件导入之后再导入才有效 -->
+    <script src="vue221.js"></script>
+    <script src="vue-router231.js"></script>
+</head>
+<body>
+<div id="app">
+    <!-- 定义导向不同的路径 -->
+    <router-link to="/login/Jack">登录</router-link>
+    <router-link to="/register/Tom">注册</router-link>
+
+    <!-- 不同的路径渲染出来的组件内容展示到router-view中 -->
+    <router-view></router-view>
+</div>
+
+<script>
+    //1 定义登陆和注册组件
+    var login = Vue.extend({
+        template:'<div>登陆组件：这是路由传递的参数val===>{{val}}</div>',
+        data:function(){
+            return {
+                val: ''
+            };
+        },
+        created: function(){ // 接收参数的方式
+            this.val = this.$route.params.name1;
+        }
+    });
+
+    var register = Vue.extend({
+        template:'<div>注册组件：这是路由传递的参数val===>{{val}}</div>',
+        data:function(){
+            return {
+                val:''
+            };
+        },
+        created: function(){
+            this.val = this.$route.params.name2;
+        }
+    });
+
+    //2 定义vueRouter对象并且定义好路由规则清单
+    var router = new VueRouter({
+        routes:[
+            {
+                path:'/login/:name1',
+                component: login
+            },
+            {
+                path:'/register/:name2',
+                component: register
+            }
+        ]
+    });
+
+    // 3 在vue实例对象中绑定router对象
+    new Vue({
+        el: '#app',
+        router: router
+    });
+
+    /*总结：
+     1、在路由规则的path中定义一个/:参数名称
+     2、在<router-link to 中写上真正的参数值>
+     3、在 $route.params中根据上面第1步中的参数名称获取到值
+     */
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax-get</title>
+    <script src="vue1026.js"></script>
+    <script src="vue-resource121.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="getdata">get请求</button>
+        {{obj | json }}
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                obj:null
+            },
+            methods: {
+                getdata: function(){
+                    // 1 请求url
+                    var url = 'http://www.lovegf.cn:8899/api/getprodlist';
+                    // 2 利用vue-resouce发出ajax的get请求
+                    this.$http.get(url).then(function(response){  //获取服务器响应的数据
+                        this.obj = response.body;
+                    });
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

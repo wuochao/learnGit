@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V1.0获取dom元素和组件的方法</title>
+    <script src="vue1026.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="getdom1">传统方式获取dom元素</button>
+    <button @click="getdom2">V1.0获取dom元素</button>
+    <div v-el:mydiv id="box">这是获取到的dom元素的innerHTML</div>
+    <br/>
+    <br/>
+    <br/>
+    <button @click="getcom">V1.0获取组件对象</button>
+    <son v-ref:mycom></son>
+</div>
+
+</body>
+<script>
+    new Vue({
+        el:'#app',
+        methods: {
+            getdom1: function(){
+                console.log('传统方式：getElementById获取元素');
+                var temp = document.getElementById('box');
+                console.log(temp);
+                console.log(temp.innerHTML);
+            },
+            getdom2: function(){
+                console.log('vuejs方法V1.0：通过v-el形式获取元素');
+                console.log(this.$els.mydiv);
+                console.log(this.$els.mydiv.innerHTML);
+            },
+            getcom: function(){
+                console.log('vuejs方法V1.0：通过v-ref形式获取组件');
+                console.log(this.$refs.mycom);
+                console.log(this.$refs.mycom.subname);
+            }
+        },
+        components:{
+            'son':{
+                template:'<h3>这是子组件son</h3>',
+                data:function(){
+                    return {
+                        subname: '子组件的名称'
+                    };
+                }
+            }
+        }
+    });
+
+</script>
+</html>

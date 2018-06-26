@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义和注册子组件</title>
+    <script src="vue1026.js"></script>
+</head>
+<body>
+<div id="app">
+    <account></account>
+    <subcom></subcom>
+</div>
+</body>
+<script>
+    //需求：在account组件中定义2个子组件：login和register
+    Vue.component('account',{
+        template:'<div><h1>账号组件account</h1><login></login><register></register></div>',
+        // 在账号组件account中定义一个登录login的子组件和一个注册register子组件
+        components: {
+            'login':{
+                template: '<h2>这是account组件中的子组件login</h2>'
+            },
+            'register':{
+                template: '<h2>这是account组件中的子组件register</h2>'
+            }
+        }
+    });
+
+    new Vue({
+        el: '#app',
+        //在app中定义子组件（这是根组件app的子组件）
+        components: {
+            'subcom': {
+                template: '<h2>根组件app的子组件subcom</h2>'
+            }
+        }
+    });
+</script>
+</html>

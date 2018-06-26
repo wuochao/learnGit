@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>根组件app向父组件father传值</title>
+	<script src="vue1026.js"></script>
+</head>
+<body>
+<!--父组件father的template-->
+<template id="fatherTpl">
+    <div>
+        <h3>根组件app向父组件father传值</h3>
+        <p>{{fatherName}} ==> {{fatherAge}} ==> {{fatherGender}}</p>
+    </div>
+
+</template>
+
+<div id="app">
+    <father  :father-name='name' :father-age='age' :father-gender='gender'></father>
+</div>
+
+</body>
+<script>
+    Vue.component('father', {
+        template:'#fatherTpl',
+        props: ['father-name','father-age','father-gender'],
+    });
+
+    new Vue({
+        el:'#app',
+        data:{
+            name: 'Jack',
+            age: 18,
+            gender: 'male'
+        }
+    });
+
+// 父组件 传 子组件 小结
+//1 在子组件内部定义一个props属性，然后在props属性内部定义用来接收父组件传过来数据的变量
+//2 在父组件中使用子组件时，在子组件上绑定一个和子组件内部props里面定义的变量同名的属性
+//3 把父组件data中定义的数据（需要传递的数据）作为子组件里面绑定属性的属性值进行传递
+
+
+
+
+
+
+</script>
+</html>

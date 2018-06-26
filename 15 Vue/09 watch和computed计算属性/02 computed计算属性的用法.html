@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性computed</title>
+    <script src="vue1026.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="firstName"> &nbsp;&nbsp;
+    <input type="text" v-model="lastName">
+    <br/>
+    <br/>
+    <br/>
+    {{fullName}}
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            firstName: 'bill',
+            lastName: 'gates'
+        },
+        computed: {
+            fullName: function () {
+                return this.firstName + this.lastName;
+            }
+        }
+    });
+
+</script>
+</html>
