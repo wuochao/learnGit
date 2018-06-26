@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>事件对象-获取按下鼠标的哪个键</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            $(function () {
+
+            /*
+            用event.keyCode获得当前按下键盘的哪个键：
+            输出的是键盘的ASCII值
+             */
+               $(window).keydown(function(event){
+                    console.log(event.keyCode);
+               });
+
+            });
+        </script>
+    </head>
+    <body>
+        
+
+    </body>
+</html>

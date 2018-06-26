@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>全局冲突</title>
+        <style>
+            * {
+                margin:0;
+                padding:0;
+            }
+
+
+        </style>
+        <script>
+            $ = {
+                show: function(argument){
+                    console.log("my $");
+                }
+            }
+        </script>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            //$.noConflict();    让jQuery释放$，
+            //让$回归到jQuery之前的对象定义上去。
+            var myJQuery = $.noConflict();
+
+            jQuery(document).ready(function(){
+                jQuery(".box").css({"color":"red"});
+            });
+
+            $.show("我是jQuery全局冲突的案例");
+            /*
+            说明：
+            如果前面的<script>标签中使用了$符号，
+            那么后面代码中要避免引起全局冲突，
+            可以使用jQuery代替$，或者定义一个变量
+            var myJQuery = $.noConflict(); 用myJQuery代替$
+            */
+
+
+        </script>
+    </head>
+    <body>
+        <div class="box">
+            jQuery全局冲突案例
+        </div>
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>触发事件</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            $(function () {
+                $("form").on("click","#btnSubmit1",function(){
+                    //获取"#btnSubmit1"的input框里面输入的值
+                    var txtName = $("#txtName").val();
+
+                    //判断所获取的值是否等于1，
+                    //如果等于1，那么就弹出“提交数字1”；
+                    //否则清空文本框，调用focus事件获得焦点
+                    if(txtName == "1")
+                        alert("提交数字1");
+                    else
+                        $("#txtName").val("").focus();
+                });
+
+                $("form").on("click","#btnSubmit2",function(){
+                    //获取"#btnSubmit2"的input框里面输入的值
+                    var txtGender = $("#txtGender").val();
+
+                    //判断所获取的值是否等于2，
+                    //如果等于2，那么就弹出“提交数字2”；
+                    //否则清空文本框，trigger触发focus获得焦点
+                    if(txtGender == "2")
+                        alert("提交数字2");
+                    else
+                        $("#txtGender").val("").trigger("focus");
+                });
+
+                $("form").on("click","#btnSubmit3",function(){
+                    //获取"#btnSubmit2"的input框里面输入的值
+                    var txtAge = $("#txtAge").val();
+
+                    //判断所获取的值是否等于3，
+                    //如果等于3，那么就弹出“提交数字3”；
+                    //否则清空文本框，triggerHandler不触发focus获得焦点
+                    if(txtAge == "3")
+                        alert("提交数字3");
+                    else
+                        $("#txtAge").val("").triggerHandler("focus");
+                });              
+            });
+        </script>
+    </head>
+    <body>
+        <form action="">
+            <label for="txtName">姓名</label><input type="text" id="txtName">
+            <input type="button" value="提交" id="btnSubmit1"/><br/><br/>
+
+            <label for="txtGender">性别</label><input type="text" id="txtGender">
+            <input type="button" value="提交" id="btnSubmit2"/><br/><br/>
+
+            <label for="txtAge">年龄</label><input type="text" id="txtAge">
+            <input type="button" value="提交" id="btnSubmit3"/><br/><br/>
+
+        </form>
+
+
+    </body>
+</html>

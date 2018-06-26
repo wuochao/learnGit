@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            height: 30px;
+            background: #036663;
+            border-bottom: 1px solid #369;
+            line-height: 30px;
+            padding-left: 30px;
+        }
+
+        .nav a {
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+            text-decoration: none;
+
+        }
+
+        .d-box {
+            width: 400px;
+            height: 300px;
+            border: 5px solid #eee;
+            box-shadow: 2px 2px 2px 2px #666;
+            position: absolute;
+            top: 40%;
+            left: 40%;
+        }
+
+        .hd {
+            width: 100%;
+            height: 25px;
+            background-color: #7c9299;
+            border-bottom: 1px solid #369;
+            line-height: 25px;
+            color: white;
+            cursor: move;
+        }
+
+        #box_close {
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="nav">
+    <a href="javascript:;" id="register">注册信息</a>
+</div>
+<div class="d-box" id="d_box">
+    <div class="hd" id="drop">注册信息 (可以拖拽)
+        <span id="box_close">【关闭】</span>
+    </div>
+    <div class="bd"></div>
+</div>
+<script>
+/*
+    //找人
+    var d_box = document.getElementById("d_box");//盒子
+    var drop = document.getElementById("drop");//拖动条
+    //需求：鼠标在拖动条上按下 可以拖拽 鼠标移动的时候 让d_box跟着鼠标移动
+    drop.onmousedown = function () {
+        //鼠标在页面上移动 让d_box跟着鼠标移动
+        document.onmousemove = function (event) {
+            var event = event || window.event;
+            //获取鼠标在页面上的位置
+            var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+            var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+            //让d_box跟着鼠标移动
+            d_box.style.left = pageX + "px";
+            d_box.style.top = pageY + "px";
+        };
+    };
+*/
+
+    function $(id)
+    {
+        return document.getElementById(id);
+    }
+    var box = $('d_box');
+    var drop  = $('drop');
+
+    drop.onmousedown = function(event){
+        //鼠标在按下那一瞬间在盒子中的位置（相对于盒子的左上角的偏移量）
+        var event = event || window.event;
+        var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+        var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+        var leftVal = pageX - box.offsetLeft;
+        var TopVal  = pageY - box.offsetTop;
+
+        document.onmousemove = function(event){
+            var event = event || window.event;
+            var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+            var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+            box.style.left = pageX - leftVal + 'px';
+            box.style.top  = pageY - TopVal  + 'px';
+
+            console.log(window.getSelection);
+            //清除选中的文字
+            window.getSelection? window.getSelection().removeAllRanges() : document.selection.empty();
+        };
+
+        document.onmouseup = function(){
+            document.onmousemove = null;
+        };
+
+    };
+
+
+
+
+</script>
+</body>
+</html>

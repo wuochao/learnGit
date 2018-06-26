@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {margin:0;padding:0;}
+        .scroll {
+            width: 400px;
+            height: 8px;
+            background-color: #ccc;
+            margin: 100px;
+            position: relative;
+
+        }
+        .mask {
+            width: 0;
+            height: 8px;
+            background-color: #369;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .bar {
+            width: 10px;
+            height: 22px;
+            background-color: #369;
+            position: absolute;
+            top: -7px;
+            left: 0;
+            cursor: pointer;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div class="scroll" id="scroll">
+    <div class="bar" id="bar"></div>
+    <div class="mask" id="mask"></div>
+</div>
+<div class="des" id="des"></div>
+
+<script>
+    function $(id)
+    {
+        return document.getElementById(id);
+    }
+
+    var scroll = $('scroll');
+    var bar    = $('bar');
+    var mask   = $('mask');
+    var des    = $('des');
+
+    //拖动：先鼠标按下，然后再页面移动鼠标
+    bar.onmousedown = function(event){
+        var event = event || window.event;
+        //鼠标在页面的位置
+        var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+        //在bar上按下鼠标时当前的位置，即鼠标在bar的左侧的距离（注意小滑块有宽度）
+        var leftVal = pageX - scroll.offsetLeft - this.offsetLeft;
+        var that = this; // 将bar的指针传给给that，以便内部函数调用
+        //按下鼠标后，在页面中移动鼠标
+        document.onmousemove = function(event){
+            var event = event || window.event;
+            //鼠标在页面的坐标
+            var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+            var x = parseInt(event.clientX - scroll.offsetLeft - leftVal);
+            /*注意：上面用parseInt处理的原因是为了后面计算拖动距离在scroll的比例，以及显示拖动距离为整数*/
+            if(x > scroll.offsetWidth - bar.offsetWidth)
+                x = scroll.offsetWidth - bar.offsetWidth;
+            else if(x < 0)
+                x = 0;
+            that.style.left  = x + 'px';
+            mask.style.width = x + 'px';  //注意：mask的宽度要设置成bar左侧的距离
+
+            //给des描述盒子显示鼠标拖动的信息
+            des.innerHTML = "已经拖动了"+parseInt(x/(scroll.offsetWidth - bar.offsetWidth)*100) +"%";
+            //清空鼠标拖动选择
+            window.getSelection? window.getSelection().removeAllRanges() : document.selection.empty();
+        };
+
+        //当拖动后，松开鼠标，页面拖动鼠标无效
+        document.onmouseup = function(){
+            document.onmousemove = null;
+        };
+    };
+
+//拖动一段距离后，再次点击鼠标位置异常：怎么跑到最前面某个位置？？？？？
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

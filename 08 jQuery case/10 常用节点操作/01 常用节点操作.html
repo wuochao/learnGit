@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+	    <meta charset="UTF-8">
+	    <title>常用节点操作</title>
+	    <style>
+			.div_1 {
+				background: Khaki;  //Khaki是卡布其（颜色）
+			}
+
+			.div_2 {
+				background: pink;  
+			}
+
+			.div_3 {
+				background: teal;  
+			}
+
+	    </style>
+	    <script src="jquery-1.11.1.min.js"></script>
+	    <script>
+	    	$(function(){
+	    		//内部末尾添加节点，如：在div内部的末尾添加一个p元素
+	    		$("button:eq(0)").click(function(){
+	    			$("div:eq(0)").append("<p>我是末尾添加的p元素</p>");
+	    		});
+
+	    		//内部开头添加节点，如：在div内部的开头添加一个p元素
+	    		$("button:eq(1)").click(function(){
+	    			$("div:eq(0)").prepend("<p>我是开头添加的p元素</p>");
+	    		});
+
+	    		//将新节点添加到指定节点内部的后面
+	    		$("button:eq(2)").click(function(){
+	    			$("<p>将节点添加到指定节点后面</p>").appendTo("div:eq(0)");
+	    		});
+
+	    		//将新节点添加到指定节点内部的前面
+	    		$("button:eq(3)").click(function(){
+	    			$("<p>将节点添加到指定节点前面</p>").prependTo("div:eq(0)");
+	    		});
+
+
+	    		//外部末尾添加节点，如：在div外部的末尾添加一个p元素
+	    		$("button:eq(4)").click(function(){
+	    			$("div:eq(0)").after("<p>我是div外部后面的p元素</p>");
+	    		});
+
+	    		//外部开头添加节点，如：在div外部的开头添加一个p元素
+	    		$("button:eq(5)").click(function(){
+	    			$("div:eq(0)").before("<p>我是div外部前面的p元素</p>");
+	    		});
+
+	    		//将新节点添加到指定节点外部的后面
+	    		$("button:eq(6)").click(function(){
+	    			$("<P>我在哪里？后面</p>").insertAfter("div:eq(0)");
+	    		});
+
+	    		//将新节点添加到指定节点外部的前面
+	    		$("button:eq(7)").click(function(){
+	    			$("<P>我在哪里？前面</p>").insertBefore("div:eq(0)");
+	    		});
+
+	    		//删除节点：remove 自杀式删除
+	    		$("button:eq(8)").click(function(){
+	    			$("div:eq(1)").remove();
+	    		});
+
+	    		//删除按钮：remove 自杀式按钮
+	    		$("button:eq(9)").click(function(){
+	    			$(this).remove();
+	    		});
+
+	    		//删除子元素，方法一：empty清空子元素，div保留
+	    		$("button:eq(10)").click(function(){
+	    			$("div:eq(1)").empty();
+	    		});
+
+	    		//删除子元素，方法二：html清空子元素，div保留
+	    		$("button:eq(11)").click(function(){
+	    			$("div:eq(1)").html("");
+	    		});
+
+	    		//克隆（复制）节点
+	    		$("button:eq(12)").click(function(){
+	    			$("div:eq(1)").append($("#p_1").clone());	  			
+	    		});
+
+	    		//包裹单个节点，用后面包裹前面
+	    		$("button:eq(13)").click(function(){
+	    			$("#p_2").wrap($("#span_2"));	  			
+	    		});
+
+	    		//包裹多个节点，用后面包裹前面
+	    		$("button:eq(14)").click(function(){
+	    			$(".liItem").wrapAll($("#span_2"));	  			
+	    		});
+
+	    		//替换节点
+	    		$("button:eq(15)").click(function(){
+	    			$("#span_3").replaceWith($("#p_3"));	  			
+	    		});
+
+
+	    	});
+
+
+	    </script>
+	</head>
+	<body>
+		<button>append节点内部末尾添加新节点</button>
+		<button>prepend节点内部开头添加新节点</button>
+		<button>appendTo将新节点添加到指定节点内部的后面</button>
+		<button>prependTo将新节点添加到指定节点内部的前面</button>
+		<hr>
+		<button>after节点外部末尾添加新节点</button>
+		<button>before节点外部开头添加新节点</button>
+		<button>insertAfter指定节点外部的末尾添加新节点</button>
+		<button>insertBefore指定节点外部的开头添加新节点</button>
+		<hr>
+		<button>remove自杀式删除节点</button>
+		<button>remove自杀式按钮</button>
+		<button>empty清空子元素</button>
+		<button>html清空子元素</button>
+		<button>clone克隆（复制）节点</button>
+		<button>wrap包裹单个节点</button>
+		<button>wrapAll包裹所有节点</button>
+		<button>replaceWith替换节点</button>
+		<hr>
+
+		<div class="div_1">
+			<h3 id="h3_1">div_1我是H3标题
+				<span id="span_1">我是span_1</span>
+			</h3>
+		</div>
+		<div class="div_2">
+			<h3 id="h3_2">div_2我是H3标题</h3>
+		</div>
+		<p id="p_1">我是div_2外部的p元素，不是动态添加的</p>
+		<div class="div_3">
+			<h3 id="h3_3">div_3我是H3标题</h3>
+		</div>
+		<p id="p_2">我是div_3外部的p元素，我也不是动态添加的</p>
+		<span id="span_2">我是span_2</span>
+		<ul class="ulItem">
+			<li class="liItem" id="li_1">我是第1个li</li>
+			<li class="liItem" id="li_2">我是第2个li</li>
+			<li class="liItem" id="li_3">我是第3个li</li>
+			<li class="liItem" id="li_4">我是第4个li</li>
+			<li class="liItem" id="li_5">我是第5个li</li>
+		</ul>
+		<span id="span_3">我是span_3</span>
+		<p id="p_3">我是p元素</p>
+	</body>
+</html>

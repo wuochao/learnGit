@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>旋转木马轮播图</title>
+    <link rel="stylesheet" href="css/css.css"/>
+</head>
+<body>
+<div class="wrap" id="wrap">
+    <div class="slide" id="slide">
+        <ul>
+            <li><a href="#"><img src="images/slidepic1.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/slidepic2.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/slidepic3.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/slidepic4.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/slidepic5.jpg" alt=""/></a></li>
+        </ul>
+        <div class="arrow" id="arrow">
+            <a href="javascript:" class="prev" id="arrLeft"></a>
+            <a href="javascript:" class="next" id="arrRight"></a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script src="js/animate.js"></script>
+<script>
+function $(id)
+{
+    return document.getElementById(id);
+}
+
+window.onload = function(){
+    //获取要操作的元素
+    var wrap = $('wrap');
+    var slide = $('slide');
+    var ul = slide.children[0];
+    var lis = ul.children;
+    var arr = $('arrow');
+    var arrLeft = $('arrLeft');
+    var arrRight = $('arrRight');
+
+    //配置数据config，初始化图片
+    var config = [
+        {
+            "width": 400,
+            "top": 20,
+            "left": 50,
+            "opacity": 0.2,
+            "zIndex": 2
+        },//0
+        {
+            "width": 600,
+            "top": 70,
+            "left": 0,
+            "opacity": 0.8,
+            "zIndex": 3
+        },//1
+        {
+            "width": 800,
+            "top": 100,
+            "left": 200,
+            "opacity": 1,
+            "zIndex": 4
+        },//2
+        {
+            width: 600,
+            top: 70,
+            left: 600,
+            opacity: 0.8,
+            zIndex: 3
+        },//3
+        {
+            "width": 400,
+            "top": 20,
+            "left": 750,
+            "opacity": 0.2,
+            "zIndex": 2
+        }//4
+    ];
+
+    //分配config的给每个图片，初始化页面图片布局
+    assign();
+
+   //鼠标悬停时，出现arr箭头，鼠标离开时隐藏箭头
+    wrap.onmouseover = function(){
+        //arr.style.display = "block";
+        //改用缓动公式
+        animate(arr,{"opacity":1});
+    };
+
+    wrap.onmouseout = function(){
+        //arr.style.display = "none";
+        //改用缓动公式
+        animate(arr,{"opacity":0});
+    };
+
+    //arrRight绑定点击事件
+    arrRight.onclick = function(){
+        //先检查节流阀，如果阀门开启，才允许点击，旋转图片，否则点击无效
+        if(flag)
+        {
+            //点击后，关闭阀门
+            flag = false;
+            config.push(config.shift());
+            assign();
+        }
+    };
+    //arrLeft绑定点击事件
+    arrLeft.onclick = function(){
+        if(flag)
+        {
+            flag = false;
+            config.unshift(config.pop());
+            assign();
+        }
+
+    };
+
+    //设置节流阀flag，用来控制动画的速度
+    var flag = true;
+    //分配config的参数给每个li
+    function assign()
+    {
+        for(var i=0; i<lis.length; i++)
+        {
+            animate(lis[i],config[i],function(){
+                flag = true;  //动画执行完才再次打开节流阀的阀门
+            });
+        }
+    }
+
+};
+
+
+
+</script>

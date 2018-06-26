@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>动画效果-页面右下角弹出广告</title>
+		<style type="text/css">
+			.ad{
+				position:fixed;
+				right:0;
+				bottom:0;
+				width:230px;
+				height:120px;
+				background-image:url(imgs/ad.jpg);
+				display:none;
+			}
+
+			.ad span{
+				position:absolute;
+				right:0;
+				top:0;
+				width:40px;
+				height:18px;
+				background-image:url(imgs/h.jpg);
+			}
+		</style>
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+			$(document).ready(function(){
+
+				/*
+				fadeIn()方法：当有2个参数时
+				第1个参数：动画执行时长；
+				第2个参数：动画执行后要执行的函数
+
+				fadeIn()方法：当有3个参数时
+				第1个参数：动画执行时长；
+				第2个参数：动画执行效果swing、linear
+				第3个参数：动画执行后要执行的函数
+
+				注释：fadeIn、fadeOut、fadeToggle的参数一样，用法类似
+				 */
+
+				$(".ad")
+					.slideDown("normal")
+					.slideUp("slow")
+					.fadeIn(1000)
+					.children("span").click(function(){
+						$(this).parent().fadeOut();
+					});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="ad">
+			<span></span>
+		</div>
+	</body>
+</html>

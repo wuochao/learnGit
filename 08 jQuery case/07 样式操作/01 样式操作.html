@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+	    <meta charset="UTF-8">
+	    <title>样式操作</title>
+	    <style>
+			.divItem{
+				background-color:teal;
+				font-size: 12px;
+			}
+
+
+			.switchStyle{
+				text-decoration:line-through;
+			}
+
+	    </style>
+	    <script src="jquery-1.11.1.min.js"></script>
+	    <script>
+	        $(document).ready(function () {
+	        	//设置单个样式
+	        	$("li").css("font-size","18px");
+	        	
+	        	//设置多个样式
+	        	$("li").css({
+	        		"background-color":"yellow",
+	        		"color":"blue"
+	        	});
+
+	            //获取某个样式
+	            var fontSize = $("li").css("font-size");
+	            console.log(fontSize);
+	           
+	            //添加样式，如：给选定的元素添加类样式，注意名字没有 点
+	            $("li").addClass("divItem");
+
+	            //带参数删除样式，如：给第3个li删除指定的类样式yuansu3
+	            $("li:eq(2)").removeClass("yuansu3");
+
+	            //不带参数删除样式，如：给第5个li删除所有的类样式
+	            $("li:eq(4)").removeClass();
+
+	            //切换样式——【失效！！！一直找不出原因】
+	            $("#btn1").click(function(){
+	            	$("li:eq(6)").toggleClass("switchStyle");
+
+	            });
+
+	            //判断有没有类样式，如：判断第1个li有无divItem类样式
+	            $("#btn2").click(function(){
+	            	var temp = $("li").eq(0).hasClass("divItem"); //temp类型为boolean
+	            	console.log(temp);	//返回值 true
+	            });
+
+
+
+
+	        });
+	    </script>
+	</head>
+	<body>
+		<input type="button" value="切换样式" 		id="btn1" />
+		<input type="button" value="判断有无样式" 	id="btn2" />
+	   <ul>
+		   	<li class="yuansu1">元素1</li>
+		   	<li class="yuansu2">元素2</li>
+		   	<li class="yuansu3">元素3</li>
+		   	<li class="yuansu4">元素4</li>
+		   	<li class="yuansu5">元素5</li>
+		   	<li class="yuansu6">元素6</li>
+		   	<li class="yuansu7">元素7</li>
+		   	<li class="yuansu8">元素8</li>
+	   </ul>
+	</body>
+</html>

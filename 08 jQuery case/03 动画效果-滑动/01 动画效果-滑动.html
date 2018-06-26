@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>动画效果-滑动</title>
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				//设置div的样式
+				$("div").css({
+					"display": "none",
+					"height":"200px",
+					"width":"300px",
+					"background":"gold",
+					"margin-bottom":"30px"
+				});
+
+				/*
+				slideDown()方法：当有2个参数时
+				第1个参数：动画执行时长；
+				第2个参数：动画执行后要执行的函数
+
+				slideDown()方法：当有3个参数时
+				第1个参数：动画执行时长；
+				第2个参数：动画执行效果swing、linear
+				第3个参数：动画执行后要执行的函数
+
+				注释：slideDown、slideUp、slideToggle的参数一样，用法类似
+				 */
+
+				//让div下拉2s显示出来	
+				$("input[id='downShow1']").click(function(){
+					$("div").slideDown(2000);
+				});
+
+				//让div下拉显示，并使用swing参数
+				//动画的开始变得更加快一些，然后再慢下来。
+				//swing是一个常用设置，因此，如果没有指定任何缓动，jQuery会使用swing方法 。 
+				$("input[id='downShow2']").click(function(){
+					$(".divItem1").slideDown(1000,"swing",function(){
+						//nothing to do 
+					});
+				});
+
+
+				//让div下拉显示，并使用linear参数：线性等速效果
+				$("input[id='downShow3']").click(function(){
+					$(".divItem1").slideDown(1000,"linear",function(){
+						//nothing to do 
+					});
+				});
+
+				//让div 1s上拉隐藏
+				$("input[id='upHide']").click(function(){
+					$(".divItem1").slideUp(1000);
+				});
+
+				//让div 显示、隐藏之间切换
+				$("button").click(function(){
+					$(".divItem1").slideToggle();
+				});
+
+			});
+
+		</script>
+
+
+	</head>
+	<body>
+		<input type="button" value="下拉" 		id="downShow1">
+		<input type="button" value="下拉swing" 	id="downShow2">
+		<input type="button" value="下拉linear" id="downShow3">
+		<input type="button" value="上拉" 		id="upHide">
+		<button>Toggle切换</button>
+		<div class="divItem1"></div>
+		<div class="divItem2"></div>
+			
+	</body>
+</html>

@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>城市选择</title>
+        <style>
+            * {
+                margin:0;
+                padding:0;
+            }
+
+            select{
+                width: 200px;
+                height: 200px;
+                font-size:20px;
+                text-align:left;
+                background-color: lightgray;
+            }
+
+            .btn-box{
+                width: 30px;
+                display:inline-block;
+                vertical-align:top;
+            }
+
+            button{
+                width: 25px;
+            }
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            jQuery(function(){
+                $("#btn-selAll").on("click", function(){
+                    //把左边select所有的城市，移动到右边的select
+                    $("#src_city option").appendTo("#tar_city");
+                });
+
+                $("#btn-selNone").on("click", function(){
+                    //把右边select所有的城市，移动到左边的select
+                    $("#tar_city option").appendTo("#src_city");
+                });
+
+                $("#btn-sel").on("click", function(){
+                    //把左边select的城市，移动到右边的select
+                    $("#src_city option:selected").appendTo("#tar_city");
+                });
+
+                $("#btn-back").on("click", function(){
+                    //把右边select的城市，移动到左边的select
+                    $("#tar_city option:selected").appendTo("#src_city");
+                });
+            });
+
+        </script>
+    </head>
+    <body>
+        <!-- select的multiple属性:设置或获取表明列表中是否可选中多个项目的 Boolean 值。 -->
+        <select name="src_city" id="src_city" multiple>
+            <option value="北京">北京</option>
+            <option value="上海">上海</option>
+            <option value="广州">广州</option>
+            <option value="深圳">深圳</option>
+            <option value="武汉">武汉</option>
+        </select>
+
+        <div class="btn-box">
+            <button id="btn-selAll">&gt;&gt</button>
+            <button id="btn-selNone">&lt;&lt;</button>
+            <button id="btn-sel">&gt;</button>
+            <button id="btn-back">&lt;</button>
+        </div>
+
+        <select name="tar_city" id="tar_city" multiple>
+            
+        </select>
+     </body>
+</html>

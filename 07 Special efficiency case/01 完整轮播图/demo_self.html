@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: 0;
+        }
+
+        .all {
+            width: 500px;
+            height: 200px;
+            padding: 7px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .screen {
+            width: 500px;
+            height: 200px;
+            /*overflow: hidden;*/     /*暂时去除overflow方便观察*/
+            position: relative;
+        }
+
+        .screen li {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            float: left;
+        }
+
+        .screen ul {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3000px;
+        }
+
+        .all ol {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .all ol li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .all ol li.current {
+            background: yellow;
+        }
+
+        #arr {
+            display: none;
+        }
+
+        #arr span {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #fff;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -20px;
+            background: #000;
+            cursor: pointer;
+            font: bold 30px/40px "黑体";
+            color: #fff;
+            text-align: center;
+            opacity: 0.3;
+        }
+
+        #arr #right {
+            right: 5px;
+            left: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="all" id='box'>
+    <div class="screen">
+        <ul>
+            <li><img src="images/1.jpg" width="500" height="200"/></li>
+            <li><img src="images/2.jpg" width="500" height="200"/></li>
+            <li><img src="images/3.jpg" width="500" height="200"/></li>
+            <li><img src="images/4.jpg" width="500" height="200"/></li>
+            <li><img src="images/5.jpg" width="500" height="200"/></li>
+        </ul>
+        <ol></ol>
+    </div>
+    <div id="arr"><span id="left">&lt;</span><span id="right">&gt;</span></div>
+</div>
+<script>
+
+/*
+    var box = document.getElementById('box');
+    var screen = box.children[0];
+    var ul = screen.children[0];
+    var ol = screen.children[1];
+    var ulLis = ul.children;
+    var olLis = ol.children;
+    var arr = document.getElementById('arr');
+    var left = document.getElementById('left');
+    var right = document.getElementById('right');
+
+    //动态生成结构ol的lis
+    for(var i=0; i<ulLis.length; i++)
+    {
+        var li = document.createElement('li');
+        li.innerHTML = i + 1;
+        ol.appendChild(li);
+    }
+    //初始化时第1张图片为current
+    olLis[0].className = "current";
+    //做无缝滚动时，要clone第1张图片
+    var firstImg = ulLis[0].cloneNode(true);
+    ul.appendChild(firstImg);
+
+    //鼠标经过按钮要按钮排他，并移动图片到对应的位置
+    for(var j=0; j<olLis.length; j++)
+    {
+        olLis[j].index = j;
+        olLis[j].onmouseover = function(){
+            for(var k=0; k<olLis.length; k++)
+            {
+                olLis[k].className = "";
+            }
+            this.className = "current";
+            var target = -this.index * screen.offsetWidth;
+            animate(ul, target);
+        };
+    }
+
+    function animate(obj, target)
+    {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function(){
+            var leader = obj.offsetLeft;
+            var step = 10;
+            step = leader < target? step: -step;
+            if(Math.abs(leader - target)> Math.abs(step))
+            {
+                leader = leader + step;
+                obj.style.left = leader + 'px';
+            }
+            else
+            {
+                obj.style.left = target + 'px';
+                clearInterval(obj.timer);
+            }
+        }, 15);
+    }
+
+    //鼠标经过arr盒子，显示左右箭头，鼠标离开arr盒子隐藏箭头
+    box.onmouseover = function(){
+        arr.style.display = "block";
+    };
+
+    box.onmouseout = function(){
+        arr.style.display = "none";
+    };
+
+    //给左右箭头绑定点击事件
+    var picIndex = 0;  //记录当前图片的索引
+    var square = 0;    //记录当前小方块的索引
+    right.onclick = function(){
+        //先判断，如果是最后一张图片时，点击右键要将picIndex改成0
+        if(picIndex == ulLis.length - 1)
+        {
+            picIndex = 0;
+            ul.style.left = 0;
+        }
+        picIndex++;
+        var target = -picIndex * screen.offsetWidth;
+        animate(ul, target);
+        if(square < olLis.length-1)
+        {
+            square++;
+        }
+        else
+        {
+            square = 0;
+        }
+        for(var i=0; i<olLis.length; i++)
+        {
+            olLis[i].className = "";
+        }
+        olLis[square].className = "current";
+    };
+
+    left.onclick = function(){
+        //先判断，如果是最后一张图片时，点击右键要将picIndex改成0
+        if(picIndex == 0)
+        {
+            picIndex = ulLis.length - 1;
+            ul.style.left = -(ulLis.length - 1)*screen.offsetWidth +'px';
+        }
+        picIndex--;
+        var target = -picIndex * screen.offsetWidth;
+        animate(ul, target);
+        if(square > 0)
+        {
+            square--;
+        }
+        else
+        {
+            square = olLis.length-1;
+        }
+        for(var i=0; i<olLis.length; i++)
+        {
+            olLis[i].className = "";
+        }
+        olLis[square].className = "current";
+
+    };
+*/
+    //获取要操作的元素
+    var box = document.getElementById('box');
+    var screen = box.children[0];
+    var ul = screen.children[0];
+    var ol = screen.children[1];
+    var ulLis = ul.children;
+    //获取箭头相关的元素
+    var arr = document.getElementById('arr');
+    var left = document.getElementById('left');
+    var right = document.getElementById('right');
+    //图片宽度
+    var imgWidth = screen.offsetWidth;
+
+    //定义一个指针变量，表示当前显示的图片的索引，根据当前的current类名的ol的li来获取
+    var picIndex = 0;
+    //定义一个指针变量，表示当前小方块的索引，根据当前的current类名的ol的li来说去
+    var squareIndex = 0;
+
+    //动态生成ol的li结构，根据ul中li的数量确定对应ol的li数量
+    for(var i=0; i<ulLis.length; i++)
+    {
+        var li = document.createElement('li');
+        li.innerHTML = i + 1;   //ol中的li的数字标识从1开始，所以要加1
+        ol.appendChild(li);
+    }
+    //为了实现无缝轮播图效果，完全克隆第1张图片，并追加到ul的末尾
+    var firstImg = ul.children[0].cloneNode(true);
+    ul.appendChild(firstImg);
+
+    //获取刚刚生成的ol中的lis
+    var olLis = ol.children;
+
+    //给当前ol中的li绑定鼠标悬停事件，添加current类名
+    //给每个ol中的li绑定轮播切换图的函数
+    for(var j=0; j<olLis.length; j++){
+        //使用自定义属性来获取当前ol中li的索引
+        olLis[j].index = j;
+        olLis[j].onmouseover = function(){
+            //排他思想： 去掉所有，保留自己的current类名
+            for(var k=0; k<olLis.length; k++){
+                olLis[k].className = "";
+            }
+            this.className = "current";
+            //将ol中当前current的li的索引赋给图片指针和小方块指针
+            picIndex = this.index;
+            squareIndex = this.index;
+
+            //给ol中li确定轮播图的x坐标，用target表示
+            //target跟当前ol中li的index位置有线性关系，每个li间隔1个图片宽度
+            var target = -this.index * imgWidth;
+            //调用animate函数运动到指定target的位置（要封装animate函数）
+            animate(ul, target);
+        };
+    }
+
+
+    //当鼠标悬浮在box上时，显示左右箭头；当鼠标离开时，隐藏左右箭头
+    //最后绑定鼠标悬停是，清空自动播放轮播图的定时器timer，鼠标离开时开启自动播放轮播图的定时器timer
+    box.onmouseover = function(){
+        arr.style.display = "block";
+        clearInterval(timer);
+    };
+
+    box.onmouseout = function(){
+        arr.style.display = "none";
+        timer = setInterval(right.onclick, 2000);
+    };
+
+    //对左右箭头绑定点击移动图片事件
+    //先实现右箭头
+    right.onclick = function(){
+        //先判断picIndex是否是最后一张，如果是，就要picIndex清零，并把图片切换到第1张
+        if(picIndex == (ulLis.length-1))
+        {
+            picIndex = 0;
+            ul.style.left = 0 + 'px';
+        }
+        else //如果不是picIndex自增
+            picIndex++;
+        //计算移动后的最终位置，向右一张图片宽度的x坐标
+        var target = -picIndex * imgWidth;
+        //调用运动函数到达目标位置
+        animate(ul, target);
+
+        //判断小方块指针是否到最后1个，如果是要置零，否则自增
+        if(squareIndex == (olLis.length-1))
+            squareIndex = 0;
+        else
+            squareIndex++;
+        //排他思想：干掉其他li的current类名，给自己添加current类名表明当前li
+        for(var i=0;i<olLis.length; i++){
+            olLis[i].className = "";
+        }
+        olLis[squareIndex].className = "current";
+
+    };
+
+    //再实现左箭头
+    left.onclick = function(){
+        //先判断picIndex是否是第1张，如果是，就要picIndex置最大olLis.length-1，并把图片切换到最后1张
+        if(picIndex == 0){
+            picIndex = ulLis.length-1;
+            ul.style.left = -(ulLis.length-1)*imgWidth + 'px';
+        } else //如果不是picIndex自减
+            picIndex--;
+        //计算移动后的最终位置，向右一张图片宽度的x坐标
+        var target = -picIndex * imgWidth;
+        //调用运动函数到达目标位置
+        animate(ul, target);
+
+        //判断小方块指针是否到第1个，如果是要置最大，否则自减
+        if(squareIndex == 0)
+            squareIndex = olLis.length-1;
+        else
+            squareIndex--;
+        //排他思想：干掉其他li的current类名，给自己添加current类名表明当前li
+        for(var i=0;i<olLis.length; i++)
+        {
+            olLis[i].className = "";
+        }
+        olLis[squareIndex].className = "current";
+
+    };
+
+    //最后实现自动播放轮播图，需要定时器，实现自动播放轮播图
+    var timer = null;
+    //使用定时器前，先清空定时器，然后再开启定时器，并传入向右运动的函数right.onclick
+    clearInterval(timer);
+    timer = setInterval(right.onclick,2000);
+
+    //定义animate函数
+    function animate(obj,target){
+        //先写好基本运动代码，再加运动限制条件，如下为基本运动代码
+        /*leader = leader + step;
+        obj.style.left = leader + 'px';*/
+        /*思路：由于运动不能一次step完成，因此需要不断运动到达target位置，考虑使用间歇定时器
+        而且该定时器需要绑定到运动对象obj上，才能方便准确控制运动对象定时器的开闭*/
+        //每次定时器开启时，清空当前运动对象的定时器
+        clearInterval(obj.timer);
+        //开启运动对象的定时器
+        obj.timer = setInterval(function(){
+            //获取运动对象初始位置
+            var leader = obj.offsetLeft;
+            //定义运动步长
+            var step = 10;
+            //根据初始位置和目标位置来确定步长的正负号
+            step = target > leader? step : -step;
+            //当leader和target的距离大于步长step时，obj的x坐标是通过一次增加一个步长方式运动；
+            //否则直接把target的位置给到当前obj的x坐标值
+            if(Math.abs(leader-target)>Math.abs(step))
+            {
+                leader = leader + step;
+                obj.style.left = leader + 'px';
+            }
+            else
+            {
+                obj.style.left = target + 'px';
+                //清空运动对象的定时器，不让obj根据定时器来运动
+                clearInterval(obj.timer);
+            }
+        },15);
+    }
+
+
+</script>
+</body>
+</html>

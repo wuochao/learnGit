@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>QQ微博-添加表情效果</title>
+
+        <style>
+            * {
+                margin:0;
+                padding:0;
+            }
+
+            body{
+                margin:0;
+                background:url(imgs/wrapBg.jpg) no-repeat #EBF1F1;
+            }
+
+            #logo{
+                margin:30px 0 0 300px;
+            }
+
+            #myBody{
+                width: 800px;
+                height: 200px;
+                border:1px solid #000;
+            }
+            
+            #myBdLeft{
+                width: 590px;
+                height: 100%;
+                background:#fff;
+                float:left;
+            }
+
+            #talkBox{
+                text-align:left;
+                margin:0 0 0 25px;
+            }
+
+            #msgTxt{
+                width: 540px;
+                height: 80px;
+                overflow:hidden;
+                font-family:Tahoma, Arial;
+                font-size:14px;
+                border:1px solid gray;
+            }
+
+            #talkBox h2{
+                text-align:left;
+                margin:0;
+                padding:0;
+                font:normal normal normal 18px/29px "MicroSoft YaHei","SimHei";
+            }
+
+            #funBox{
+                width:540px;
+            }
+
+            #funBox a{
+                color:#000;
+                font-size:14px;
+                text-decoration:none;
+            }
+
+            .createNew, .atSomebody, .insertFace, .uploadPic, .uploadVideo{
+                height: 16px;
+                display:inline-block;
+                background-position:-170px -33px;
+                padding-left:18px;
+            }
+
+            .countTxt{
+                color:#999;
+                float:right;
+                line-height:33px;
+                margin:0 15px 0 0;
+            }
+
+            .countTxt em{
+                font-family: Georgia, Tahoma, Arial;
+                font-size: 26px;
+                position: relative;
+                top: -5px;
+                vertical-align: middle;
+            }
+
+            .sendBtn{
+                width: 112px;
+                height: 30px;
+                float:right;
+                margin:0 20px 0 0;
+                padding:0;
+                background:url(imgs/bg1.png) -117px -165px no-repeat;
+                line-height:33px;
+                margin-left:14px;
+                border:0px;
+                cursor:pointer;
+            }
+
+            .sendBtn:hover{
+                background:url(imgs/bg1.png) 0px -195px no-repeat;
+            }
+
+            #btnCloFri{
+                cursor:pointer;
+            }
+
+            #myBdRight{
+                width: 210px;
+                height: 100%;
+                background-color: #cccbf4;
+                float:left;
+            }
+
+            .faceDiv{
+                width: 300px;
+                background-color: #f0f0f0;
+                position:absolute;
+            }
+
+            .atSomeList{
+                width: 60px;
+                background-color: #f0f0f0;
+                border: 1px solid #a0a0a0;
+                list-style:none;
+                position:absolute;
+            }
+
+            .atSomeList a{
+                text-decoration:none;
+                color:#c0c0c0;
+            }
+
+            .showFace{
+                width: 200px;
+                background-color:#f0f0f0;
+                border:1px solid #a0a0a0;
+                position:absolute;
+            }
+
+
+
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script src="js/01 QQ微博-添加表情效果.js"></script>
+
+    </head>
+    <body>
+        <img id="logo" src="imgs/b3_100901.png" alt=""/>
+        <center>
+            <div id="myBody">
+                <div id="myBdLeft">
+                    <div id="talkBox">
+                        <h2><a href="">夏天来了，你懂得......</a></h2>
+                        <textarea name="" id="msgTxt" cols="30" rows="10" class="">
+                        </textarea>
+                        <div id="funBox">
+                            <a href="javascript:void(0);" class="createNew">话题</a>
+                            <a href="javascript:void(0);" class="atSomebody">朋友</a>
+                            <a href="javascript:void(0);" class="insertFace">表情</a>
+                            <a href="javascript:void(0);" class="uploadPic">照片</a>
+                            <a href="javascript:void(0);" class="uploadVideo">视频</a>
+                        </div>
+                        <div id="sendBox">
+                            <input type="button" class="sendBtn" value="">
+                            <span class="countTxt">还能输入<em>140</em>字</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="myBdRight">              
+                </div>
+            </div>  
+        </center>
+     </body>
+</html>

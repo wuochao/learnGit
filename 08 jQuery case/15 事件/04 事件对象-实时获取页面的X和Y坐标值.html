@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>事件对象-实时获取页面的X和Y坐标值</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            $(function () {
+                $("#btn1").click(function(){
+                    $(window).mousemove(function(e){
+                        //获取鼠标的X和Y坐标，并赋值给txt_X和txt_Y
+                        var txt_X = e.pageX;
+                        var txt_Y = e.pageY;
+                        $("#txt_X").val(txt_X);
+                        $("#txt_Y").val(txt_Y);
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <input type="button" value="获得鼠标在页面的位置X，Y" id="btn1"/>
+        当前坐标X&nbsp;<input type="text" value="鼠标当前坐标X" id="txt_X">&nbsp;&nbsp;
+        当前坐标Y&nbsp;<input type="text" value="鼠标当前坐标Y" id="txt_Y">
+
+
+    </body>
+</html>

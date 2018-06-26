@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>动画效果-自定义动画</title>
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				//设置div的样式
+				$("div").css({
+					"display":"block",
+					"height":"200px",
+					"width":"300px",
+					"background":"gold"
+				});
+
+				/*
+				animate的参数：
+				params:一组包含作为动画属性和终值的样式属性和及其值的集合
+				speed:三种预定速度之一的字符串("slow","normal", or "fast")或表示动画时长的毫秒数值(如：1000)
+				easing:要使用的擦除效果的名称(需要插件支持).默认jQuery提供"linear" 和 "swing".
+				fn:在动画完成时执行的函数，每个元素执行一次。
+				 */
+
+
+				//自定义动画
+				$("button:eq(0)").click(function(){
+					$("div").animate({
+						"width":"400px",
+						"height":"400px",
+						"opacity":"0.5"
+					},2000);
+				});
+
+				//停止当前正在运行的动画
+				$("button:eq(1)").click(function(){
+					$("div").stop();
+				});
+
+			});
+
+		</script>
+	</head>
+	<body>
+		<button id="btn1">自定义动画</button>
+		<button id="btn2">停止</button>
+		<div id="divItem"></div>
+	</body>
+</html>

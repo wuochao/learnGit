@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+	    <meta charset="UTF-8">
+	    <title>tab切换案例</title>
+	    <style>
+			body,div,ul,li,ol,dl,dt,p,dd,img,input,a,span,h1,h2,h3,h4{
+				padding:0;
+				margin:0;
+				border:0;
+				list-style:none;
+			}
+			
+			.wrapper{
+				width:1000px;
+				height:475px;
+				margin:0 auto;
+				margin-top:100px;
+			}
+
+			.tab{
+				width:320px;
+				height:36px;
+				border-bottom:0;
+				border:1px solid #ddd;
+			}
+	    
+			.tab li{
+				width:80px;
+				height:34px;
+				line-height:34px;
+				text-align:center;
+				float:left;
+				border-top:4px solid #fff;
+				position:relative;
+				cursor: pointer;  
+				/*cursor属性规定要显示的光标的类型（形状）*/
+			}
+
+			.tab span{
+				width:1px;
+				height:14px;
+				background:#ddd;
+				position:absolute;
+				right:0;
+				top:10px;
+				overflow:hidden;
+			}
+
+			.products{
+				width:1002px;
+				height:476px;
+				border:1px solid #ddd;
+			}
+
+			.products .main{
+				float: left;
+				display: none;
+			}
+
+			.products .main.selected{  
+				/*.main.selected表示交集选择器*/
+				display: block;
+			}
+
+			.tab li.active{
+				border-color:red;
+				border-bottom:0;
+			}
+	    </style>
+	    <script src="jquery-1.11.1.min.js"></script>
+	    <script>
+	        $(function(){
+	       		$(".tab li").mouseenter(function(){
+	       			//给当前元素添加active类样式，
+	       			//给所有兄弟元素移除active类样式
+	       			$(this)
+	       				.addClass("active");
+	       				.siblings("li").removeClass("active")
+
+	       			//让下面div的内容，根据上面tab标签显示相应的内容
+	       			$(".products div").eq($(this).index())
+	       				.addClass("selected");
+	       				.siblings("div").removeClass("selected")
+	          	});
+	       })
+	    </script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<ul class="tab"> 
+				<li class="tab_item active">国际大牌<span>◆</span></li>
+			 	<li class="tab_item">国装品牌<span>◆</span></li>
+			 	<li class="tab_item">清洁用品<span>◆</span></li>
+			 	<li class="tab_item">男士精品</li>	
+			</ul>
+			<div class="products">
+				<div class="main selected">
+					<a href="#"><img src="imgs/guojidapai.jpg" alt=""/></a>
+				</div> 			
+				<div class="main">
+					<a href="#"><img src="imgs/guozhuangmingpin.jpg" alt=""/></a>
+				</div> 		
+				<div class="main">
+					<a href="#"><img src="imgs/qingjieyongpin.jpg" alt=""/></a>
+				</div> 		
+				<div class="main">
+					<a href="#"><img src="imgs/nanshijingpin.jpg" alt=""/></a>
+				</div> 		
+			</div>
+		</div>
+	</body>
+</html>

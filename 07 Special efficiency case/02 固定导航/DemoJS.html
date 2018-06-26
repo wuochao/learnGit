@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        .main {
+            margin: 0 auto;
+            width: 1000px;
+            margin-top: 10px;
+
+        }
+
+        .fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="top" id="topPart">
+    <img src="images/top.png" alt=""/>
+</div>
+<div id="navBar">
+    <img src="images/nav.png" alt=""/>
+</div>
+<div class="main" id="mainPart">
+    <img src="images/main.png" alt=""/>
+</div>
+<script>
+/*    var topPart = document.getElementById("topPart");
+    var navBar = document.getElementById("navBar");
+    var mainPart = document.getElementById("mainPart");
+
+    //需求：窗体滚动的时候 判断页面被卷去的头部的高度 如果 大于topPart的高度
+    //就要把navBar变为固定定位
+    window.onscroll = function () {
+        //判断页面被卷去的头部的高度 如果 大于topPart的高度
+        if (scroll().top > topPart.offsetHeight) {
+            navBar.className = "fixed";
+            //navBar变为固定定位后 脱离标准流 不再占位置 后面的就跳上来了
+            //为了防止 后面的内容跳上来 可以 给后面的内容 加paddingTop
+            mainPart.style.paddingTop = navBar.offsetHeight + "px";
+        } else {
+            navBar.className = "";
+            mainPart.style.paddingTop = 0;
+        }
+    };
+
+
+    function scroll() {
+        return {
+            top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0,
+            left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0
+        };
+    }*/
+    //获取要操作的元素
+    var topPart = document.getElementById('topPart');
+    var navBar = document.getElementById('navBar');
+    var main = document.getElementById('main');
+    //获取navBar上方的高度
+    var topPartHeight = topPart.offsetHeight;
+
+    //console.log(topPartHeight);
+
+    //对navBar设置定位
+    window.onscroll = function(){
+        if(scroll().top > topPartHeight)
+        {
+            navBar.className = "fixed";
+            main.style.marginTop = navBar.offsetHeight + 'px';
+        }
+        else
+        {
+            navBar.className = "";
+            main.style.marginTop = 0;
+        }
+
+    };
+
+//页面滚动scroll兼容性就汗水
+function scroll()
+{
+    return {
+        left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+    }
+}
+
+
+
+//缓动框架
+function animate(obj, json, fn)
+{
+    clearInterval(obj.timer);
+    obj.timer = setInterval(function(){
+        //假设已经完成所有属性的更改
+        var flag = true;
+        //遍历json，获取json的目标属性值
+        for(var k in json)
+        {
+            if(k == "zIndex")
+                obj.style[k] = json[k];
+            else if( k == "opacity")
+            {
+                var leader = getStyle(obj, k) *100;
+                var target = json[k] * 100;
+                var step = (target - leader)/10;
+                step = step>0? Math.ceil(step) : Math.floor(step);
+                leader = leader + step;
+                obj.style[k] = leader /100;
+            }
+            else
+            {
+                var leader = parseInt(getStyle(obj, k)) || 0;
+                var target = json[k];
+                var step = (target - leader)/10;
+                step = step>0? Math.ceil(step) : Math.floor(step);
+                leader = leader + step;
+                obj.style[k] = leader + 'px';
+            }
+            if(leader != target)
+                flag = false;
+        }
+        if(flag)
+        {
+            clearInterval(obj.timer);
+            if(fn)
+                fn();
+        }
+
+    }, 15);
+
+}
+
+
+
+
+
+</script>
+</body>
+</html>

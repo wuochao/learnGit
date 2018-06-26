@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul {
+            list-style: none
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 1150px;
+            height: 400px;
+            margin: 50px auto;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        div li {
+            width: 240px;
+            height: 400px;
+            float: left;
+            /*background-image: url(images/1.jpg);*/
+        }
+
+        div ul {
+            width: 1300px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script>
+    //找人
+    var box = document.getElementById("box");
+    var ul = box.children[0];
+    var lis = ul.children;
+
+    //遍历所有li给每个li添加背景图片，绑定鼠标悬停事件
+    for(var i=0; i<lis.length; i++)
+    {
+        //遍历li给每个li添加背景图片
+        lis[i].style.backgroundImage = "url(images/"+(i+1)+".jpg)";
+        //给每个li绑定onmouseover事件
+        lis[i].onmouseover = function(){
+            for(var j=0; j<lis.length; j++)
+            {   //由于鼠标悬停的宽度要设置为800，剩余1200-800=400px，均分给剩余4个图片，每个100px
+                animate(lis[j],{"width":100});
+            }
+            animate(this,{"width":800});
+        };
+    }
+
+    //鼠标离开box后，各个图片恢复原来的宽度240 （1200/5 = 240）
+    box.onmouseout = function(){
+        for(var i=0; i<lis.length; i++)
+        {
+            animate(lis[i],{"width":240});
+        }
+    };
+
+    function animate(obj, json) {//json {属性名:属性值} {attr:target}
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+            var flag = true;//假设这一次执行完成后 所有属性都能达到目标值
+            for (var k in json) {//json {attr:target} k json[k]
+                var leader = parseInt(getStyle(obj, k)) || 0;
+                var target = json[k];
+                var step = (target - leader) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                leader = leader + step;
+                obj.style[k] = leader + "px";
+               // console.log("代码在运行");
+                if (leader !== target) {//当前这个属性还没有到达目标值
+                    flag = false;
+                }
+            }
+            if (flag) {//如果此时仍然是true说明所有的都到目标了
+                clearInterval(obj.timer);
+            }
+        }, 15);
+    }
+
+    function getStyle(obj, attr) {
+        if (window.getComputedStyle) {
+            return window.getComputedStyle(obj, null)[attr];
+        } else {
+            return obj.currentStyle[attr];
+        }
+    }
+</script>
+</body>
+</html>

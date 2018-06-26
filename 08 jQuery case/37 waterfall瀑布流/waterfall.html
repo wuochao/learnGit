@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>waterfall</title>
+    <link rel="stylesheet" href="waterfall.css">
+</head>
+
+<body>
+    <div class="waterfall">
+        <!-- <div class="feed-item">
+            <p><img src="images/0.png" alt=""></p>
+            <p class="pic-title">图片的标题图片的标题图片的标题</p>
+            <p class="pic-content">图片的内容图片的内容图片的内容图片的内容图片的内容图片的内容图片的内容图片的内容图片的内容图片的内容图片的内容图片的内容图片的内容图片的内容</p>
+            <p class="pic-author">张三疯</p>
+        </div> -->
+    </div>
+    <div class="end">
+		到最后了亲！
+	</div>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/underscore.js"></script>
+    <!-- 模版 -->
+    <script type="text/template" id="feed_template">
+        <div class="feed-item">
+            <p>
+                <img src="<%= imgurl %>" alt="">
+            </p>
+            <p class="pic-title"><%= title %></p>
+            <p class="pic-content"><%= content %></p>
+            <p class="pic-author"><%= author %></p>
+        </div>
+    </script>
+    <script src="waterfall.js"></script>
+
+</body>
+
+</html>

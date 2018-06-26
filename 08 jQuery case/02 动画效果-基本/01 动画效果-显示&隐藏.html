@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>动画基本效果-显示&隐藏</title>
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				//设置div的样式
+				$("div").css({
+					"display": "none",
+					"height":"200px",
+					"width":"300px",
+					"background":"gold"
+				});
+
+				/*
+				让div显示出来，常用show()的几种形式（注意：hide()类似）
+				第1个参数：动画时长，可以是number或string类型（fast、normal、slow）	
+				第2个参数：动画执行后，要执行的函数
+				*/
+				$("button").eq(0).click(function(){
+					$("div").show("fast");  	//快速显示
+				});
+
+				$("button").eq(1).click(function(){
+					$("div").show("normal");  	//正常速度显示
+				});
+
+				$("button").eq(2).click(function(){
+					$("div").show("slow");  	//慢速显示
+				});
+
+				$("button").eq(3).click(function(){
+					$("div").show(3000);  	//3s显示
+				});
+
+				//显示完后，弹出警告
+				$("button").eq(4).click(function(){
+					$("div").show(1000,function(){
+						alert("显示完了");
+					});
+				});
+
+				//显示完后自动隐藏
+				$("button").eq(5).click(function(){
+					$("div").show(1000,function(){
+						$("div").hide(1000);
+					});
+				});
+
+				//让div隐藏出来
+				$("button").eq(6).click(function(){
+					$("div").hide();
+				});
+
+			});	
+		</script>
+	</head>
+	<body>
+		<button>快速显示</button>
+		<button>正常速度显示</button>
+		<button>慢速显示</button>
+		<button>3s显示</button>
+		<button>显示后提示</button>
+		<button>显示后自动隐藏</button>
+		<button>隐藏</button>
+		<div></div>
+		
+	</body>
+</html>

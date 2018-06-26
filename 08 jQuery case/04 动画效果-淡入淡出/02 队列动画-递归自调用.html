@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>队列动画-递归自调用</title>
+		<style>
+			.box{
+				width: 500px;
+				height: 50px;
+				background: #ccc;
+				margin: 0 auto;
+			}
+			.box .letter{
+				float: left;
+				background: yellow;
+				margin-right: 10px;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<span class="letter">你</span>
+			<span class="letter">在</span>
+			<span class="letter">他</span>
+			<span class="letter">乡</span>
+			<span class="letter">还</span>
+			<span class="letter">好</span>
+			<span class="letter">吗</span>
+			<span class="letter">？</span>
+			<button id="show">顺向依次显示</button>
+			<button id="hide">逆向依次隐藏</button>
+		</div>
+
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+			$(function(){
+				//顺向依次显示
+				$('#show').on('click',function(){
+					$('.letter').first().show('fast', function showNext(){
+						$(this).next().show('fast', showNext);
+					});
+				});
+				//逆向依次隐藏
+				$('#hide').on('click',function(){
+					$('.letter').last().hide('fast', function hidePrev(){
+						$(this).prev().hide('fast', hidePrev);
+					});
+				});
+
+			});
+		</script>
+	</body>
+</html>

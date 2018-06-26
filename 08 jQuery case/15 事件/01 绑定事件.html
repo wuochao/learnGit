@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>绑定事件</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+            .div_1{
+                background-color:pink;
+                margin-top:20px;
+            }
+
+            .div_2{
+                background-color:gray;
+                margin-top:20px;
+                margin-bottom:20px;
+            }
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            $(function () {
+                //利用bind绑定2个事件，触发同一种function
+                $("#btn1").bind("click mouseenter", function(){
+                    alert("我绑定了2个事件：click 和 mouseenter，触发同一种function");
+                });
+
+                //利用bind绑定2个事件，触发不同的function
+                $("#btn2").bind({
+                    "click":function(){
+                        alert("我是click事件");
+                    },
+                    "mouseleave":function(){
+                        alert("我是mouseleave事件");
+                    }
+                });
+
+                //bind传入3个参数的情况，data是文本
+                $("#btn3").bind("click","我是传入的数据", function(e){
+                    alert(e.data);          //弹出“我是传入的数据”
+                })
+                
+                //bind传入3个参数的情况，data是对象
+                $("#btn4").bind("click",{
+                    aa : true,
+                    bb : false,
+                    cc : "haha",
+                    dd : "嘿嘿"
+                    }, function(e){
+                    alert(e.data.aa);       //弹出“true”
+                    alert(e.data.bb);       //弹出“false”
+                    alert(e.data.cc);       //弹出“haha”
+                    alert(e.data.dd);       //弹出“嘿嘿”
+                })
+
+                //one绑定事件后，触发只响应1次（bind绑定的事件触发就响应，没有次数限制）
+                $("#btn5").one("click",function(){
+                    alert("我是one绑定的事件，触发只响应1次");
+                });
+
+                //bind多个li标签function
+                $("#ul_1 li").bind("click", function(){
+                    alert($(this).html());
+                });
+
+                //delegate委托ul绑定多个li标签function
+                $("#ul_2").delegate("li", "click", function(){
+                    alert($(this).html());
+                });
+
+                //on绑定事件：【强烈建议使用】
+                $(".div_1").on("click","h2:eq(1)", function(){
+                    alert($(this).html());
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <button id="btn1">bind绑定2个事件，触发同一个function</button>
+        <button id="btn2">bind绑定2个事件，触发不同的function</button>
+        <button id="btn3">bind绑定事件，bind传入3个参数，data是文本</button>
+        <button id="btn4">bind绑定事件，bind传入3个参数，data是对象</button>
+        <button id="btn5">one绑定事件，触发只响应1次</button><br/>
+
+        <div class="div_1">
+            <p>我是文本段落</p>
+            <h2>我是h2标题的第1个</h2>
+            <h2>我是h2标题的第2个</h2>
+        </div>
+        <div class="div_2">
+            我是div_2
+        </div>
+        <ul id="ul_1">
+            <li>bind多个li标签function，我是ul_1的第1个li标签</li>
+            <li>bind多个li标签function，我是ul_1的第2个li标签</li>
+            <li>bind多个li标签function，我是ul_1的第3个li标签</li>
+            <li>bind多个li标签function，我是ul_1的第4个li标签</li>
+            <li>bind多个li标签function，我是ul_1的第5个li标签</li>
+            <li>bind多个li标签function，我是ul_1的第6个li标签</li>
+        </ul>
+        <br/>
+        <ul id="ul_2">
+            <li>delegate委托ul绑定多个li标签function，我是ul_2的第1个li标签</li>
+            <li>delegate委托ul绑定多个li标签function，我是ul_2的第2个li标签</li>
+            <li>delegate委托ul绑定多个li标签function，我是ul_2的第3个li标签</li>
+            <li>delegate委托ul绑定多个li标签function，我是ul_2的第4个li标签</li>
+            <li>delegate委托ul绑定多个li标签function，我是ul_2的第5个li标签</li>
+            <li>delegate委托ul绑定多个li标签function，我是ul_2的第6个li标签</li>
+        </ul>
+    </body>
+</html>

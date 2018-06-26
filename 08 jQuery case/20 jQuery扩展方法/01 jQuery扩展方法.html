@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>jQuery扩展方法</title>
+        <style>
+            * {
+                margin:0;
+                padding:0;
+            }
+
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            //给全局的jQuery扩展一个方法：输出当前日期
+            $.log = function(){
+                console.log(new Date());
+            };
+
+            //使用刚刚扩展的方法，如下：
+            $.log();        //返回当前日期和时间
+
+            //Sat Mar 25 2017 09:53:20 GMT+0800 (中国标准时间)
+
+            //普通的jQuery对象的扩展方法，即在原型上添加方法
+            $.fn.log = function(){
+                console.log($(this).text());    //打印当前对象的文本
+            };          
+
+            $(function(){
+                $(".box").log();
+            });
+
+
+
+
+
+
+        </script>
+    </head>
+    <body>
+        <div class="box">
+            我是文本，文本加载完成，不等于图片加载完成。
+        </div>
+
+
+    </body>
+</html>

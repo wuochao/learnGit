@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>事件对象-获取按下鼠标的哪个键</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+            .box{
+                width: 300px;
+                height: 500px;
+                background-color:pink;
+                margin: 0 auto;
+            }
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            $(function () {
+
+            /*
+            用event.which获取当前按下鼠标的哪个键：
+            左键：1    中键：2    右键：3
+            注意：右键会被浏览器占用。
+             */
+               $(".box").click(function(event){
+                    console.log(event.which);
+               });
+
+            });
+        </script>
+    </head>
+    <body>
+        <div class="box"></div>
+
+    </body>
+</html>

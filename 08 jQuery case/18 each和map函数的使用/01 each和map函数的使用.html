@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>each和map函数的使用</title>
+        <style>
+            * {
+                margin:0;
+                padding:0;
+            }
+
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+
+            jQuery(document).ready(function(){
+            /*
+            需求：用each函数实现给每个li标签增加一个index_1数字
+            思路：
+            1、获取当前li标签的文本originTxt_1
+            2、将originTxt_1和index_1赋值给每个li标签的text
+            方法一：
+             */
+                //选择li标签，添加each函数
+                $("li").each(function(index_1, element_1){
+                    //先获取li标签之前的内容
+                    var originTxt_1 = $(element_1).text();
+
+                    //然后在originTxt_1后面分别添加index"01234"
+                    $(element_1).text(originTxt_1 + index_1);
+                });
+
+            /*
+            需求：用each函数实现给每个li标签增加一个i数字
+                  注意：要将li作为数组传递给each
+            思路：（同上面一样）
+            1、获取当前li标签的文本originTxt_2
+            2、将originTxt_2和index_2赋值给每个li标签的text
+            方法二：
+             */
+                $.each($("li"),function(index_2,element_2){
+                    //先获取li标签之前的内容
+                    var originTxt_2 = $(element_2).text(); 
+
+                    //然后在originTxt_2后面分别添加"6" 
+                    $(element_2).text(originTxt_2 + 6);       
+
+                });
+
+                //使用全局的map函数注意参数的顺序是：element_3，index_3
+                //map函数会把每一项返回的结果组成一个新数组
+                var temp1 = $.map($("li"),function(element_3, index_3 ){
+                    return index_3;
+                });
+
+                //非全局的map函数
+                var temp2 = $("li").map(function(index_4, element_4){
+                    console.log(index_4);
+                    return index_4;
+                });
+
+
+
+            });
+        </script>
+    </head>
+    <body>
+        <ul class="tab">
+            <li>传智播客</li>
+            <li>传智播客</li>
+            <li>传智播客</li>
+            <li>传智播客</li>
+            <li>传智播客</li>
+        </ul>
+
+    </body>
+</html>

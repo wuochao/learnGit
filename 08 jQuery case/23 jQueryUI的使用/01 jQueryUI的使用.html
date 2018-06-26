@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>jQueryUI的使用</title>
+        <style>
+            * {
+                margin:0;
+                padding:0;
+            }
+
+            .wrap div{
+                height: 300px;
+                background-color: gray;
+            }
+
+        </style>
+        <!--
+        第1步：引入jquery和第3方插件
+        第2步：引入jQueryUI的css样式
+        第3步：照着demo写代码
+        -->
+        <script src="jquery-1.11.1.min.js"></script>
+        <script src="jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="jquery-ui.min.css">
+        <script>
+            $(function(){
+                $(".wrap").tabs();
+                $(".dialog").dialog();
+            });
+
+        </script>
+    </head>
+    <body>
+        <div class="wrap">
+            <ul>
+                <li><a href="#tab1">页签1</a></li>
+                <li><a href="#tab2">页签2</a></li>
+                <li><a href="#tab3">页签3</a></li>
+            </ul>
+            <div id="tab1">我是#tab1的div</div>
+            <div id="tab2">我是#tab2的div</div>
+            <div id="tab3">我是#tab3的div</div>
+        </div>
+
+        <!-- dialog案例 -->
+        <div class="dialog" title="我是对话框的标题">
+            我是对话框
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>仿QQ悬浮右侧菜单依次展开</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
+            background: #DCDCDC;
+        }
+        a, a:hover {
+            text-decoration: none;
+        }
+        .box {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 9999;
+            width: 140px;
+            cursor: pointer;
+            margin: 100px 0 0 0;
+        }
+        .box a {
+            display: block;
+            width: 130px;
+            height: 30px;
+            background-color: #fff;
+            margin-bottom: 2px;
+            color: #333;
+            line-height: 30px;
+            position: relative;
+            right: -110px;    /*隐藏序号后面的页签*/
+            padding-right: 10px;  /*延伸a标签长度到页面最右册，不产生缝隙*/
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .box a:hover {
+            color: #1974A1;
+        }
+        .box a span {
+            display: block;
+            float: left;
+            width: 30px;
+            background-color: #636871;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        .box a:hover span {
+            background-color: #5FA429
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <a href="#"><span>1</span>网页素材</a>
+    <a href="#"><span>2</span>菜单导航</a>
+    <a href="#"><span>3</span>日期时间</a>
+    <a href="#"><span>4</span>相册代码</a>
+    <a href="#"><span>5</span>网站特效</a>
+    <a href="#"><span>6</span>视频播放</a>
+    <a href="#"><span>7</span>联系我们</a>
+    <a href="#"><span>8</span>在线客服</a>
+</div>
+<div style="height:1000px;"></div>  <!--撑高页面，删除不影响效果-->
+<script src="jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        //设置定时器
+        var timer = null;
+        //给box绑定鼠标进入事件，注意不能用mouseover因为会事件冒泡
+        $('.box').mouseenter(function(){
+            //先清当前定时器，再开始新定时器
+            clearTimeout(timer);
+            timer = setTimeout(function(){
+                //给每个a标签绑定each函数，将a标签展开显示，right：0；延迟0.2s显示
+                $('.box').find('a').each(function(index, element){
+                    setTimeout(function(){
+                        $(element).stop().animate({right: 0}, 300);
+                    }, 50*index);
+                });
+            }, 200);
+        });
+        //给box绑定鼠标离开事件，注意不能用mouseout因为会事件冒泡
+        $('.box').mouseleave(function(){
+            //如果有定时器，先清空
+            if(timer)
+                clearTimeout(timer);
+            //再将a标签缩回到页面右侧隐藏 right：-110
+            $('.box').find('a').each(function(index, element){
+                setTimeout(function(){
+                    $(element).stop().animate({right: -110}, 300);
+                }, 50 * index);
+            });
+        });
+    });
+
+</script>
+</body>
+</html>

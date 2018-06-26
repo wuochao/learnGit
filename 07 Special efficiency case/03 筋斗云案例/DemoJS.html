@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        ul {
+            list-style: none
+        }
+
+        body {
+            background-color: #333;
+        }
+
+        .nav {
+            width: 800px;
+            height: 42px;
+            margin: 100px auto;
+            background: url(images/rss.png) right center no-repeat;
+            background-color: #fff;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .nav li {
+            width: 83px;
+            height: 42px;
+            text-align: center;
+            line-height: 42px;
+            float: left;
+            cursor: pointer;
+        }
+
+        .nav span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 83px;
+            height: 42px;
+            background: url(images/cloud.gif) no-repeat;
+        }
+
+        ul {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="nav">
+    <span id="cloud"></span>
+    <ul id="navBar">
+        <li>北京校区</li>
+        <li>上海校区</li>
+        <li>广州校区</li>
+        <li>深圳校区</li>
+        <li>武汉校区</li>
+        <li>关于我们</li>
+        <li>联系我们</li>
+        <li>招贤纳士</li>
+    </ul>
+</div>
+<script>
+/*    var lastPosition = 0;
+    //鼠标经过当前li 让筋斗云 跑到当前li的位置
+    //点击当前li 记录当前li的位置 下一次回到这个位置
+    var navBar = document.getElementById("navBar");
+    var cloud = document.getElementById("cloud");
+    var lis = navBar.children;
+    for (var i = 0; i < lis.length; i++) {
+        //鼠标经过要过来
+        lis[i].onmouseover = function () {
+            //让筋斗云 跑到当前li的位置
+            var target = this.offsetLeft;
+            animate(cloud, target);
+        };
+        //鼠标离开后要回去
+        lis[i].onmouseout = function () {
+            animate(cloud, lastPosition);
+        };
+        //点击当前li 记录当前li的位置
+        lis[i].onclick = function () {
+            lastPosition = this.offsetLeft;//记录当前点击的位置
+        };
+    }*/
+
+    var cloud = document.getElementById('cloud');
+    var ul    = document.getElementById('navBar');
+    var lis = ul.children;
+    var lastPosition = 0;  //上次点击的位置
+
+for(var i=0; i<lis.length; i++)
+    {
+        //鼠标悬停时，将当前li的offsetLeft给到cloud的offsetLeft
+        lis[i].onmouseover = function(){
+            var target = this.offsetLeft;
+            animate(cloud,{"left":target});
+        };
+
+        //当点击时，记录当前li的offsetLeft值，以便离开时停留在该li上
+        lis[i].onclick = function(){
+            lastPosition = this.offsetLeft;
+        };
+
+        //鼠标离开时，恢复上次点击的位置
+        lis[i].onmouseout = function(){
+            var target = lastPosition;
+            animate(cloud, {"left":target});
+        };
+
+    }
+
+function animate(obj, json, fn)
+{
+    clearInterval(obj.timer);
+    obj.timer =setInterval(function(){
+        var flag = true;
+        for(var k in json)
+        {
+            if(k=="zIndex")
+                obj.style[k]=json[k];
+            else if(k == "opacity")
+            {
+                var leader = getStyle(obj, k) *100;
+                var target = json[k]*100;
+                var step = (target - leader)/10;
+                step = step>0? Math.ceil(step) : Math.floor(step);
+                leader = leader + step;
+                obj.style[k] = leader/100;
+            }
+            else
+            {
+                var leader = parseInt(getStyle(obj,k)) || 0;
+                var target = json[k];
+                var step = (target - leader)/10;
+                step = step>0? Math.ceil(step): Math.floor(step);
+                leader = leader + step;
+                obj.style[k] = leader + 'px';
+            }
+            if(leader != target)
+                flag = false;
+        }
+        if(flag)
+        {
+            clearInterval(obj.timer);
+            if(fn)
+                fn();
+        }
+    }, 15);
+}
+
+function getStyle(obj, attr)
+{
+    if(window.getComputedStyle)
+        return window.getComputedStyle(obj, null)[attr];
+    else
+        return obj.currentStyle[attr];
+}
+
+
+</script>
+</body>
+</html>

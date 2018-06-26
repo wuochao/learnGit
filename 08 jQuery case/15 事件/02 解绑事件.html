@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>解绑事件</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+            .div_1{
+                margin-top:10px;
+                background-color: purple;
+            }
+
+            .div_2{
+                margin-top:10px;
+                background-color: olive;
+            }
+
+            .div_3{
+                margin-top:10px;
+                background-color: maroon;
+            }
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            $(function () {
+                //用bind绑定2个事件：click和mouseleave
+                $(".div_1 li").bind({
+                    "click":function(){
+                        alert("click触发"+$(this).html());
+                    },
+                    "mouseleave":function(){
+                        alert("mouseleave触发"+$(this).html());
+                    }
+                });
+
+                //用unbind解绑mouseleave事件
+                $(".div_1 li").unbind("mouseleave");
+
+
+                //用delegate绑定2个事件：click和mouseleave
+                $(".div_2").delegate("li", {
+                    "click":function(){
+                        alert("click触发"+$(this).html());
+                    },
+                    "mouseleave":function(){
+                        alert("mouseleave触发"+$(this).html());
+                    }
+                });
+
+                //用undelegate解绑mouseleave事件
+                $(".div_2").undelegate("mouseleave");
+
+                //用on绑定2个事件：click和mouseleave
+                $(".div_3 li").on({
+                    "click":function(){
+                        alert("click触发"+$(this).html());
+                    },
+                    "mouseleave":function(){
+                        alert("mouseleave触发"+$(this).html());
+                    }
+                });
+
+                //用off解绑mouseleave事件
+                $(".div_3 li").off("mouseleave");
+            });
+        </script>
+    </head>
+    <body>
+        <div class="div_1">
+            <ul>
+                <li>div_1里面ul的第1个li标签，bind绑定，unbind解绑</li>
+                <li>div_1里面ul的第2个li标签，bind绑定，unbind解绑</li>
+                <li>div_1里面ul的第3个li标签，bind绑定，unbind解绑</li>
+                <li>div_1里面ul的第4个li标签，bind绑定，unbind解绑</li>
+                <li>div_1里面ul的第5个li标签，bind绑定，unbind解绑</li>
+                <li>div_1里面ul的第6个li标签，bind绑定，unbind解绑</li>
+            </ul>
+        </div>
+
+        <div class="div_2">
+            <ul>
+                <li>div_2里面ul的第1个li标签，delegate绑定，undelegate解绑</li>
+                <li>div_2里面ul的第2个li标签，delegate绑定，undelegate解绑</li>
+                <li>div_2里面ul的第3个li标签，delegate绑定，undelegate解绑</li>
+                <li>div_2里面ul的第4个li标签，delegate绑定，undelegate解绑</li>
+                <li>div_2里面ul的第5个li标签，delegate绑定，undelegate解绑</li>
+                <li>div_2里面ul的第6个li标签，delegate绑定，undelegate解绑</li>
+            </ul>
+        </div>
+
+        <div class="div_3">
+            <ul>
+                <li>div_3里面ul的第1个li标签，on绑定，off解绑</li>
+                <li>div_3里面ul的第2个li标签，on绑定，off解绑</li>
+                <li>div_3里面ul的第3个li标签，on绑定，off解绑</li>
+                <li>div_3里面ul的第4个li标签，on绑定，off解绑</li>
+                <li>div_3里面ul的第5个li标签，on绑定，off解绑</li>
+                <li>div_3里面ul的第6个li标签，on绑定，off解绑</li>
+            </ul>
+        </div>
+    </body>
+</html>

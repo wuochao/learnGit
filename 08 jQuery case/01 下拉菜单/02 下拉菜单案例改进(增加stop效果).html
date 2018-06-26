@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+	    <meta charset="UTF-8">
+	    <title>下拉菜单案例改进（增加stop效果）</title>
+	    <style>
+	        * {
+	            padding: 0;
+	            margin: 0;
+	        }
+	        ul {
+	            list-style: none;
+	        }
+
+	        .wrap {
+	            width: 330px;
+	            height: 30px;
+	            margin: 100px auto 0;
+	            background-image: url(imgs/bg.jpg);
+	            padding-left: 10px;
+	        }
+
+	        .wrap li {
+	            float: left;
+	            width: 100px;
+	            height: 30px;
+	            margin-right: 10px;
+	            position: relative;
+	        }
+
+	        .wrap a {
+	            color: black;
+	            text-decoration: none;
+	            display: block;
+	            width: 100px;
+	            height: 30px;
+	            text-align: center;
+	            line-height: 30px;
+	            background-image: url(imgs/libg.jpg);
+	        }
+
+	        .wrap li ul {
+	            position: absolute;
+	            display: none;
+	        }
+	    </style>
+	    <script src="jquery-1.11.1.min.js"></script>
+	    <script>
+	        $(document).ready(function () {
+	            //方法一：用mouseenter和mouseleaver事件触发
+	            //mouseenter事件：鼠标经过时触发
+	            //mouseleave事件：鼠标离开时触发
+	            //$(this)是将DOM的this对象转换成jQuery对象
+	            //childern()方法获取子元素，参数为jQuery过滤器
+	             
+	            $(".wrap li").mouseenter(function(){
+	                $(this).children("ul").stop().show(1000);
+	            });
+
+	            $(".wrap li").mouseleave(function(){
+	                $(this).children("ul").stop().hide(1000);
+	            });
+				
+	            //方法二：用hover带2个function()
+	            /*
+	            $(".wrap li").hover(function () {
+	                $(this).children("ul").stop().show(1000);
+	            }, function () {
+	                $(this).children("ul").stop().hide(1000);
+	            });
+				*/
+				
+	            //方法三：用hover带if判断
+	            /*
+	            $(".wrap li").hover(function () {
+	                var $this = $(this).children("ul");
+	                var isShow = $this.css("display");
+	                if(isShow === "block") 
+	                    $this.stop().hide(1000);
+	                else 
+	                    $this.stop().show(1000);
+	            });
+				*/
+			
+	            //方式四：用slideToggle();方法完成，推荐使用！
+	            /*	
+	            $(".wrap li").hover(function () {
+	                $(this).children("ul").stop().slideToggle();
+	            });
+	             */
+
+	        });
+	    </script>
+	</head>
+	<body>
+	    <div class="wrap">
+	        <ul>
+	            <li>
+	                <a href="#">一级菜单1</a>
+	                <ul>
+	                    <li><a href="#">二级菜单1</a></li>
+	                    <li><a href="#">二级菜单2</a></li>
+	                    <li><a href="#">二级菜单3</a></li>
+	                </ul>
+	            </li>
+	            <li>
+	                <a href="#">一级菜单2</a>
+	                <ul>
+	                    <li><a href="#">二级菜单1</a></li>
+	                    <li><a href="#">二级菜单2</a></li>
+	                    <li><a href="#">二级菜单3</a></li>
+	                </ul>
+	            </li>
+	        	<li>
+	            	<a href="#">一级菜单3</a>
+	            	<ul>
+		                <li><a href="#">二级菜单1</a></li>
+		                <li><a href="#">二级菜单2</a></li>
+		                <li><a href="#">二级菜单3</a></li>
+	            	</ul>
+	        	</li>
+	        </ul>
+	    </div>
+	</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>动画效果-淡入淡出</title>
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				//设置div的样式
+				$("div").css({
+					"display":"none",
+					"height":"200px",
+					"width":"300px",
+					"background":"gold",
+					"margin-bottom":"20px"
+				});
+
+				/*
+				fadeIn()方法：当有2个参数时
+				第1个参数：动画执行时长；
+				第2个参数：动画执行后要执行的函数
+
+				fadeIn()方法：当有3个参数时
+				第1个参数：动画执行时长；
+				第2个参数：动画执行效果swing、linear
+				第3个参数：动画执行后要执行的函数
+
+				注释：fadeIn、fadeOut、fadeToggle的参数一样，用法类似
+				 */
+
+				 /*
+				fadeTo()方法：当有2个参数时
+				第1个参数：动画执行时长；
+				第2个参数：设置不透明度opacity 0～1
+
+				fadeTo()方法：当有3个参数时
+				第1个参数：动画执行时长；
+				第2个参数：设置不透明度opacity 0～1
+				第3个参数：动画执行后要执行的函数
+				 */
+
+
+				//淡入效果
+				$("button:eq(0)").click(function(){
+					$("div").fadeIn(1000);
+				});
+
+				//淡出效果
+				$("button:eq(1)").click(function(){
+					$("div").fadeOut(1000);
+				});
+
+				//淡入淡出切换效果
+				$("button:eq(2)").click(function(){
+					$("div").fadeToggle(1000);
+				});
+
+				//淡到效果，设置不透明度
+				$("button:eq(3)").click(function(){
+					$("div").fadeTo(1000, 0.5);
+				});
+
+			});
+
+		</script>
+	</head>
+	<body>
+		<button id="btn1">淡入</button>
+		<button id="btn2">淡出</button>
+		<button id="btn3">淡入淡出切换</button>
+		<button id="btn4">淡到</button>
+		<div id="divItem1"></div>
+		<div id="divItem2"></div>
+	</body>
+</html>

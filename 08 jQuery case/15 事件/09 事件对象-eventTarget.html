@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>事件对象-eventTarget</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+            .div_1{
+                width: 200px;
+                height: 400px;
+                margin: 0 auto;
+                background-color: yellow;
+            }
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            $(function () {
+                //阻止事件冒泡
+                $("#btn1").on("click",function(){
+                    $("#tiaozhuan").on("click",function(e){
+                        //先取消默认操作
+                        e.preventDefault();
+
+                    });                   
+                });
+
+                $(".div_1").on("click",function(e){
+                    console.log("div_1响应点击");
+                    //判断当前用户是否点击的是a标签，还是自己的div？
+                    if(e.target == this)
+                        console.log("你点击的是div_1");
+                });
+
+
+            });
+        </script>
+    </head>
+    <body>
+        <button id="btn1">阻止事件冒泡</button>
+        <div class="div_1">
+            <a href="http://www.baidu.com" id="tiaozhuan">百度</a>            
+        </div>
+
+    </body>
+</html>

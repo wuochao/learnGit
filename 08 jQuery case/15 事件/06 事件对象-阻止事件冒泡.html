@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>事件对象-阻止事件冒泡</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+            .div_1{
+                width: 800px;
+                height: 600px;
+                margin: 0 auto;
+                background-color: olive;
+            }
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            $(function () {
+                //阻止事件冒泡
+                $("#btn1").on("click",function(){
+                    $("#tiaozhuan").on("click",function(e){
+                        //先取消默认操作
+                        e.preventDefault();
+                        //再阻止事件冒泡
+                        e.stopPropagation();
+                    });                   
+                });
+
+                $(".div_1").on("click",function(){
+                    alert("div_1被冒泡了");
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <button id="btn1">阻止事件冒泡</button>
+        <div class="div_1">
+            <a href="http://www.baidu.com" id="tiaozhuan">百度</a>            
+        </div>
+
+    </body>
+</html>

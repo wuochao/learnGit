@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>五角星评分案例</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .comment {
+            font-size: 40px;
+            color: yellow;
+        }
+
+        .comment li {
+            float: left;
+        }
+
+        ul {
+            list-style: none;
+        }
+    </style>
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+
+        $(function(){
+            //给ul>li绑定mouseover、mouseout、click事件，链式编程
+            $(".comment>li").mouseover(function(){
+                $(this).text("★")
+                        .prevAll("li").text("★")
+                        .end()
+                        .nextAll("li").text("☆")
+            }).mouseout(function(){
+                $(".comment").find("li").text("☆");
+                $(".comment>li[clicked=1]").text("★")
+                        .prevAll("li").text("★")
+                        .end()
+                        .nextAll("li").text("☆");
+            }).click(function(){
+                $(this).attr("clicked","1")
+                        .siblings("li").removeAttr("clicked");
+
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+<ul class="comment">
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+</ul>
+</body>
+
+</html>

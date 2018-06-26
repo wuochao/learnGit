@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+	    <meta charset="UTF-8">
+	    <title>仿腾讯固定导航栏</title>
+	    <style type="text/css">
+	        * {
+	            padding: 0;
+	            margin: 0;
+	        }
+	        
+	        .main{
+	        	width:1000px;
+	        	margin:0 auto;
+	        }
+
+	    </style>
+	    <script src="jquery-1.11.1.min.js"></script>
+	    <script>
+	        /*
+	        思路：
+	        1、获取页面的top高度 和 被卷曲的页面高度
+	        2、两者比较，如果被卷曲的文档高度大于等于top高度，那么让nav固定
+	        3、当被卷曲的文档高度小于top高度，让固定导航栏变成默认状态
+	         */ 
+
+
+	        $(document).ready(function () {
+	        	//获取页面的top高度
+	        	var topHeight = $(".top").height();
+
+	        	//监听window的scroll对象
+	        	$(window).scroll(function(){
+	        		//获取被卷曲的文档高度
+	        		var docScrollTop = $(document).scrollTop();
+	        		//判断docScrollTop和topHeight大小
+	        		//如果被卷曲的页面高度大于等于top高度，那么让nav固定
+	        		if(docScrollTop >= topHeight)
+	        		{
+	        			$(".nav").css({
+	        				"position":"fixed",
+	        				"top":0
+	        			});
+	        			$(".main").css({"margin-top":$(".nav").height()});
+	        		}
+	        		else
+	        		{
+	        			// 让固定导航栏变为默认状态 position: static
+	        			$(".nav").css({"position":"static"});
+	        			$(".main").css({"margin-top":0});
+	        		}
+	        	});
+	        });
+	    </script>
+	</head>
+	<body>
+		<div class="top">
+			<img src="images/top.png" alt="" />
+		</div>
+		<div class="nav">
+			<img src="images/nav.png" alt="" />
+		</div>
+		<div class="main">
+			<img src="images/main.png" alt="" />
+		</div>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+        //两个按钮:1按钮全选,2全不选
+        //获取或设置checked,selected,readonly和disabled等属性时，用prop方法显然更好
+/*        //方法一：
+        $(function(){
+            $("#btnAll").click(function(){
+                $("#dv>input").prop("checked","checked");
+            });
+            $("#btnNoAll").click(function(){
+                $("#dv>input").prop("checked","");
+            });
+        });*/
+        //方法二：
+        $(function(){
+            $("#btnAll").click(function(){
+                $("div>input:checkbox").prop("checked",true);
+            });
+            $("#btnNoAll").click(function(){
+                $("div>input:checkbox").prop("checked",false);
+            });
+        });
+
+
+
+
+    </script>
+</head>
+<body>
+<input type="button" value="全选" id="btnAll"/>
+<input type="button" value="全不选" id="btnNoAll"/>
+<div id="dv">
+    <input type="checkbox" value="1"/>Java
+    <input type="checkbox" value="2"/>PHP
+    <input type="checkbox" value="3"/>C++
+    <input type="checkbox" value="4"/>Python
+    <input type="checkbox" value="5"/>JavaScript
+    <input type="checkbox" value="6"/>C#
+    <input type="checkbox" value="7"/>Visual Basic
+</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>通过json动态创建表格</title>
+        <script src="jquery-1.11.1.min.js"></script>
+        <style>
+            * {
+                margin:0;
+                padding:0;
+            }
+
+            table{
+                border-collapse: collapse; /*边框折叠*/
+                border-spacing:0;          /*边框间距*/
+                border:1px solid #c0c0c0;
+            }
+
+            /*
+            border-collapse（边框折叠：合并边框）和
+            border-spacing（边框间距）一般配合使用
+            */
+
+            th,td{
+                border:1px solid #d0d0d0;
+                color:#404060;
+                padding:10px;
+            }
+
+            th{
+                background-color:#09c;
+                font:bold 16px "微软雅黑";
+                color:#fff;
+            }
+
+            td{
+                font:14px "微软雅黑";
+            }
+
+            tbody tr{
+                background-color:#f0f0f0;
+            }
+
+            tbody tr:hover{
+                cursor:pointer;
+                background-color:#fafafa;
+            }
+
+        </style>
+        <script>
+            //假设：通过AJAX从后台获取的json数据
+            var data = [{
+                name:"传智播客",
+                url:"http//www.itcast.cn",
+                type:"IT最强培训机构"
+            },{
+                name:"黑马程序员",
+                url:"http://wwww.itheima,com",
+                type:"大学生IT培训机构"
+            },{
+                name:"传智前端学院",
+                url:"http//web.itcast.cn",
+                type:"前端的黄埔军校"
+            }];
+
+            /*
+            需求：把上面获取的数据动态的创建到tbody中去
+            思路：
+            方式一：用for循环遍历数组，将数据的每一项用临时遍历temp存储
+                    创建一个临时HTML标签strHTML，注意书写缩进和标签成对编程
+            方式二：使用动态创建DOM对象的方式完成表格创建
+
+             */
+ 
+
+            jQuery(function(){
+                //方式一：用for循环遍历
+                /*
+                var strHTML = "";
+                for( var i = 0; i < data.length; i++ )
+                {
+                    //获取数据中的数据
+                    var temp = data[i];
+                    //拼接成html，注意要成对编程，避免漏掉标签，
+                    //也要注意缩进，方便检查代码
+                    strHTML += "<tr>";
+                    strHTML +=      "<td>" + temp.name + "</td>" ;
+                    strHTML +=      "<td>" + temp.url  + "</td>" ;
+                    strHTML +=      "<td>" + temp.type + "</td>" ;
+                    strHTML += "</tr>";
+                }
+
+                //把拼接好的html标签放到tbody中
+                $("#J_tb").html(strHTML);
+                */
+
+                //方式二：使用创建DOM对象的方式
+
+                //step1：首先清空tbody内容
+                $("#J_tb").empty();
+                //step2：for循环动态创建DOM对象
+                for( var i = 0; i< data.length; i++ )
+                {
+                    //step2-1：动态创建一个tr行标签
+                    //注意：$("<tr></tr>")前面的$
+                    //表示创建一个DOM对象并转换成jQuery对象
+                    var $trTemp = $("<tr></tr>");
+
+                    //step2-2：往行标签里面添加td单元格（DOM节点操作）
+                    $trTemp.append("<td>" + data[i].name + "</td>");
+                    $trTemp.append("<td>" + data[i].url  + "</td>");
+                    $trTemp.append("<td>" + data[i].type + "</td>");
+
+                    //step2-3：将添加了td单元格的行标签tr添加到tbody中
+                    $("#J_tb").append($trTemp);
+                }
+
+            });
+
+        </script>
+    </head>
+    <body>
+        <!-- 动态创建表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>标题</th>
+                    <th>地址</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody id="J_tb">
+                
+            </tbody>
+        </table>
+        <br>
+        <!-- 整个表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>一个单元格</th>
+                    <th>一个单元格</th>
+                    <th>一个单元格</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- rowspan：跨度2个行 -->
+                    <td rowspan="2">一个单元格</td>
+
+                    <!-- colspan：跨度2个列 -->
+                    <td colspan="2">一个单元格</td>
+                </tr>
+                <tr>
+                    <td>ss</td>
+                    <td>ss</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

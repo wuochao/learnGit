@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>鼠标跟随效果</title>
+    <style>
+        img {
+            position: absolute;
+        }
+    </style>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script>
+        $(function () {
+            $(document).on("mousemove",function(e){
+                $("img").css({
+                    "position":"absolute",
+                    "top": e.pageY,   //event.pageY鼠标相对于文档的上边缘的位置
+                    "left": e.pageX   //event.pageX鼠标相对于文档的左边缘的位置
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <img src="img/ts.gif" alt=""/>
+</body>
+</html>

@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>背景色渐变效果</title>
+        <style>
+            * {
+                margin:0;
+                padding:0;
+            }
+
+            .box{
+                width:400px;
+                height:400px;
+                background-color: #ccc;
+            }
+
+
+        </style>
+        <!--
+        第1步：引入jquery
+        第2步：引入第3方插件
+        第3步：用第3方插件实现效果
+        -->
+        <script src="jquery-1.11.1.min.js"></script>
+        <script src="jquery.color.js"></script>
+        <script>
+            $(function(){
+                $(".box").animate({"backgroundColor":"teal"},3000);
+            });
+
+        </script>
+    </head>
+    <body>
+        <div class="box"></div>
+
+
+    </body>
+</html>

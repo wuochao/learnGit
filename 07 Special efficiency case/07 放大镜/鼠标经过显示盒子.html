@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 350px;
+            height: 350px;
+            margin: 100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+
+        .mask {
+            width: 175px;
+            height: 175px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+            display: none;
+        }
+
+        .small {
+            position: relative;
+        }
+
+        .box img {
+            vertical-align: top;
+        }
+
+        #bigBox img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <div id="smallBox" class="small">
+        <img src="images/001.jpg" width="350" alt=""/>
+        <div id="mask" class="mask"></div>
+    </div>
+    <div id="bigBox" class="big">
+        <img src="images/0001.jpg" width="800" alt="" id="bigImg"/>
+    </div>
+</div>
+<script>
+
+    //获取要操作的元素
+    var box = document.getElementById('box');
+    var smallBox = document.getElementById('smallBox');
+    var bigBox = document.getElementById('bigBox');
+    var mask = document.getElementById('mask');
+    var bigImg = document.getElementById('bigImg');
+
+    //给smallBox绑定事件鼠标在盒子中移动出现遮罩，鼠标离开隐藏遮罩
+    smallBox.onmouseover = function(){
+        bigBox.style.display = "block";
+        mask.style.display = "block";
+    };
+
+    smallBox.onmouseout = function(){
+        bigBox.style.display = "none";
+        mask.style.display = "none";
+    };
+
+    //获取鼠标在smallBox中的坐标
+    smallBox.onmousemove = function(event){
+        var event = event || window.event;
+        //鼠标在页面中的坐标
+        var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+        var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+        //鼠标在小盒子中的坐标
+        //这里不能用smallBox.offsetLeft因为smallBox的offsetParent是box
+        //而smallBox到box的offsetLeft是0 所以这里要用box.offsetLeft
+        var boxX = pageX - box.offsetLeft;
+        var boxY = pageY - box.offsetTop;
+        //将鼠标在小盒子中的坐标赋值给遮罩的坐标
+        var maskX = boxX - mask.offsetWidth/2;
+        var maskY = boxY - mask.offsetHeight/2;
+
+        //限制遮罩的条件
+        if(maskX < 0)
+            maskX = 0;
+        if(maskX > smallBox.offsetWidth - mask.offsetWidth)
+            maskX = smallBox.offsetWidth - mask.offsetWidth;
+        if(maskY < 0)
+            maskY = 0;
+        if(maskY > smallBox.offsetHeight - mask.offsetHeight)
+            maskY = smallBox.offsetHeight - mask.offsetHeight;
+
+        mask.style.left = maskX + 'px';
+        mask.style.top  = maskY + 'px';
+
+        //计算放大比例：遮罩移动的总距离 与 大图在大盒子里面移动的总距离的 比值
+        var maskCanMove = smallBox.offsetWidth - mask.offsetWidth;
+        var bigCanMove  = bigImg.offsetWidth   - bigBox.offsetWidth;
+        var rate = bigCanMove / maskCanMove;
+        //给大图片赋值相对于bigBox的偏移坐标
+        bigImg.style.left =  -maskX * rate + 'px';
+        bigImg.style.top  =  -maskY * rate + 'px';
+
+    };
+
+
+
+
+
+</script>
+</body>
+</html>

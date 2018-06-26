@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 300px;
+            height: 500px;
+            border: 1px solid red;
+            margin: 100px;
+            position: relative;
+        }
+
+        .content {
+            padding: 5px 18px 5px 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .scroll {
+            width: 18px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #eee;
+        }
+
+        .bar {
+            /*height: 100px;*/
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: red;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <div class="content" id="content">
+        我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文容我是文字内容我是文字内容我是文字内我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文容我是文字内容我是文字内容我是文字内我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文容我是文字内容我是文字内容我是文字内我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文容我是文字内容我是文字内容我是文字内我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文容我是文字内容我是文字内容我是文字内我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容
+    </div>
+    <div class="scroll" id="scroll">
+        <div class="bar" id="bar"></div>
+    </div>
+</div>
+<script>
+    /*    //找人
+     var box = document.getElementById("box");
+     var content = document.getElementById("content");
+     var bar = document.getElementById("bar");
+     //需求：拖动滚动条 让滚动条跟着鼠标走 内容也要按照比例移动
+     //1.1按照比例计算bar的高度
+     //bar的高度/侧边栏的高度=显示出来的内容的高度/内容的整体高度
+     //bar的高度/box的高度=box的高度/content高度
+     //bar的高度=box的高度/content高度*box的高度
+     //1.2如果内容没有全部显示出来 才需要有滚动条 如果内容能够完全显示 就不需要有滚动条了
+     if (content.offsetHeight > box.offsetHeight) {
+     bar.style.height = box.offsetHeight / content.offsetHeight * box.offsetHeight + "px";
+     } else {
+     bar.style.height = 0;
+     }*/
+  /*  function $(id) {
+        return document.getElementById(id);
+    }
+    var box = $('box');
+    var content = $('content');
+    var scroll = $('scroll');
+    var bar = $('bar');
+
+    //需求：拖动滚动条，页面内容按照滚动条相应比例移动
+    //按照比例计算滚动条的高度
+    if (content.offsetHeight > box.offsetHeight)
+        bar.style.height = box.offsetHeight * box.offsetHeight / content.offsetHeight + 'px';
+    else {
+        bar.style.height = 0;
+        //此时滚动条不需要显示
+        scroll.style.display = "none";
+        content.style.padding = "5px";
+    }
+
+    //鼠标在bar上按下，bar变为拖动状态，鼠标移动时候，bar跟着鼠标移动
+    bar.onmousedown = function (event) {
+        var event = event || window.event;
+        //鼠标按下时，在页面中的坐标
+        var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+        //鼠标在bar上的坐标
+        var yOnBar = pageY - box.offsetTop - bar.offsetTop;
+
+        document.onmousemove = function (event) {
+            var event = event || window.event;
+            //鼠标在页面中的坐标
+            var pageY = event.pageY || document.documentElement.scrollTop;
+            //鼠标在盒子中的坐标
+            var barY = pageY - box.offsetTop - yOnBar;
+            //限定barY的运动范围
+            if (barY < 0)
+                barY = 0;
+            if (barY > box.offsetHeight - bar.offsetHeight)
+                barY = box.offsetHeight - bar.offsetHeight;
+            //让bar跟着鼠标在盒子中坐标移动
+            bar.style.top = barY + "px";
+            //清除鼠标拖动选中的文字
+            window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+
+            //4、按照比例移动内容
+            /!*滚动条能移动的总距离/content能移动的总距离 = bar移动的距离 / content移动的距离*!/
+            var rate = (content.offsetHeight-box.offsetHeight)/(box.offsetHeight-bar.offsetHeight);
+            content.style.top = -rate*barY + "px";
+        };
+
+        document.onmouseup = function () {
+            document.onmousemove = null;
+        };
+    };*/
+
+//获取要操作的元素
+    function $(id){
+        return document.getElementById(id);
+    }
+
+    var box     = $('box');
+    var content = $('content');
+    var scroll  = $('scroll');
+    var bar     = $('bar');
+
+    //先要根据页面内容的长短决定是否显示滚动条，以及滚动滑块bar的高度
+    if(content.offsetHeight < box.clientHeight) {
+        //此时不需要显示bar和scroll
+        bar.style.height = 0;
+        scroll.style.display = "none";
+        content.style.padding = "5px";
+    } else {
+        scroll.style.display = "block";
+        //按照content内容长短设置bar的长度
+        //bar的长度/scroll长度 = box的长度clientHeight/content的长度
+        //scroll的长度 和 box的长度 相等
+        //bar的长度= scroll.长度的平方/content的长度
+        //或者bar的长度 = box的长度的平方 /content的长度
+        bar.style.height = scroll.offsetHeight * scroll.offsetHeight / content.offsetHeight + "px";
+    }
+
+
+    //绑定鼠标按下事件
+    bar.onmousedown = function(event){
+        //鼠标按下时获取当前鼠标的坐标
+        var event = event || window.event;
+        //鼠标按下时，在页面的坐标
+        var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+        //获取鼠标在盒子中的距离（减去scroll距页面顶部的距离）
+        var boxY = pageY - box.offsetTop;
+        //获取鼠标在bar上的距离
+        var onBarY = boxY - bar.offsetTop;
+        //文档绑定鼠标拖动事件
+        document.onmousemove = function(event){
+            //获得当前鼠标的位置
+            var event = event || window.event;
+            var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+            //获取bar在scroll中的位置
+            var barOnScroll = pageY - box.offsetTop - onBarY;
+            //限制bar运动的位置
+            if(barOnScroll < 0)
+                barOnScroll = 0;
+            if(barOnScroll > scroll.clientHeight - bar.offsetHeight)
+                barOnScroll = scroll.clientHeight - bar.offsetHeight;
+            //将barOnScroll赋给bar的top值
+            bar.style.top = barOnScroll + "px";
+            //清除鼠标拖动时，选中的文字
+            window.getSelection? window.getSelection().removeAllRanges() : document.selection.empty();
+            //最后设置页面content的内容要随着鼠标移动而移动
+            //移动按照比例：content能移动的最大距离/bar能移动的最大距离
+            var contentCanMove = content.offsetHeight - box.clientHeight;
+            var barCanMove = scroll.offsetHeight - bar.offsetHeight;
+            var rate = contentCanMove / barCanMove;
+            content.style.top = -rate * barOnScroll + "px";
+        };
+
+        //当鼠标在document上弹起时，onmousemove无效
+        document.onmouseup = function(){
+            document.onmousemove = null;
+        };
+
+
+    };
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

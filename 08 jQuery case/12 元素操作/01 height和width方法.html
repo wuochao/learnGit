@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>height和width方法</title>
+		<style>
+			.div_1{
+				background-color: green;
+				/*float:left;*/
+			}
+
+			.div_2{
+				background-color: blue;
+				/*float:left;*/
+			}
+		</style>
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				//利用height设置div_1高度
+				$("button").eq(0).click(function(){
+					$(".div_1").height(100);
+				});
+		
+				//利用css设置div_2高度
+				$("button").eq(1).click(function(){
+					$(".div_2").css("height","150px");
+				});
+		
+				//利用height获取div_1高度
+				$("button").eq(2).click(function(){
+					console.log("div_1的高度为" + $(".div_1").height());
+				});
+		
+				//利用css获取div_2高度
+				$("button").eq(3).click(function(){
+					console.log("div_2的高度为" + $(".div_2").css("height"));
+				});
+
+				//利用width设置div_1宽度
+				$("button").eq(4).click(function(){
+					$(".div_1").width(100);
+				});
+		
+				//利用css设置div_2宽度
+				$("button").eq(5).click(function(){
+					$(".div_2").css("width","150px");
+				});
+		
+				//利用height获取div_1宽度
+				$("button").eq(6).click(function(){
+					console.log("div_1的宽度为" + $(".div_1").width());
+				});
+		
+				//利用css获取div_2宽度
+				$("button").eq(7).click(function(){
+					console.log("div_2的宽度为" + $(".div_2").css("width"));
+				});
+
+				/*
+				height方法和css方法的区别：
+				返回值不同，.height()方法返回的是 数字类型(100)，.css(“height”)返回的是字符串类型(150px)，
+				因此.height()方法常用在参与数学计算的时候。
+				 */
+
+
+
+
+			});	
+		</script>
+	</head>
+	<body>
+		<button>height设置高度</button>
+		<button>css设置高度</button>
+		<button>height获取高度</button>
+		<button>css获取宽度</button>
+		<br/>
+		<button>width设置宽度</button>
+		<button>css设置宽度</button>
+		<button>width获取宽度</button>
+		<button>css获取宽度</button>
+		<hr/>
+		<div class="div_1"></div>
+		<div class="div_2"></div>
+	
+		
+	</body>
+</html>

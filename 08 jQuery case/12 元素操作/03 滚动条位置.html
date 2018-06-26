@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滚动条位置</title>
+	<style>
+		.div_1{
+			width:300px;
+			height:300px;
+			background-color:pink;
+			overflow:scroll;
+		}
+
+		.div_1 p{
+			width:2000px;
+			height:2000px;
+		}
+
+	</style>
+	<script src="jquery-1.11.1.min.js">
+	</script>
+	<script>
+		$(function(){
+			//获取滚动条位置
+			$("#btn1").click(function(){
+				//滚动条top距离初始位置移动了多少，高度值
+				console.log($(".div_1").scrollTop());
+
+				//滚动条left距离初始位置移动了多少
+				console.log($(".div_1").scrollLeft());
+			});
+
+			//设置滚动条位置
+			var i = 0;
+			$("#btn2").click(function(){
+				i += 100;
+				
+				//滚动条top距离初始位置移动了多少px
+				console.log($(".div_1").scrollTop(i));
+
+				//滚动条left距离初始位置移动了多少px
+				console.log($(".div_1").scrollLeft(i));
+			});
+		});
+
+	</script>
+</head>
+<body>
+	<button id="btn1">获取滚动条位置</button>
+	<button id="btn2">设置滚动条位置</button>
+	<div class="div_1">
+		<p>我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;我是大文本&nbsp;</p>
+	</div>
+	<div class="div_2"></div>
+	
+</body>
+</html>

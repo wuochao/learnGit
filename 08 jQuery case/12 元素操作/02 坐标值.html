@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>坐标值</title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			
+			#div_1{
+				width:200px;
+				height:150px;
+				background-color: teal;
+				position:absolute;
+				top:100px;
+				left:200px;
+			}
+
+			#div_2{
+				width:200px;
+				height:150px;
+				background-color: green;
+				position:absolute;
+				top:100px;
+				left:500px;
+			}
+
+			#p_1{
+				background-color: yellow;
+				position:relative;
+				top:15px;
+				left:10px;
+			}
+
+		</style>
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				//获取offset值（含top和left）
+				$("#btn1").click(function(){
+					console.log($("#div_1").offset());
+					console.log("div_1距离页面上边的距离为"+$("#div_1").offset().top);
+					console.log("div_1距离页面左边的距离为"+$("#div_1").offset().left);
+				});
+
+				//获取相对于父元素的坐标值
+				$("#btn2").click(function(){
+					console.log($("#p_1").position());
+					console.log("p相对于父元素上边的距离为"+$("#p_1").position().top);
+					console.log("p相对于父元素左边的距离为"+$("#p_1").position().left);
+				});
+
+				//offset设置position的top和left值
+				//先通过val()获得输入要设置的top和left值，然后对div_1进行offset设置
+				$("#btn3").click(function(){
+					//获取top和left值
+					var txtTop1 = $("#txtTop_1").val();
+					var txtLeft1 = $("#txtLeft_1").val();
+
+					//利用offset设置position
+					$("#div_1").offset({
+						top: txtTop1,
+						left: txtLeft1
+					});
+				});
+
+				//offset设置position的left值
+				//先通过val()获得输入要设置的left值，然后对div_2进行offset设置
+				$("#btn4").click(function(){
+					//left值
+					var txtLeft2 = $("#txtLeft_2").val();
+
+					//利用offset设置position
+					$("#div_2").offset({
+						left: txtLeft2
+					});
+				});
+
+
+			});	
+		</script>
+	</head>
+	<body>
+		<button id="btn1">offset获取坐标值</button>
+		<button id="btn2">position获取坐标值</button>
+		<button id="btn3">position设置2个坐标值</button>
+		<button id="btn4">position设置1个坐标值</button>
+		<br/>
+		<label for="txtTop_1" >Top值输入 </label><input type="text" id="txtTop_1">
+		<label for="txtLeft_1">Left值输入</label><input type="text" id="txtLeft_1">
+		<br/>
+		<label for="txtLeft_2">Left值输入</label><input type="text" id="txtLeft_2">		
+		<div id="div_1">
+			<p id="p_1">我是div_1的子元素p</p>
+		</div>
+		<div id="div_2">
+			<p id="p_2">我是div_2的子元素p</p>
+		</div>
+
+	</body>
+</html>

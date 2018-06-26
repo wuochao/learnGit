@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>五角星评论</title>
+        <style>
+            * {
+                margin:0;
+                padding:0;
+            }
+
+            .comment{
+                list-style:none;
+                color:red;
+                letter-spacing:-5px;  //设置字母间距
+            }
+
+            .comment li{
+                font-size:40px;
+                display:inline-block;  //设置成行内块
+            }
+
+        </style>
+        <script src="jquery-1.11.1.min.js"></script>
+        <script>
+            /*
+            思路：
+            step1：鼠标移入，当前五角星和前面的五角星变实体，后面的变空心五角星；
+            step2：鼠标点击的时候，为当前元素添加clicked类，其他的移除clicked类
+            step3：当鼠标移开整个评分控件的时候，把clicked的之前的五角星显示实心
+             */
+            $(function () {
+                //定义两种符号：五角星实心★、五角星空心☆
+                var wjx_selected = "★";
+                var wjx_none = "☆";
+
+                //comment上的li上绑定mouseenter事件
+                $(".comment").on("mouseenter", "li", function(){
+                    $(this)
+                        .text(wjx_selected)     //设置当前对象为实心五角星
+                        .prevAll().text(wjx_selected)   //设置前面所有对象为实心五角星
+                        .end()                  //回到上一次选择对象
+                        .nextAll().text(wjx_none);      //设置后面所有对象为空心五角星
+                }).on("click", "li", function(){        //第2步：记录用户点击的那个五角星
+                    $(this)
+                        .addClass("clicked")
+                        .siblings().removeClass("clicked");
+                }).on("mouseleave", function(){         //第3步：见下面注释
+                    //当鼠标移开时，先给所有li标签添加一个空心五角星
+                    $(".comment li").text(wjx_none);
+                    //当鼠标点击时，给当前对象和前面所有的对象换成实心五角星
+                    //给当前对象后面的所有对象换成空心五角星
+                    $(".clicked")
+                        .text(wjx_selected)
+                        .prevAll().text(wjx_selected)
+                        .end()
+                        .nextAll().text(wjx_none)
+                });
+
+                //第3步：当鼠标移开评分控件的时候，把click（包括自己）之前的五角星全部变成实心的，后面的变成空心的。
+                //
+
+            });
+        </script>
+    </head>
+    <body>
+        <ul class="comment">
+            <li>☆</li>
+            <li>☆</li>
+            <li>☆</li>
+            <li>☆</li>
+            <li>☆</li>
+        </ul>
+
+    </body>
+</html>

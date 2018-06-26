@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrap {
+            width: 300px;
+            margin: 100px auto 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+        }
+
+        th,
+        td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #09c;
+            font: bold 16px "Microsoft Yahei";
+            color: #fff;
+        }
+
+        td {
+            font: 14px "Microsoft Yahei";
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+        }
+
+        tbody tr:hover {
+            background-color: #fafafa;
+            cursor: pointer;
+        }
+    </style>
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+        //方法一：
+/*        $(function () {
+            //当点击全选框时，下面checkbox全部勾选；再次点击取消全选，下面checkbox也取消勾选
+            $("#cbAll").click(function () {
+                if ($(this).prop("checked") == true)
+                    $("#tbody input:checkbox").prop("checked", true);
+                else
+                    $("#tbody input:checkbox").prop("checked", false);
+            });
+            //下面checkbox全部勾选时，上面cbAll也勾选，否则上面cbAll不勾选
+            //即：下面checkbox的数量要和checkbox被勾选的数量相等时，表示全选，此时上面的cbAll要勾选，
+            //否则cbAll不勾选
+            $("#tbody>tr>td>input:checkbox").click(function () {
+                var length1 = $("#tbody input:checkbox").length;
+                var length2 = $("#tbody input:checked").length;
+                if (length1 == length2)
+                    $("#cbAll").prop("checked", true);
+                else
+                    $("#cbAll").prop("checked", false);
+            });
+        });*/
+
+        //方法二：
+        $(function(){
+            //给cbAll全选绑定点击事件：点击后全选的状态（checked属性）和下面所有checkbox状态一致（checked属性）
+            $("#cbAll").click(function(){
+                //先将全选的状态保存下面，赋值给tbody里面的每个checkbox的checked属性即可
+                var flag = $(this).prop("checked");
+                $("#tbody input:checkbox").prop("checked",flag);
+            });
+            //传统方式：下面checkbox的checked属性循环遍历，如果发现有1个checked不是选中，那么全选不选中，否则全选选中
+            //先获取tbody中的所有checkbox，然后each遍历
+            $("#tbody input:checkbox").click(function(){
+                //假设全选被选中，作为标记变量使用
+                var flag = true;
+                $("#tbody input:checkbox").each(function(index,element){
+                    if($(element).prop("checked") == false)
+                    {
+                        flag = false;
+                    }
+                });
+                $("#cbAll").prop("checked",flag);
+            });
+        });
+
+
+
+    </script>
+</head>
+
+<body>
+<div class="wrap">
+    <table>
+        <thead>
+        <tr>
+            <th>
+                <input type="checkbox" id="cbAll"/>
+            </th>
+            <th>课程名称</th>
+            <th>所属学院</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>JavaScript</td>
+            <td>前端与移动开发学院</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>css</td>
+            <td>前端与移动开发学院</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>html</td>
+            <td>前端与移动开发学院</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>jQuery</td>
+            <td>前端与移动开发学院</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
