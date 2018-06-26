@@ -1,0 +1,374 @@
+/*���幫����ʽ*/
+/*ͷ����*/
+.wjs-header {
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #ccc;
+}
+.wjs-header .row {
+  height: 50px;
+  text-align: center;
+}
+.wjs-header .row > div + div {
+  border-left: 1px solid #ccc;
+}
+.wjs-header .row > div:first-of-type > .wjs-code {
+  position: relative;
+  display: block;
+}
+.wjs-header .row > div:first-of-type > .wjs-code > img {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 49px;
+  transform: translateX(-50%);
+  border: 1px solid #ccc;
+  border-top: none;
+  z-index: 999;
+}
+.wjs-header .row > div:first-of-type > .wjs-code:hover > img {
+  display: block;
+}
+.wjs-header .row > div:last-of-type > .btn-danger {
+  background-color: #e92322;
+  border-color: #e92322;
+}
+.wjs-header .row > div:last-of-type > .btn {
+  padding: 3px 15px;
+}
+.wjs-header .row > div:last-of-type > .btn-link {
+  color: #333;
+}
+.wjs-header .row > div:last-of-type > .btn-link:hover {
+  text-decoration: none;
+}
+/*������*/
+.wjs-nav .navbar-toggle {
+  margin-top: 23px;
+}
+.wjs-nav .navbar-brand {
+  height: 80px;
+  line-height: 50px;
+}
+.wjs-nav .navbar-brand .wjs_icon {
+  font-size: 40px;
+  color: #333;
+}
+.wjs-nav .navbar-brand .wjs_icon.wjs_icon_logo {
+  color: #e92322;
+}
+.wjs-nav .navbar-nav > li > a {
+  background-color: transparent;
+  line-height: 50px;
+  font-size: 16px;
+}
+.wjs-nav .navbar-nav > li > a:hover,
+.wjs-nav .navbar-nav > li > a:focus {
+  background-color: transparent;
+  color: #777;
+  border-bottom: 3px solid #e92322;
+}
+.wjs-nav .navbar-nav > li.active > a,
+.wjs-nav .navbar-nav > li.active a:hover,
+.wjs-nav .navbar-nav > li.active a:focus {
+  background-color: transparent;
+  border-bottom: 3px solid #e92322;
+}
+.wjs-nav.navbar {
+  margin-bottom: 0;
+}
+/*�ֲ�ͼ*/
+.wjs-banner .carousel-inner .pcImg {
+  display: block;
+  width: 100%;
+  height: 410px;
+  background-position: center center;
+  background-size: cover;
+}
+.wjs-banner .carousel-inner .mobileImg {
+  display: block;
+  width: 100%;
+}
+.wjs-banner .carousel-inner .mobileImg > img {
+  width: 100%;
+  display: block;
+}
+/*��Ϣ��*/
+.wjs-info {
+  padding: 20px;
+}
+.wjs-info .wjs_icon {
+  font-size: 40px;
+}
+.wjs-info .row > div {
+  margin-top: 20px;
+}
+.wjs-info .row > div > a:hover {
+  color: #e92322;
+}
+/*ԤԼ��*/
+.wjs-reverse {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.wjs-reverse .col-sm-9,
+.wjs-reverse .col-sm-3 {
+  height: 60px;
+  line-height: 60px;
+}
+.wjs-reverse .wjs_icon {
+  font-size: 18px;
+  vertical-align: bottom;
+}
+.wjs-reverse .reverse-now {
+  color: #e92322;
+  border-bottom: 1px dashed #e92322;
+}
+.wjs-reverse a {
+  color: #333;
+}
+.wjs-reverse a:hover {
+  color: #e92322;
+}
+/*��Ʒ��*/
+.wjs-product {
+  clear: both;
+  background-color: #eee;
+  padding: 20px;
+}
+.wjs-product #wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+.wjs-product .nav-tabs > li {
+  margin-bottom: 0;
+  padding: 0px 15px;
+}
+.wjs-product .nav-tabs > li > a {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  line-height: 50px;
+}
+.wjs-product .nav-tabs > li > a:hover,
+.wjs-product .nav-tabs > li a:focus {
+  border-bottom: 3px solid #e92322;
+}
+.wjs-product .nav-tabs > li.active > a,
+.wjs-product .nav-tabs > li.active a:hover,
+.wjs-product .nav-tabs > li.active a:focus {
+  background-color: transparent;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 3px solid #e92322;
+}
+.wjs-product .tab-content .row .pBox {
+  height: 150px;
+  background-color: #fff;
+  margin-top: 20px;
+  position: relative;
+}
+.wjs-product .tab-content .row .pBox > .pLeft {
+  height: 100%;
+  margin-right: 100px;
+  padding-top: 10px;
+}
+.wjs-product .tab-content .row .pBox > .pLeft > p {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+}
+.wjs-product .tab-content .row .pBox > .pLeft .row {
+  margin-left: -5px;
+  margin-right: -5px;
+  font-size: 12px;
+}
+.wjs-product .tab-content .row .pBox > .pLeft .row div:nth-of-type(even) {
+  text-align: right;
+}
+.wjs-product .tab-content .row .pBox > .pRight {
+  width: 100px;
+  height: 100%;
+  border-left: 1px dashed #ccc;
+  padding-top: 40px;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.wjs-product .tab-content .row .pBox > .pRight > b {
+  font-size: 40px;
+  color: #e92322;
+}
+.wjs-product .tab-content .row .pBox > .pRight > sub {
+  bottom: 0;
+  color: #e92322;
+}
+.wjs-product .tab-content .row .pBox > .pRight::before,
+.wjs-product .tab-content .row .pBox > .pRight::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #eee;
+  position: absolute;
+  left: -5px;
+}
+.wjs-product .tab-content .row .pBox > .pRight::before {
+  top: -5px;
+  box-shadow: 0 -1px 3px #eee;
+}
+.wjs-product .tab-content .row .pBox > .pRight::after {
+  bottom: -5px;
+  box-shadow: 0 1px 3px #eee;
+}
+.wjs-product .tab-content .row .pBox > .pRight > .tip {
+  position: absolute;
+  left: 50%;
+  top: 25px;
+  transform: translateX(-50%);
+  width: 100%;
+}
+.wjs-product .tab-content .row .pBox > .pRight > .tip > span {
+  cursor: pointer;
+}
+.wjs-product .tab-content .row .pBox > .pRight > .tip > span:first-of-type {
+  color: red;
+  border: 1px solid red;
+}
+.wjs-product .tab-content .row .pBox > .pRight > .tip > span:last-of-type {
+  color: blue;
+  border: 1px solid blue;
+}
+.wjs-product .tab-content .row .pBox.active {
+  background-color: #e92322;
+  color: #fff;
+}
+.wjs-product .tab-content .row .pBox.active > .pLeft {
+  position: relative;
+}
+.wjs-product .tab-content .row .pBox.active > .pLeft::before {
+  content: "\e915";
+  /*һ��Ҫ��������*/
+  font-family: 'wjs';
+  position: absolute;
+  left: 0;
+  top: -5px;
+  font-size: 25px;
+}
+.wjs-product .tab-content .row .pBox.active > .pRight > b,
+.wjs-product .tab-content .row .pBox.active > .pRight sub,
+.wjs-product .tab-content .row .pBox.active > .pRight p {
+  color: #fff;
+}
+/*���ſ�*/
+.wjs-news {
+  padding: 20px;
+}
+.wjs-news .row {
+  /*�����б�*/
+}
+.wjs-news .row h3 {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+}
+.wjs-news .row h3::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  position: absolute;
+  right: -8px;
+  bottom: -4px;
+}
+.wjs-news .row .newsLine {
+  width: 2px;
+  height: 100%;
+  border-left: 1px dashed #e92322;
+  position: absolute;
+  left: 45px;
+  top: 0;
+}
+.wjs-news .row .nav-tabs {
+  border-bottom: 0;
+  /*ʹ��ý����ѯ����w��768~992֮����liԪ�ص���ʽ*/
+  /*ʹ��ý����ѯ����w��<768��liԪ�ص���ʽ*/
+}
+.wjs-news .row .nav-tabs > li {
+  margin-bottom: 60px;
+  text-align: center;
+}
+.wjs-news .row .nav-tabs > li > a {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background-color: #eee;
+}
+.wjs-news .row .nav-tabs > li > a .wjs_icon {
+  font-size: 30px;
+  color: #fff;
+}
+.wjs-news .row .nav-tabs > li > a:hover {
+  border: none;
+  background-color: #e92322;
+}
+.wjs-news .row .nav-tabs > li.active > a,
+.wjs-news .row .nav-tabs > li.active a:hover,
+.wjs-news .row .nav-tabs > li.active a:focus {
+  background-color: #e92322;
+  border: none;
+}
+.wjs-news .row .nav-tabs li:last-of-type {
+  margin-bottom: 0;
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .wjs-news .row .nav-tabs > li {
+    margin: 20px 30px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .wjs-news .row .nav-tabs > li {
+    margin: 20px 0;
+    width: 25%;
+  }
+}
+.wjs-news .row .tab-content .wjs-newslist {
+  list-style: none;
+}
+.wjs-news .row .tab-content .wjs-newslist > li {
+  line-height: 50px;
+}
+/*��������*/
+.wjs-partner {
+  background-color: #eee;
+}
+.wjs-partner .container {
+  padding: 20px;
+  text-align: center;
+}
+.wjs-partner .container h3 {
+  width: 100%;
+}
+.wjs-partner .container ul {
+  list-style: none;
+  display: inline-block;
+}
+.wjs-partner .container ul > li {
+  float: left;
+}
+.wjs-partner .container ul > li:hover > a {
+  color: #e92322;
+}
+.wjs-partner .container ul li + li {
+  margin-left: 30px;
+}
+.wjs-partner .container .wjs_icon {
+  font-size: 60px;
+  color: #333;
+}

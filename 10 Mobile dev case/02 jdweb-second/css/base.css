@@ -1,0 +1,59 @@
+/*公共样式*/
+
+html, body, h1, h2, h3, h4, h5, h6, div, span, p, a, ul, ol, li, form, input, textarea{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+body{
+    font-family: "Microsoft YaHei","sans-serif";
+    font-size: 14px;
+}
+ul, ol{
+    list-style: none;
+}
+a, a:hover{
+    text-decoration: none;
+    color: #666666;
+}
+input, textarea{
+    outline: none;
+    border: 0 none;
+    border: 1px solid #ccc;
+    -webkit-appearance: none;
+    resize: none;
+}
+
+/*新样式*/
+.clearfix::before, .clearfix::after{
+    content:"";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.m-left10{
+    margin-left: 10px;
+}
+.m-right10{
+    margin-right: 10px;
+}
+.m-top10{
+    margin-top: 10px;
+}
+.m-bottom10{
+    margin-bottom: 10px;
+}
+
+
+
+

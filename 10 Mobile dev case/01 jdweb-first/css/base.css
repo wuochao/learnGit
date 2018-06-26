@@ -1,0 +1,70 @@
+/*公共样式*/
+
+
+/*1、样式重置*/
+html, body, ul, ol, li, img, a, p, div, form, input,h1, h2, h3, h4, h5, h6{
+    margin: 0;
+    padding: 0;
+    /*设置盒模型*/
+    -webkit-box-sizing: border-box;
+    /*清除移动端特有的点击高亮效果*/
+    -webkit-tap-highlight-color: transparent;
+}
+body{
+    /*移动端默认字体*/
+    font-family: "Microsoft YaHei", "sans-serif";
+    font-size: 14px;
+}
+a,
+a:hover {
+    text-decoration: none;
+    color: #666;
+}
+ul, ol{
+    list-style: none;
+}
+input, textarea{
+    /*清除文本框获取焦点时默认的边框阴影*/
+    outline: none;
+    /*去除边框*/
+    border: 0 none;
+    /*添加边框*/
+    border:1px solid #ccc;
+    resize: none;
+    /*清除浏览器默认的样式*/
+    -webkit-appearance: none;
+}
+
+
+/*2、添加新样式*/
+.f_left{
+    float: left;
+}
+.f_right{
+    float: right;
+}
+.m_left10{
+    margin-left: 10px;
+}
+.m_right10{
+    margin-right: 10px;
+}
+.m_top10{
+    margin-top: 10px;
+}
+.m_bottom10{
+    margin-bottom: 10px;
+}
+.clearfix::before,
+.clearfix::after {
+    content: "";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+
+
+

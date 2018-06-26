@@ -1,0 +1,129 @@
+
+html, body{
+    width: 100%;
+    height: 100%;
+}
+
+.ct-layout{
+    width: 100%;
+    height: 100%;
+    /*background-color: gray;*/
+}
+
+.ct-layout .ct-header{
+    width: 100%;
+    height: 50px;
+    background-color: #ccc;
+    position: fixed;
+    border-bottom: 1px solid #aaa;
+    box-sizing: border-box;
+}
+.ct-layout .ct-header .back,
+.ct-layout .ct-header .menu{
+    width: 49px;
+    height: 49px;
+    padding: 14px;
+    position: absolute;
+    top:0;
+    background: url(../images/jd-sprites.png) no-repeat;
+    background-size: 200px 200px;
+    background-origin: content-box;
+    background-clip: content-box;
+}
+.ct-layout .ct-header .back{
+    left: 0;
+    background-position: -20px 0;
+}
+.ct-layout .ct-header .menu{
+    right: 0;
+    background-position: -60px 0;
+}
+.ct-layout .ct-header .searchBox{
+    width: 100%;
+    height: 100%;
+    padding: 4px 60px;
+}
+.ct-layout .ct-header .searchBox .search{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 12px;
+}
+
+.ct-layout .ct-content{
+    width: 100%;
+    height: 100%;
+    padding-top: 50px;
+    /*background-color: green;*/
+}
+.ct-layout .ct-content .ct-cLeft{
+    width: 100px;
+    height: 100%;
+    float: left;
+    /*background-color: yellow;*/
+    position: relative;
+    overflow: hidden;
+}
+.ct-layout .ct-content .ct-cLeft .ulList{
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+.ct-layout .ct-content .ct-cLeft .ulList li{
+    width: 100%;
+    height: 50px;
+}
+.ct-layout .ct-content .ct-cLeft .ulList li a{
+    display:block;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    line-height: 50px;
+    text-align:center;
+    background-color: #eee;
+    color: #333;
+}
+.ct-layout .ct-content .ct-cLeft .ulList li.active a{
+    color: #e92322;
+    background-color: #fff;
+    border-bottom: none;
+    border-right: none;
+}
+.ct-layout .ct-content .ct-cRight{
+    margin-left: 100px;
+    height: 100%;
+    /*background-color: purple;*/
+    display: flex;
+    flex-direction: column;
+}
+.ct-layout .ct-content .ct-cRight .ct-crImg{
+    display: block;
+    width: 100%;
+}
+.ct-layout .ct-content .ct-cRight .ct-crImg img{
+    width: 100%;
+    display: block;  /*解决3px问题*/
+}
+.ct-layout .ct-content .ct-cRight h3{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #aaa;
+    padding-left: 10px;
+    /*background-color: yellow;*/
+}
+.ct-layout .ct-content .ct-hotCategory{
+    width: 100%;
+    overflow: hidden;
+    flex: 1;
+}
+.ct-layout .ct-content .ct-hotCategory ul li{
+    width: 33.3333%;
+    float: left;
+    text-align: center;
+}
+
+
+

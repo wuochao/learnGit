@@ -1,0 +1,129 @@
+html, body{
+    width: 100%;
+    height: 100%;
+}
+
+.ct-layout{
+    width: 100%;
+    height: 100%;
+    /*background-color: skyblue;*/
+}
+.ct-header{
+    width: 100%;
+    height: 50px;
+    background-color: #ccc;
+    box-sizing: border-box;
+    border-bottom: 1px solid #aaa;
+    position: fixed;
+    top: 0;
+}
+.ct-header .back,
+.ct-header .menu {
+    width: 49px;
+    height: 49px;
+    /*background-color: blue;*/
+    background: url(../images/jd-sprites.png) no-repeat;
+    background-size: 200px 200px;
+    padding: 14px;
+    background-origin: content-box;
+    background-clip: content-box;
+    position: absolute;
+    top: 0;
+}
+.ct-header .back{
+    left: 0;
+    background-position: -20px 0;
+}
+.ct-header .menu{
+    right: 0;
+    background-position: -60px 0;
+}
+.ct-header .searchBox{
+    width: 100%;
+    height: 100%;
+    padding: 4px 60px;
+}
+.ct-header .searchBox .search{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 12px;
+}
+
+.ct-content{
+    width: 100%;
+    height: 100%;
+    padding-top: 50px;
+    /*background-color: yellow;*/
+}
+.ct-content .ct-cleft{
+    width: 100px;
+    height: 100%;
+    float: left;
+    /*background-color: hotpink;*/
+    overflow: hidden;
+    position: relative;
+}
+.ct-content .ct-cleft ul{
+    width: 100%;
+    position: absolute;
+    top:0;
+}
+.ct-content .ct-cleft ul li{
+    width: 100%;
+    height: 50px;
+}
+.ct-content .ct-cleft ul li a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    line-height: 50px;
+    text-align: center;
+    background-color: #eee;
+    color: #333;
+}
+.ct-content .ct-cleft ul li.active a{
+    background-color: white;
+    color: #e92322;
+    border-bottom: none;
+    border-right:  none;
+}
+.ct-content .ct-cright{
+    margin-left: 100px;
+    height: 100%;
+    /*background-color: blueviolet;*/
+    display: flex;
+    flex-direction: column;
+}
+.ct-content .ct-cright .cr-img{
+    display: block;
+    width: 100%;
+}
+.ct-content .ct-cright .cr-img .banner{
+    width: 100%;
+    display: block;  /*解决3px问题*/
+}
+.ct-content .ct-cright h3{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.ct-content .ct-cright .ct-hotCategory{
+    width: 100%;
+    overflow: hidden;
+    flex: 1;
+}
+
+.ct-content .ct-cright .ct-hotCategory ul li{
+    float: left;
+    width: 33.3333%;
+    text-align: center;
+}
+
+
+

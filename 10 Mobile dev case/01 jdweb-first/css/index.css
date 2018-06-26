@@ -1,0 +1,244 @@
+.jd-layout{
+    width: 100%;
+    max-width: 640px;
+    /*height: 2000px;*/
+    margin: 0 auto;
+    background-color: #ccc;
+}
+
+
+/*顶部搜索栏*/
+
+.topbar{
+    width: 100%;
+    max-width: 640px;
+    height: 40px;
+    position: fixed;
+    top: 0;
+    background-color: rgba(224,49,58,.8);
+    z-index: 999;
+}
+.topbar .logo{
+    display: block;
+    width: 56px;
+    height: 20px;
+    /*background-color: blue;*/
+    background: url(../images/jd-sprites.png) no-repeat 0 -109px;
+    background-size: 200px 200px;
+    position: absolute;
+    left: 4px;
+    top: 10px;
+}
+.topbar .login{
+    display: block;
+    width: 40px;
+    height: 20px;
+    /*background-color: blue;*/
+    position: absolute;
+    right: 0;
+    top: 10px;
+    color: #fff;
+}
+.topbar .searchBox{
+    width: 100%;
+    height: 100%;
+    padding-left: 65px;
+    padding-right: 45px;
+    padding-top: 5px;
+}
+.topbar .searchBox::before{
+    content: "";
+    display: block;
+    width: 19px;
+    height: 19px;
+    background: url(../images/jd-sprites.png) no-repeat -59px -109px;
+    background-size: 200px 200px;
+    position:absolute;
+    left: 75px;
+    top: 10px;
+}
+
+.topbar .searchBox .search{
+    width: 100%;
+    height: 30px;
+    border-radius: 15px;
+    padding-left: 30px;
+}
+
+/*轮播图*/
+.jd-banner{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+/*.jd-banner ul{
+    width: 800%;
+}*/
+.jd-banner ul{
+    width: 1000%;
+    position: relative;
+}
+/*.jd-banner ul li{
+    width: 12.5%;
+    float: left;
+}*/
+.jd-banner ul li{
+    width: 10%;
+    float: left;
+}
+.jd-banner ul li img{
+    width: 100%;
+    vertical-align: bottom;  /*清除文本基线的影响*/
+}
+.jd-banner ol{
+    width: 160px;
+    height: 10px;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    margin-left: -80px;
+}
+.jd-banner ol li{
+    float: left;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    margin: 0 5px;
+}
+.jd-banner ol li.active{
+    background-color: white;
+}
+/*导航栏*/
+.jd-nav{
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+}
+.jd-nav ul li{
+    float: left;
+    width: 25%;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.jd-nav ul li img{
+    width: 40px;
+}
+
+/*产品块*/
+.jd-product{
+    width: 100%;
+}
+.jd-productBox{
+    width: 100%;
+    background-color: #fff;
+    margin-top: 10px;
+    box-shadow: 1px 1px 3px #ccc;
+}
+.jd-productBox .jd-pHead{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    /*background-color: skyblue;*/
+}
+.jd-productBox .jd-pHead h3{
+    padding-left: 30px;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+}
+.jd-productBox .jd-pHead h3::before{
+    content:"";
+    width: 3px;
+    height: 12px;
+    background-color: #e92322;
+    position: absolute;
+    left:20px;
+    top: 9px;
+}
+.jd-productBox .jd-pContent{
+    width: 100%;
+}
+/*a标签的图片*/
+.a-50{
+    width: 50%;
+}
+
+.b-left{
+    border-left: 1px solid #ccc;
+}
+.b-right{
+    border-right: 1px solid #ccc;
+}
+.b-top{
+    border-top: 1px solid #ccc;
+}
+.b-bottom{
+    border-bottom: 1px solid #ccc;
+}
+
+.jd-productBox .jd-pContent img{
+    width: 100%;
+    display: block;
+}
+/*掌上秒杀*/
+.seckill .jd-pHead{
+    font-size: 13px;
+    color: #aaa;
+}
+.seckill .jd-pHead .icon-clock{
+    display: block;
+    width: 16px;
+    height: 20px;
+    /*background-color: blue;*/
+    background: url(../images/seckill-icon.png);
+    background-size: 16px 20px;
+    margin-top:3px;
+}
+.seckill .jd-pHead .sk{
+    color: #e92322;
+}
+.seckill .jd-pHead .timerBack>span{
+    display: inline-block;
+    width: 13px;
+    height: 18px;
+    line-height: 18px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+.seckill .jd-pHead .timerBack>span:nth-child(3n){
+    width: 4px;
+    background-color: #fff;
+    color:black;
+}
+.seckill .jd-pContent{
+    padding: 20px;
+}
+.seckill .jd-pContent ul{
+    width: 100%;
+}
+.seckill .jd-pContent ul li{
+    width: 33.3333%;
+    text-align: center;
+}
+.seckill .jd-pContent ul li img{
+    width: 60%;
+    display: inline-block;
+}
+
+.seckill .jd-pContent ul li:nth-of-type(-n+2){
+    border-right: 1px solid #ccc;
+}
+.seckill .jd-pContent ul li .new-price{
+    font-size: 14px;
+    color: #e92322;
+}
+.seckill .jd-pContent ul li .old-price{
+    font-size: 13px;
+    color: #ccc;
+    text-decoration: line-through;
+}
+
+
