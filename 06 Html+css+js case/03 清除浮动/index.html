@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<!--主体-->
+    <div class="main clearfix">
+        <!--左边部分开始-->
+        <div class="main-left fl">
+            <!--上部分-->
+            <div class="main-left-top clearfix">
+                <div class="main-left-top-img fl">
+                    <img src="images/pic.png" alt="">
+                </div>
+                <div class="main-left-top-concent fl">
+                    <h3 class="title font-14">在德国慕尼黑现代史研究所的资料室</h3>
+                    <p class="text">报录比 即报考人数和录取人数做对比，这是一个很重要</br>
+                        的数据，是衡量某个专业报考热度的核心指标。
+                    </p>
+                    <button class="btn">点击进入</button>
+                </div>
+            </div>
+            <div class="line"></div>
+            <!--下部分-->
+            <div id="main-left-bottom">
+                <div class="map-box">
+                    <ul class="imgs clearfix">
+                        <li><img src="images/1.png"/><span>星期一</span></li>
+                        <li><img src="images/1.png"/><span>星期二</span></li>
+                        <li><img src="images/1.png"/><span>星期三</span></li>
+                        <li><img src="images/1.png"/><span>星期四</span></li>
+                        <li><img src="images/1.png"/><span>星期五</span></li>
+                        <li><img src="images/1.png"/><span>星期六</span></li>
+                        <li><img src="images/1.png"/><span>星期日</span></li>
+                        <li><img src="images/1.png"/><span>星期一</span></li>
+                        <li><img src="images/1.png"/><span>星期二</span></li>
+                        <li><img src="images/1.png"/><span>星期三</span></li>
+                        <li><img src="images/1.png"/><span>星期四</span></li>
+                        <li><img src="images/1.png"/><span>星期五</span></li>
+                    </ul>
+                </div>
+                <div id="arr">
+                    <span id="left">&lt;</span><span id="right">&gt;</span>
+                </div>
+            </div>
+        </div>
+        <!--左边部分结束-->
+        <!--右边部分开始-->
+        <div class="main-right fl">
+            <!--登录部分-->
+            <div class="main-right-Login">
+                <h3 class="Login">用户登录</h3>
+                <input type="text" name="name" id="name" /><br />
+                <input type="password" name="pw" id="pw" /><br />
+                <input type="submit" value="登录" id="btn"/>
+            </div>
+            <!--tab部分-->
+            <div class="main-right-tab" id="one">
+                <div class="tab-nav">
+                    <ul>
+                        <li class="current">资料动态</li>
+                        <li>最近浏览</li>
+                    </ul>
+                </div>
+                <div class="tab-bottom">
+                        <span class="show">
+                           <p class="message">2016金融学考研：18大热门院校报考难...</p>
+                           <p class="message">谈谈报考热门就业冷门的四大考研专业</p>
+                        </span>
+                        <span class="">最近浏览</span>
+                </div>
+            </div>
+            <img class="cat" src="images/cat.png" alt="">
+        </div>
+        <!--右边部分结束-->
+    </div>
+</body>
+</html>
+<script src='jquery-1.11.1.min.js'></script>
+<script>
+
+    $(document).ready(function(){
+        lunbo();
+        tab();
+    });
+    function lunbo(){
+        var box = document.getElementById("main-left-bottom");
+        var arr = document.getElementById("arr");
+        var right = document.getElementById("right");
+        var left = document.getElementById("left");
+        var ul=document.getElementsByClassName("imgs")[0];
+        var lis = ul.getElementsByTagName("li")
+        var imgWidth = lis[1].offsetLeft;
+            
+        //点击right显示下一张图片
+        var pic = 0;//定义一个变量 来存储 当前应该显示的图片的索引
+        right.onclick = function () {
+            if (pic < lis.length - 1) {
+                pic++;
+            }
+            if (ul.offsetLeft > -568) {
+                //leader = leader +step
+                ul.style.left = ul.offsetLef - 10 + "px";
+            } else {
+                pic=1;
+                ul.style.left= 0 + "px";
+            }
+            var target = -pic * imgWidth;
+
+            animate(ul, target)
+        }
+        //点击left显示上一张图
+        left.onclick = function () {
+            if (pic > 0) {
+                pic--;
+            }
+            var target = -pic * imgWidth;
+            animate(ul, target);
+        }
+        function animate(obj, target) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                var step = 9;
+                step = obj.offsetLeft < target ? step : -step;
+                if (Math.abs(obj.offsetLeft - target) > Math.abs(step)) {
+                    obj.style.left = obj.offsetLeft + step + "px";
+                } else {
+                    obj.style.left = target + "px";
+                    clearInterval(obj.timer);
+                }
+            }, 5)
+        }
+    }
+
+    function tab(){
+    var one = document.getElementById("one");
+    fn(one);
+    function fn(str){
+        var arrLi = str.getElementsByTagName("li");
+        var arrDiv = str.getElementsByTagName("span");
+
+        for(var i=0; i<arrLi.length; i++){
+
+            arrLi[i].index = i;
+
+            arrLi[i].onmouseover = function(){
+
+                for(var j=0; j<arrLi.length; j++){
+                    arrLi[j].className = "";
+                    arrDiv[j].className = "";
+                }
+                this.className = "current";
+                arrDiv[this.index].className = "show";
+
+            }
+        }
+    }
+}
+
+</script>

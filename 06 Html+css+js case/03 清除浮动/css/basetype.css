@@ -1,0 +1,76 @@
+@charset "UTF-8";
+/*CSS initial*/
+html, body, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, form, fieldset, legend, img{
+	margin:0;
+	padding:0;
+}
+
+img, button, input{
+	border:0;
+	margin:0;
+	padding:0;
+	outline-style:none;
+}
+
+ul, ol{
+	list-style:none;
+}
+
+input{
+	padding-top:0;
+	padding-bottom;
+	font-family:"SimSun","宋体";
+}
+
+select, input{
+	vertical-align:middle;
+}
+
+img{
+	border:0;
+	vertical-align:middle;
+}
+
+.clearfix::before, .clearfix::after{
+	content:"";
+	display:table;
+}
+
+.clearfix::after{
+	clear:both;
+}
+
+.clearfix{
+	zoom:1;  /*兼容IE6/7*/
+}
+
+a{
+	color:#666;
+	text-decoration: none;
+}
+
+body{
+	font:12px/150% Arial,Verdana,"\5b8b\4f53";   /*宋体，Unicode，统一码*/
+	color: #666;
+	background:#fff;
+}
+
+.fl{
+	float: left;
+}
+
+.fr{
+	float: right;
+}
+
+.font-14{
+	font-size:14px;
+}
+
+/*initial end*/
+
+
+
+
+
+

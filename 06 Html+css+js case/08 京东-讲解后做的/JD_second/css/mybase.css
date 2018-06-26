@@ -1,0 +1,89 @@
+@charset="UTF-8";
+
+html, body, h1, h2, h3, h4, h5, h6, p, div, span, ul, ol, li, dl, dt, dd, a, img, form, input, button, label, fieldset, iframe, legend, pre, code, big, small, b, i, u, s, strong, em, ins, del, table, tr, th, td {
+	margin:0;
+	padding:0;
+}
+
+header, footer, aside, section, nav, details, article, summary, hgroup, figcaption {
+	display: block;
+}
+
+body {
+    font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+    color: #666;
+    background: #fff
+}
+
+ul, ol {
+	list-style: none;
+}
+
+img {
+	border: 0;
+	vertical-align: middle;
+}
+
+i, u, em {
+	font-style: normal;
+}
+
+s {
+	text-decoration: none;
+}
+
+a {
+	text-decoration: none;
+	color: #666;
+}
+
+a:hover {
+	color: #C81623;
+}
+
+button, input {
+	cursor: default;
+}
+
+fieldset, input, button, img {
+	outline: none;
+	border: 0;
+}
+
+select, input {
+    vertical-align: middle;
+}
+
+textarea{
+	resize:none;
+}
+table{
+	border-collapse:collapse;
+}
+
+
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.clearfix::before, .clearfix::after {
+	content:"";
+	display: table;
+	clear: both;
+}
+
+.clearfix {
+	zoom: 1;   /*兼容IE6/7*/
+}
+
+
+
+
+
+
+

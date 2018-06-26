@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>boyahudong</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+
+		body{
+			height: 2000px;
+		}
+		.header{
+			height: 58px;
+			background-color:#191D3A;
+		}
+
+		.header .banxin{
+			width: 980px;
+			height: 58px;
+			margin:0 auto;
+			padding-left:20px;
+		}
+
+		.header .banxin .logo{
+			width: 170px;
+			height: 58px;
+			float: left;
+			background:url(images/logo.png) no-repeat left center;
+			margin-right:35px;
+
+		}
+
+		.header .banxin .nav{
+
+		}
+
+		.header .banxin .nav ul{
+			float: left;
+			list-style: none;
+		}
+
+		.header .banxin .nav ul li{
+			width: 100px;
+			height: 58px;
+			float: left;
+			font:14px/1 "Microsoft YaHei";
+			line-height: 58px;
+			text-align:center;
+			border-right:1px solid #252947;
+
+		}
+
+		.header .banxin .nav ul li a{
+			width: 100px;
+			height: 58px;
+			display:inline-block;			
+			text-decoration: none;
+			color:#818496;
+		}
+
+		.header .banxin .nav ul li a:hover{
+			background-color:#252947;
+		}
+		.header .banxin .nav ul li a.first{
+			color:white;
+			font-weight:bold;
+		}
+
+		.header .banxin .join_us{
+			width: 100px;
+			height: 34px;
+			background:url(images/join_us.png) no-repeat center right ;
+			float: right;
+			margin-top:12px;
+			margin-right:20px;
+		}
+		.banner{
+			height: 463px;
+			background:url(images/banner.jpg) no-repeat center top;
+		}
+		.content{
+			width: 1000px;
+			height: 279px;
+			border-bottom:1px solid #DBE1E7;
+			margin:0 auto;
+			overflow:hidden;
+			position: relative;
+		}
+
+		.content ul{
+			list-style:none;
+			margin-top:50px;
+		}
+
+		.content ul li{
+			float: left;
+			width: 218px;
+			height: 130px;			
+			background-color: red;
+			margin-right: 43px;
+			font:14px "Microsoft YaHei";
+			color:#444866;
+			text-align: center;
+		}
+		.content ul li.last{
+			float: left;
+			width: 217px;
+			height: 130px;			
+			background-color: blue;
+			margin-right:0;
+		}
+		.content ul li .pic{
+			width: 218px;
+			height: 130px;
+		}
+		.content ul li.last .pic{
+			width: 217px;
+			height: 130px;
+		}
+		.content ul li p a{
+			display:inline-block;
+			text-decoration: none;
+			color:#38B774;
+			font:14px ;
+		}
+		.content .four-point{
+			width: 117px;
+			height: 11px;
+			background:url(images/four-point.png) no-repeat;
+			position:absolute;
+			top:275px;
+			left:50%;
+			margin-left:-59px;
+			z-index:999;     
+
+		}
+		.info{
+			height: 420px;
+			background:url(images/indexmainbg.jpg) no-repeat center bottom;
+			position:relative;
+		}
+		.info .banxin{
+			width: 1000px;
+			height: 420px;
+			margin:0 auto;
+		}
+		.info .banxin .news{
+			width: 480px;
+			height: 257px;
+			float: left;
+			background:url(images/bynewsbg.jpg) no-repeat center center;
+			padding-top:163px;
+			padding-left:20px;
+			position:relative;
+		}
+		.info .banxin .news ul{
+			list-style:none;
+		}
+
+		.info .banxin .news ul li{
+			width: 460px;
+			height: 50px;
+			border-bottom:1px solid #DBE1E7;
+			font:14px/50px "Microsoft YaHei";
+		}
+
+		.info .banxin .news ul li span{
+			color:#AFCCE4;
+		}
+
+		.info .banxin .news ul li a{
+			text-decoration: none;
+			color:#444866;
+			font:16px "Microsoft YaHei";
+
+		}
+		.info .banxin .news .more{
+			width: 66px;
+			height: 28px;
+			background:url(images/icons.png) no-repeat 0 0;
+			position:absolute;
+			top:93px;
+			left:218px;
+		}
+		.info .banxin .recruitment{
+			width: 306px;
+			height: 420px;
+			float: left;
+			background:url(images/byhrbg3.jpg) no-repeat center center;
+			position:relative;
+			padding-left:20px;
+			padding-right:174px;
+		}
+
+		.info .banxin .recruitment .zczp{
+			width: 119px;
+			height: 51px;
+			background:url(images/zczp.png) no-repeat;
+			position:absolute;
+			top:93px;
+			left:80px;
+
+		}
+		.info .banxin .recruitment .more{
+			width: 66px;
+			height: 28px;
+			background:url(images/more_2.png) no-repeat;  
+			position:absolute;
+			top:93px;
+			left:218px;
+		}		
+		.info .banxin .recruitment .title{
+			font:bold 14px "Microsoft YaHei";
+			color:white;
+			margin-top:167px;
+		}
+
+		.info .banxin .recruitment .job ul{
+			list-style: none;
+
+		}
+
+		.info .banxin .recruitment .job ul li{
+			width: 305px;
+			height:37px;
+			border-bottom:1px solid #6FDEA3;
+		}
+
+		.info .banxin .recruitment .job ul li a{
+			display:block;
+			width: 305px;
+			height:37px;
+			text-decoration: none;
+			color:white;
+			font:14px/37px "Microsoft YaHei";
+		}
+		.footer{
+			height: 91px;
+			background-color: #191D3A;
+			position:relative;
+		}
+		.footer .banxin{
+			width: 995px;
+			height: 52px;
+			margin:0 auto;
+			padding-left:5px;
+			padding-top:39px;
+			font: 12px "SimSun";
+			color:#6C6E7E;
+			position:relative;
+		}
+		.footer .banxin .map{
+			float: left;
+			margin-right: 170px;
+		}
+		.footer .banxin a{
+			text-decoration: none;
+			color:#6C6E7E;
+		}
+
+		.footer .banxin .copyright{
+			float: left;
+		}
+
+		.footer .banxin .govIcon{
+			width: 50px;
+			height: 68px;
+			background:url(images/govIcon.gif) no-repeat;
+			position:absolute;
+			top:15px;
+			right:10px;
+		}
+		.footer .bottom-top{
+			width: 68px;
+			height: 29px;
+			background:url(images/bottom-top.png) no-repeat;
+			position:absolute;
+			top:-13px;
+			right:83px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="header">
+		<div class="banxin">
+			<div class="logo"></div>
+			<div class="nav">
+				<ul>
+					<li><a class="first active" href="#">首页</a></li>
+					<li><a href="#">博雅游戏</a></li>
+					<li><a href="#">博雅新闻</a></li>
+					<li><a href="#">关于我们</a></li>
+					<li><a href="#">客服中心</a></li>
+					<li><a href="#">投资者关系</a></li>
+				</ul>
+			</div>
+			<div class="join_us"></div>
+		</div>
+	</div>
+	<div class="banner"></div>
+	<div class="content">
+		<ul>
+			<li>
+				<img class="pic" src="images/bpt.jpg" alt="加载失败">
+				<p>BPT宣传片</p>
+				<p><a href="#">点击播放</a>&nbsp;<img src="images/sanjiaoxing.png" alt=""></p>
+			</li>
+			<li>
+				<img class="pic" src="images/video.jpg" alt="加载失败">
+				<p>博雅互动宣传视频</p>
+				<p><a href="#">点击播放</a>&nbsp;<img src="images/sanjiaoxing.png" alt=""></p>				
+			</li>
+			<li>
+				<img class="pic" src="images/gamepic3.jpg" alt="加载失败">
+				<p>斗地主</p>
+				<p><a href="#">Landlords</a>&nbsp;<img src="images/sanjiaoxing.png" alt=""></p>					
+			</li>
+			<li class="last">
+				<img class="pic" src="images/gamepic1.jpg" alt="加载失败">
+				<p>德州扑克</p>
+				<p><a href="#">Taxas Hold'em Poker</a>&nbsp;<img src="images/sanjiaoxing.png" alt=""></p>						
+			</li>
+		</ul>
+		<div class="four-point"></div>
+	</div>
+	<div class="info">
+		<div class="banxin">
+			<div class="news">
+				<ul>
+					<li><span>09 / 28</span>&nbsp;&nbsp;<a href="#">新闻内容新闻内容新闻内容新闻内容</a></li>
+					<li><span>08 / 26</span>&nbsp;&nbsp;<a href="#">新闻内容新闻内容新闻内容新闻内容</a></li>
+					<li><span>08 / 01</span>&nbsp;&nbsp;<a href="#">新闻内容新闻内容新闻内容新闻内容</a></li>
+					<li><span>07 / 21</span>&nbsp;&nbsp;<a href="#">新闻内容新闻内容新闻内容新闻内容</a></li>
+				</ul>
+				<div class="more"></div>
+			</div>
+			<div class="recruitment">
+				<div class="zczp"></div>
+				<div class="more"></div>
+				<div class="title">专场招聘岗位:</div>
+				<div class="job">
+					<ul>
+						<li><a href="#">PHP开发工程师</a></li>
+						<li><a href="#">C++开发工程师</a></li>
+						<li><a href="#">WEB前端开发工程师</a></li>
+						<li><a href="#">大数据开发工程师</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="banxin">
+			<div class="map">
+				<a href="#">网站地图</a><span> | </span><a href="#">免责声明</a>
+			</div>
+			<div class="copyright">
+				<p>Copyright ©2004 - 2014 博雅互动(Boyaa Interactive) 粤ICP备05062536 增值电信业务经营许可证：粤B2-20110513</p>
+			</div>
+			<div class="govIcon"><img src="images/govIcon.gif" alt=""></div>
+		</div>
+		<div class="bottom-top"></div>
+		
+	</div>
+
+
+
+
+	
+</body>
+</html>

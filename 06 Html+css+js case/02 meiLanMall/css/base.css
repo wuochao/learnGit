@@ -1,0 +1,51 @@
+/*样式初始化*/
+@charset "UTF-8";
+html,body,h1,h2,h3,h4,h5,h6,p,div,span,ul,ol,li,dl,dt,dd,em,b,i,del{
+	margin: 0;
+	padding: 0;
+}
+img{
+	border:0;
+}
+ul,ol{
+	list-style:none;
+}
+body{
+	font:12px "SimSun";
+	color:#434343;
+	background-color: #fff;
+}
+a{
+	text-decoration: none;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clearfix::before, .clearfix::after{
+	content:"";
+	display:table;
+	clear:both;
+}
+.clearfix{
+	zoom:1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

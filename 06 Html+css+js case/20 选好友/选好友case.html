@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选好友的案例</title>
+    <style>
+        select {
+            width: 100px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+<select name="" id="left" multiple="multiple">
+    <option value="">张三</option>
+    <option value="">李四</option>
+    <option value="">王五</option>
+    <option value="">赵六</option>
+</select>
+<input type="button" id="btn1" value="&gt;&gt;"/>
+<input type="button" id="btn2" value="&lt;&lt;"/>
+<input type="button" id="btn3" value="&gt;"/>
+<input type="button" id="btn4" value="&lt;"/>
+<select name="" id="right" multiple="multiple"></select>
+<script>
+/*
+/!*方法一：传统方法（不封装函数）*!/
+    //获取要操作的元素
+    var left  = document.getElementById('left');
+    var right = document.getElementById('right');
+    var leftOpts  = left.children;
+    var rightOpts = right.children;
+    var btn1 = document.getElementById('btn1');
+    var btn2 = document.getElementById('btn2');
+    var btn3 = document.getElementById('btn3');
+    var btn4 = document.getElementById('btn4');
+    //全部移动，注意length属性的变化，不需要i++
+    btn1.onclick = function(){
+        for(var i=0; i<leftOpts.length; )
+        {
+            right.appendChild(leftOpts[i]);
+        }
+    };
+
+    btn2.onclick = function(){
+        for(var i=0; i<rightOpts.length; )
+        {
+            left.appendChild(rightOpts[i]);
+        }
+    };
+    //部分移动，注意因为length变化（每移动一项，长度减1，指针也随着改变，所以需要修正指针的指向
+
+    btn3.onclick = function(){
+        for(var i=0; i<leftOpts.length; i++)
+        {
+            if(leftOpts[i].selected)
+            {
+                right.appendChild(leftOpts[i]);
+                i--;    //i-- 因为length变化（每移动一项，长度减1，指针也随着改变，所以需要修正指针的指向
+            }
+        }
+    };
+
+    btn4.onclick = function(){
+        for(var i=0; i<rightOpts.length; i++)
+        {
+            if(rightOpts[i].selected)
+            {
+                left.appendChild(rightOpts[i]);
+                i--;    //i-- 因为length变化（每移动一项，长度减1，指针也随着改变，所以需要修正指针的指向
+            }
+        }
+    };
+*/
+
+/*/!*方法二：不封装函数*!/
+    //封装通过id获取元素的函数
+    function $(id)
+    {
+        return document.getElementById(id);
+    }
+    //获取要操作的元素
+    var left = $("left");
+    var right = $("right");
+    var btn1 = $("btn1");
+    var btn2 = $("btn2");
+    var btn3 = $("btn3");
+    var btn4 = $("btn4");
+    var leftOpts  = left.children;
+    var rightOpts = right.children;
+    //封装一个全部移动函数
+    function moveAll(source, destination)
+    {
+        var opts = source.children;
+        for(var i=0; i<opts.length; )
+        {
+            destination.appendChild(opts[i]);
+        }
+    }
+    //全部移动，注意length属性的变化，不需要i++
+    btn1.onclick = function(){
+        moveAll(left, right);
+    };
+
+    btn2.onclick = function(){
+        moveAll(right, left);
+    };
+
+    //封装一个部分移动函数
+    function movePart(source, destination)
+    {
+        var opts = source.children;
+        for(var i=0; i<opts.length; i++)
+        {
+            if(opts[i].selected)
+            {
+                destination.appendChild(opts[i]);
+                i--;
+            }
+        }
+    }
+    //部分移动，注意因为length变化（每移动一项，长度减1，指针也随着改变，所以需要修正指针的指向
+    btn3.onclick = function(){
+        movePart(left, right);
+    };
+
+    btn4.onclick = function(){
+        movePart(right, left);
+    };*/
+
+/*方法三：不封装函数*/
+    //封装通过id获取元素的函数
+    function $(id)
+    {
+        return document.getElementById(id);
+    }
+    //获取要操作的元素
+    var left = $("left");
+    var right = $("right");
+    var btn1 = $("btn1");
+    var btn2 = $("btn2");
+    var btn3 = $("btn3");
+    var btn4 = $("btn4");
+    var leftOpts  = left.children;
+    var rightOpts = right.children;
+
+    //封装数组元素移动函数，设置一个参数标记是否全部移动isMoveAll
+    function moveElement(source, destination, isMoveAll)
+    {
+        var opts = source.children;
+        for(var i=0; i<opts.length; i++)
+        {
+            if(isMoveAll || opts[i].selected)
+            {
+                destination.appendChild(opts[i]);
+                i--;
+            }
+        }
+    }
+    //全部移动
+    btn1.onclick = function(){
+        moveElement(left, right, true);
+    };
+
+    btn2.onclick = function(){
+        moveElement(right, left, true);
+    };
+    //部分移动
+    btn3.onclick = function(){
+        moveElement(left, right, false);
+    };
+
+    btn4.onclick = function(){
+        moveElement(right, left, false);
+    };
+
+/*
+/!*对于全部移动元素，可以用innerHTML来实现*!/
+    //封装通过id获取元素的函数
+    function $(id)
+    {
+        return document.getElementById(id);
+    }
+    //获取要操作的元素
+    var left = $("left");
+    var right = $("right");
+    var btn1 = $("btn1");
+    var btn2 = $("btn2");
+    var btn3 = $("btn3");
+    var btn4 = $("btn4");
+    var leftOpts  = left.children;
+    var rightOpts = right.children;
+
+    //通过innerHTML来实现全部移动
+    btn1.onclick = function(){
+        right.innerHTML += left.innerHTML;
+        left.innerHTML = "";
+    };
+
+    btn2.onclick = function(){
+        left.innerHTML += right.innerHTML;
+        right.innerHTML = "";
+    };
+*/
+
+
+
+
+
+</script>
+</body>
+</html>

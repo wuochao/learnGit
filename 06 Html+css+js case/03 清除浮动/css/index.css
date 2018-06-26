@@ -1,0 +1,221 @@
+  /*主体部分开始*/
+.main {
+    width: 900px;
+    height: 310px;
+    margin:100px auto;
+    border: 1px solid #E7E7E7;
+}
+/*左边部分*/
+.main-left {
+    /*float: left;*/
+    width:549px;
+    height: 100%;
+    border-right: 1px solid #E7E7E7;
+}
+.main-left-top {
+    height: 155px;
+    width: 100%;
+    overflow: hidden;
+}
+.main-left-top-img {
+    margin-top: 13px;
+    margin-left: 13px;
+    width: 196px;
+    height: 130px;
+}
+.main-left-top-img img{
+    width: 100%;
+    height: 100%;
+}
+.main-left-top-concent {
+    margin-left: 24px;
+}
+.title {
+    font-size: 14px;
+    height: 18px;
+    width: 230px;
+    line-height: 18px;
+    color: #FF3F3F;
+    margin-top: 15px;
+    margin-bottom:10px ;
+}
+.text {
+    width: 297px;
+    height: 39px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #666;
+    margin-bottom: 15px;
+}
+.btn {
+    border: 0;
+    width: 185px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    background: #0099FF;
+    color: white;
+    cursor: pointer;
+}
+.line {
+    margin: 0 13px ;
+    border-bottom: 1px dashed #CCCCCC;
+}
+
+/*轮播部分*/
+
+#main-left-bottom {
+    display: inline-block;
+    width: 100%;
+    height: 155px;
+    position: relative;
+}
+.map-box {
+    width: 460px;
+    height: 107px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 20px;
+    margin-left: 42px;
+}
+.imgs {
+    position: absolute;
+    top:0;
+    width: 1000%;
+}
+.imgs li {
+    float: left;
+    margin-right: 13px;
+    text-align: center;
+}
+.imgs span {
+    display: block;
+    width: 42px;
+    height: 16px;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+.map-box img {
+    width: 80px;
+    height: 80px;
+    display: block;
+}
+
+/*#arr {*/
+    /*display: none;*/
+/*}*/
+
+#arr span {
+    width: 25px;
+    height: 30px;
+    position: absolute;
+    left: 10px;
+    top:45px;
+    background: #CCCCCC;
+    cursor: pointer;
+    line-height: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-family: '黑体';
+    font-size: 20px;
+    color: #fff;
+
+}
+
+#arr #right {
+    right: 20px;
+    left: auto;
+}
+/*轮播结束*/
+
+
+    /*右边部分*/
+.main-right {
+    overflow: hidden;
+    height: 100%;
+    width: 350px;
+    position: relative;
+}
+/*登录部分*/
+.main-right-Login {
+    width: 100%;
+    height: 180px;
+    display: inline-block;
+}
+.Login {
+    width: 62px;
+    height: 15px;
+    line-height: 18px;
+    font-size: 14px;
+    margin-top: 13px;
+    margin-left: 25px;
+    box-sizing: border-box;
+}
+.main-right-Login input {
+    display: inline-block;
+    width: 297px;
+    height: 40px;
+    margin-left: 25px;
+    margin-top: 10px;
+    border: 1px solid  #CCCCCC;
+
+}
+#btn {
+    width:300px;
+    height:36px;
+    background:#FF9900;
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+/*登录结束*/
+/*tab部分*/
+.main-right-tab {
+    height: 106px;
+    overflow: hidden;
+    margin-top: 23px;
+}
+.tab-nav {
+    padding-left: 15px;
+    height: 27px;
+    border-bottom:1px solid #ccc;
+}
+.tab-nav li {
+    float: left;
+    width: 76px;
+    line-height: 27px;
+    text-align: center;
+    cursor: pointer;
+}
+.tab-nav .current {
+    color: #F06227;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+}
+.tab-bottom {
+    height: 80px;
+}
+.tab-bottom span{
+    display: block;
+    height: 66px;
+    display: none;
+    padding-left: 15px;
+}
+.tab-bottom .show {
+    padding-top: 14px;
+    display: block;
+}
+.tab-bottom .message {
+    height: 19px;
+    line-height: 19px;
+}
+
+.main-right .cat {
+    position: absolute;
+    top:190px;
+    right: 0;
+    width: 104px;
+    height: 53px;
+}
+/*tab结束*/

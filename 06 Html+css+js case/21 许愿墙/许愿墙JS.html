@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>许愿墙案例</title>
+    <style>
+        body {
+            margin: 0 auto;
+            padding: 0;
+            font-size: 12px;
+            background: #c30230 url(images/bg.gif) repeat center 36px;
+            text-align: center;
+        }
+
+        #content {
+            margin: 0 auto;
+            width: 960px;
+            background: url(images/content_bg.jpg) no-repeat left top;
+            height: 627px;
+        }
+
+        #content .tip1, #content .tip2, #content .tip3, #content .tip4, #content .tip5, #content .tip6, #content .tip7, #content .tip8 {
+            position: absolute;
+            width: 227px;
+            left: 200px;
+            top: 100px;
+        }
+
+        #content .tip1 .tip_h {
+            background: url(images/tip1_h.gif) no-repeat left top;
+        }
+
+        #content .tip1 .tip_h, #content .tip2 .tip_h, #content .tip3 .tip_h, #content .tip4 .tip_h, #content .tip5 .tip_h, #content .tip6 .tip_h, #content .tip7 .tip_h, #content .tip8 .tip_h {
+            width: 227px;
+            height: 23px;
+            padding-top: 45px;
+            text-align: left;
+            cursor: move;
+        }
+
+        #content .tip1 .tip_c {
+            background: url(images/tip1_c.gif) repeat-y;
+        }
+
+        #content .tip1 .tip_c, #content .tip2 .tip_c, #content .tip3 .tip_c, #content .tip4 .tip_c, #content .tip5 .tip_c, #content .tip6 .tip_c, #content .tip7 .tip_c, #content .tip8 .tip_c {
+            width: 200px;
+            padding-left: 12px;
+            padding-right: 15px;
+            min-height: 40px;
+            max-height: 160px;
+            text-align: left;
+            line-height: 20px;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow: hidden;
+        }
+
+        #content .tip1 .tip_f {
+            background: url(images/tip1_f.gif) no-repeat left top;
+        }
+
+        #content .tip1 .tip_f, #content .tip2 .tip_f, #content .tip3 .tip_f, #content .tip4 .tip_f, #content .tip5 .tip_f, #content .tip6 .tip_f, #content .tip7 .tip_f, #content .tip8 .tip_f {
+            width: 227px;
+            height: 53px;
+            padding-top: 20px;
+        }
+
+        #content .close, #content .close2 {
+            float: left;
+            font-size: 12px;
+            cursor: pointer;
+            color: #000;
+        }
+
+        .clr {
+            clear: both;
+            overflow: auto;
+            display: block;
+            height: 0;
+        }
+
+        #content .icon {
+            float: left;
+            width: 35px;
+            height: 35px;
+            padding-left: 15px;
+            text-align: center;
+        }
+
+        #content .name {
+            float: right;
+            padding-right: 15px;
+            text-align: right;
+            font-size: 14px;
+            line-height: 35px;
+            color: #C0F;
+        }
+
+        #content .num {
+            float: left;
+            width: 195px;
+            padding-left: 7px;
+        }
+    </style>
+</head>
+<body>
+<div id="content"></div>
+<script>
+    var messages = [
+        {
+            "id": 1,
+            "name": "to mama",
+            "content": "give my mum the best wishes from the bottom of my heart",
+            "time": "2017-05-14 01:00:00"
+        },
+        {
+            "id": 2,
+            "name": "to papa",
+            "content": "you are the best man in the world， give me a lot of love without words",
+            "time": "2017-05-14 02:00:00"
+        },
+        {
+            "id": 3,
+            "name": "to mama",
+            "content": "forgive me that I say a lot of wrong words to you, but I really want to hurt you",
+            "time": "2017-05-14 03:00:00"
+        },
+        {
+            "id": 4,
+            "name": "to papa",
+            "content": "you bear all our burdens in my family.",
+            "time": "2017-05-14 04:00:00"
+        },
+        {
+            "id": 5,
+            "name": "to mama",
+            "content": "you give me too much love over I hope",
+            "time": "2017-05-14 05:00:00"
+        },
+        {
+            "id": 6,
+            "name": "to papa",
+            "content": "good health",
+            "time": "2017-05-14 06:00:00"
+        },
+        {
+            "id": 7,
+            "name": "哎呦杰杰.",
+            "content": "真搞不懂你们地球人，月亮有什么好看的，全是坑，还是对面那哥们好看，",
+            "time": "2017-05-14 07:00:00"
+        },
+        {
+            "id": 8,
+            "name": "哎呦哎呦",
+            "content": "今天哪里的烟花最好看！！？答：朋友圈。。。",
+            "time": "2017-05-14 08:00:00"
+        },
+        {
+            "id": 9,
+            "name": "没猴哥，不春晚",
+            "content": "班主任:“小明，老师你都四十多岁了，你”。老师:……",
+            "time": "2017-05-14 09:00:00"
+        }
+    ];
+    //获取要操作的元素
+    var content = document.getElementById('content');
+    //设置记录层级的变量 zIndex
+    var zIndex = 0;
+    //随机生成tip，有多少messages就要生成多少个tip
+    for(var i=0; i<messages.length; i++)
+    {
+        console.log(i);
+        //最外层的div用createElement创建，方便绑定事件
+        var tip = document.createElement('div');
+        tip.className = "tip1";
+        tip.id = "cc" + messages[i].id; //添加id，以区分各个tip
+        var str = '<div class="tip_h" title="双击关闭纸条">'
+                + '<div class="num">第['+ messages[i].id+ ']条' + messages[i].time + '</div>'
+                + '<div class="close" title="关闭纸条">×</div>'
+                + '<div class="clr"></div>'
+                + '</div>'
+                + '<div class="tip_c">'
+                + ''+messages[i].content+''
+                + '</div>'
+                + '<div class="tip_f">'
+                + '<div class="icon">'
+                + '<img src="images/bpic_1.gif" alt="" title="">'
+                + '</div>'
+                + '<div class="name">'+messages[i].name+'</div>'
+                + '<div class="clr"></div>'
+                + '</div>';
+        tip.innerHTML = str;
+        content.appendChild(tip);
+        //动态生成x和y的坐标时，让tip产生在不同的位置显示在许愿墙上
+        var x = parseInt(Math.random()*400 + 400);
+        var y = parseInt(Math.random()*400 );
+        //给每个tip设置style.left值 和 style.top值
+        tip.style.left = x + "px";
+        tip.style.top  = y + "px";
+
+        //给没给tip绑定事件：点击在最上层、双击tip头部关闭、点击小叉关闭
+        //1、绑定点击后zIndex到最上层的事件
+        tip.onclick = function(){
+            this.style.zIndex = zIndex++;
+        };
+
+        //2、双击tip的头部header关闭tip
+        //先获取tip的头部
+        var header = getFirstElement(tip);
+        header.ondblclick = function(){
+            content.removeChild(this.parentNode);
+        };
+
+        //3、点击小叉关闭tip
+        //获取小叉的元素
+        var close = getElementsByClassName(tip, 'close')[0];
+        console.log(close);
+        close.onclick = function(){
+            content.removeChild(this.parentNode.parentNode);
+        };
+
+    }
+
+    //兼容性处理函数：1、获取第一个元素、最后一个元素  2、根据类名获取元素
+    //1、获取第一个元素
+    function getFirstElement(element)
+    {
+        if(element.firstElementChild)
+            return element.firstElementChild;
+        else
+        {
+            var node = element.firstChild;
+            while(node && node.nodeType !== 1)
+            {
+                node = node.nextSibling;
+            }
+            return node;
+        }
+    }
+
+    //2、获取最后一个元素
+    function getLastElement(element)
+    {
+        if(element.lastElementChild)
+            return element.lastElementChild;
+        else
+        {
+            var node = element.lastChild;
+            while(node && node.nodeType !== 1)
+            {
+                node = node.previousSibling;
+            }
+            return node;
+        }
+    }
+
+    //3、通过类名获取元素
+    function getElementsByClassName(element, className)
+    {
+        var filterArr = [];
+        var elements = element.getElementsByTagName("*");
+        //遍历所有获取的元素
+        for(var i=0; i<elements.length; i++)
+        {
+            //对每个元素按照类名的空格，切割成nameArr
+            var nameArr = elements[i].className.split(' ');
+            for(var j=0; j<nameArr.length; j++)
+            {
+                if(nameArr[j] === className)
+                {
+                    filterArr.push(elements[i]);
+                    break;
+                }
+            }
+        }
+        return filterArr;
+    }
+
+
+</script>
+</body>
+</html>

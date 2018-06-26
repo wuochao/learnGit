@@ -1,0 +1,162 @@
+/*这是main部分的css*/
+.w .focus {
+    width: 730px;
+    height: 454px;
+    background-color: pink;
+    margin: 12px 0 0 220px;
+    position: relative;
+}
+
+.w .focus .sliderbtn {
+    width: 140px;
+    height: 18px;
+    /*background-color: blue;*/
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -70px;
+}
+
+.w .focus .sliderbtn ul li {
+    float: left;
+    width: 18px;
+    height: 18px;
+    background-color: #3E3E3E;
+    border-radius: 50%;
+    font: 12px/18px "Arial";
+    color: white;
+    text-align: center;
+    margin: 0 2px;
+}
+
+.w .focus .sliderbtn ul li.current {
+    background-color: #B61B1F;
+}
+
+.w .focus .arrow a {
+    width: 28px;
+    height: 62px;
+    background-color: gray; /*兼容IE6 7 8*/
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    font: 20px/62px "SimSun";
+    color: white;
+    text-align: center;
+
+}
+
+.w .focus .arrow .left_arrow {
+    top: 50%;
+    margin-top: -31px;
+    left: 0;
+}
+
+.w .focus .arrow .right_arrow {
+    top: 50%;
+    margin-top: -31px;
+    right: 0;
+}
+
+.w .focus-extra {
+    width: 250px;
+    height: 454px;
+    /*background-color: olive;*/
+    margin-top: 12px;
+}
+
+.w .focus-extra .news {
+    width: 248px;
+    height: 163px;
+    border: 1px solid #ccc;
+    /*background-color: pink;*/
+}
+
+.w .focus-extra .news .title {
+    width: 218px;
+    height: 32px;
+    border-bottom: 1px dashed #ccc;
+    padding: 0 15px;
+}
+
+.w .focus-extra .news .title h2 {
+    float: left;
+    height: 32px;
+    font: 16px/32px "Microsoft YaHei";
+}
+
+.w .focus-extra .news .title a {
+    float: right;
+    height: 32px;
+    font: 12px/32px "SimSun";
+}
+
+.w .focus-extra .news .detail {
+    padding: 10px 0 0 15px;
+}
+
+.w .focus-extra .news .detail ul li {
+    float: left;
+    height: 24px;
+}
+
+.w .focus-extra .news .detail ul li b {
+    margin-right: 5px;
+}
+
+.w .focus-extra .lifeservice {
+    width: 248px;
+    height: 208px;
+    border: 1px solid #ccc;
+    border-top: none;
+    /*background-color: orange;*/
+    overflow: hidden;
+}
+
+.w .focus-extra .lifeservice ul {
+    width: 252px;
+}
+
+.w .focus-extra .lifeservice ul li {
+    float: left;
+    width: 62px;
+    height: 70px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.w .focus-extra .lifeservice ul li a {
+    display: block;
+    width: 62px;
+    height: 25px;
+    padding-top: 45px;
+    font: 12px/25px "Microsoft YaHei";
+    text-align: center;
+    position: relative;
+}
+
+.w .focus-extra .lifeservice ul li a i {
+    width: 25px;
+    height: 25px;
+    background: url(../images/life.png) no-repeat;
+    position: absolute;
+    top: 12px;
+    left: 19px;
+}
+
+.w .focus-extra .advertisement {
+    width: 250px;
+    height: 75px;
+    background-color: orchid;
+    margin-top: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+

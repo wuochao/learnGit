@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>左右轮播图</title>
+    <style type="text/css">
+        body, ul, ol, li, img {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #box {
+            width: 490px;
+            height: 170px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin: 100px auto 0;
+            position: relative;
+            /*overflow: hidden;*/
+        }
+
+        .ad {
+            width: 490px;
+            height: 170px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #box img {
+            width: 490px;
+            height: 170px;
+        }
+
+        .ad ol {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            margin-left: -75px;
+        }
+
+        .ad ol li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(118, 136, 156, 0.4);
+            margin: 0 5px;
+            font: 12px/20px "Arial";
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            _display: inline;
+        }
+
+        .ad ol li.current {
+            background-color: orange;
+        }
+
+        .ad ul {
+            width: 2940px;
+            position: absolute;
+            top: 0;
+        }
+
+        .ad ul li {
+            float: left;
+        }
+
+        .ad ul li.current {
+            display: block;
+        }
+
+        #arr {
+            display: none;
+        }
+
+        #arr span {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.3);
+            font: bold 30px/40px "SimSun";
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+        }
+
+        #arr #left {
+            left: 5px;
+        }
+
+        #arr #right {
+            right: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="box" class="box">
+    <div class="ad">
+        <ul id="imgs">
+            <li><img src="images/1.jpg" alt=""/></li>
+            <li><img src="images/2.jpg" alt=""/></li>
+            <li><img src="images/3.jpg" alt=""/></li>
+            <li><img src="images/4.jpg" alt=""/></li>
+            <li><img src="images/5.jpg" alt=""/></li>
+        </ul>
+        <ol>
+            <li class="current">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ol>
+    </div>
+    <div id="arr">
+        <span id="left"><</span><span id="right">></span>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    //获取轮播图的外框box、ul和ol
+    var box = document.getElementById('box');
+    var ul = box.children[0].children[0];
+    var ol = box.children[0].children[1];
+    //获取ul和ol下面的lis
+    var ulLis = ul.getElementsByTagName('li');
+    var olLis = ol.getElementsByTagName('li');
+    //获取左右箭头的盒子、左右箭头
+    var arr = box.children[1];
+    var arr_l = arr.children[0];
+    var arr_r = arr.children[1];
+    //初始化ul的初始位置leader和结束位置target
+    var leader = 0, target = 0;
+
+    //遍历ol的lis绑定鼠标悬停事件
+    for (var i = 0; i < olLis.length; i++) {
+        olLis[i].index = i;
+        olLis[i].onmouseover = function () {
+            for (var j = 0; j < olLis.length; j++) {
+                olLis[j].className = "";
+            }
+            this.className = "current";
+            target = -this.index * 490;
+        }
+    }
+
+    //设置定时器，开启鼠标悬停的缓动动画
+    var timer1 = setInterval(function () {
+        leader = leader + (target - leader) / 10;
+        ul.style.left = leader + "px";
+    }, 1);
+
+    //左右箭头在鼠标悬停时显示，鼠标离开时隐藏
+    box.onmouseover = function () {
+        arr.style.display = "block";
+    };
+    box.onmouseout = function () {
+        arr.style.display = "none";
+    };
+
+    //给左箭头绑定onclick向左滚动一个图片宽度
+    arr_l.onclick = function () {
+        target += 490;
+        preLi();
+    };
+    //给右箭头绑定onclick向右滚动一个图片宽度
+    arr_r.onclick = function () {
+        target -= 490;
+        nextLi();
+    };
+
+    //设置定时器timer2，当点击左箭头时，ul向右移动一个图片宽度，当点击右箭头时，ul向左移动一个图片宽度
+    var timer2 = setInterval(function () {
+        target = target < -1960 ? -1960 : target;
+        target = target > 0 ? 0 : target;
+        leader = leader + (target - leader) / 10;
+        ul.style.left = leader + "px";
+    }, 20);
+
+    //返回ol中当前为current类名的li（相当于指针，传回的是地址（引用类型），而不是值）
+    function getCurrent() {
+        for (var i = 0; i < olLis.length; i++) {
+            if (olLis[i].className === "current")
+                return olLis[i];
+        }
+    }
+
+    //ol当前li向前移动一个，并判断当前li前面是否有还有li，如果有才会移动，否则不动
+    function preLi() {
+        if(getCurrent().previousElementSibling)
+        {
+            var currentLi = getCurrent();
+            var preLi = currentLi.previousElementSibling;
+            preLi.className = "current";
+            currentLi.className = "";
+        }
+    }
+    //ol当前li向后移动一个，并判断当前li后面是否有还有li，如果有才会移动，否则不动
+    function nextLi() {
+        if(getCurrent().nextElementSibling)
+        {
+            var currentLi = getCurrent();
+            var nextLi = currentLi.nextElementSibling;
+            nextLi.className = "current";
+            currentLi.className = "";
+        }
+    }
+</script>

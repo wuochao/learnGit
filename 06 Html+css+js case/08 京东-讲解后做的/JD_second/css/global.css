@@ -1,0 +1,351 @@
+body {
+    height: 2000px;
+}
+
+.w {
+    width: 1210px;
+    margin: 0 auto;
+}
+
+/*begin: shortcut*/
+.shortcut {
+    width: 100%;
+    height: 30px;
+    background-color: #F1F1F1;
+}
+
+.shortcut .w ul {
+    line-height: 30px;
+}
+
+.shortcut .w .left_ul li {
+    float: left;
+}
+
+.shortcut .w .right_ul li {
+    float: left;
+}
+
+.shortcut .w ul li {
+    padding: 0 10px;
+}
+
+.shortcut .w .sep_line {
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    background-color: #ddd;
+    padding: 0;
+    margin-top: 9px;
+}
+
+.shortcut .w ul .dropdown i {
+    display: inline-block;
+    width: 15px;
+    height: 7px;
+    line-height: 15px;
+    /*background-color: red;*/
+    position: relative;
+    overflow: hidden;
+}
+
+.shortcut .w ul .dropdown i s {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    position: absolute;
+    top: -7px;
+    left: 0;
+}
+.shortcut .w .right_ul .fontRed{
+    color: #C81623;
+}
+.shortcut .w .right_ul em {
+    display: inline-block;
+    width: 15px;
+    height: 20px;
+    background: url(../images/sprite.png) no-repeat 0 0;
+    vertical-align: middle;
+    margin-top: -1px;
+}
+
+/*end: shortcut*/
+/*begin:header*/
+.w .logo {
+    width: 270px;
+    height: 60px;
+    padding: 20px 90px 20px 0;
+    /*background-color: pink;*/
+}
+
+.w .logo h1 a {
+    display: inline-block;
+    width: 270px;
+    height: 60px;
+    background: url(../images/logo.png) no-repeat;
+    text-indent: -9999px;
+}
+
+.w .search {
+    margin-top: 25px;
+}
+
+.w .search .searchBar {
+    width: 444px;
+    height: 32px;
+    border: 2px solid #C81623;
+    padding: 0 5px;
+    font: 12px "Microsoft YaHei";
+    color: #666;
+}
+
+.w .search .searchBtn {
+    width: 80px;
+    height: 36px;
+    background-color: #C81623;
+    color: white;
+    font: 16px/36px "Microsoft YaHei";
+}
+
+.w .shopcar {
+    width: 119px;
+    height: 34px;
+    border: 1px solid #DFDFDF;
+    padding: 0 10px;
+    /*background-color: pink;*/
+    margin-top: 25px;
+    font: 12px/34px "SimSun";
+    color: #666;
+    position: relative;
+}
+
+.w .shopcar i {
+    display: inline-block;
+    width: 18px;
+    height: 16px;
+    background: url(../images/sprite.png) no-repeat 0 -90px;
+    vertical-align: middle;
+    margin: -4px 3px 0 5px;
+}
+
+.w .shopcar s {
+    display: inline-block;
+    font: 14px/34px "SimSun";
+    color: #666;
+    margin-left: 15px;
+    vertical-align: middle;
+}
+
+.w .shopcar em {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px 8px 8px 0;
+    background-color: #C81623;
+    font: 12px/16px "Arial";
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: -4px;
+    right: 27px;
+}
+
+.w .hotwords {
+    white-space: nowrap;
+}
+
+.w .hotwords a {
+    font: 12px/32px "SimSun";
+    color: #DEE3EB;
+    padding: 0 3px;
+}
+
+.w .hotwords a:hover {
+    color: #C81623;
+}
+
+.w .hotwords .fontRed {
+    color: #C81623;
+}
+
+/*end:header*/
+/*begin:nav*/
+.nav {
+    height: 44px;
+    /*background-color: olive;*/
+    border-bottom: 2px solid #B1191A;
+}
+
+.nav .w .categories {
+    width: 210px;
+    height: 46px;
+    /*background-color: blue;*/
+}
+
+/*.nav .w .categories .itemAll {*/
+/*width: 190px;*/
+/*height: 46px;*/
+/*background-color: #B1191A;*/
+/*padding: 0 10px;*/
+/*font: 16px/46px "Microsoft YaHei";*/
+/*color: white;*/
+/*}*/
+.nav .w .categories .itemAll a {
+    display: block;
+    width: 190px;
+    height: 46px;
+    background-color: #B1191A;
+    padding: 0 10px;
+    font: 16px/46px "Microsoft YaHei";
+    color: white;
+}
+
+.nav .w .categories .subItem {
+    width: 188px;
+    height: 466px;
+    background-color: #C81623;
+    border: 1px solid #B61D1D;
+    border-top: 0;
+    border-bottom: 0;
+    padding: 0 10px;
+}
+.nav .w .categories .subItem .subItemName{
+    height: 31px;         /*宽度可以继承，而高度不能继承。  因为subItemName的宽度是188px*/
+}
+.nav .w .categories .subItem .subItemName a {
+    float: left;
+    font: 14px/31px "Microsoft YaHei";
+    color: white;
+}
+.nav .w .categories .subItem .subItemName i {
+    float: right;
+    font: 14px/31px "consolas";
+    color: white;
+}
+.nav .w .navitems{
+    height: 46px;
+}
+.nav .w .navitems ul li {
+    float: left;
+    padding: 0 20px;
+}
+.nav .w .navitems ul li a{
+    display: block;    /*设置为block后，点击链接是一个区域，而不仅仅是文字部分。*/
+    font: 16px/46px "Microsoft YaHei";
+    color: #666;
+}
+.nav .w .navitems ul li a:hover{
+    color: #C81623;
+}
+/*end:nav*/
+
+/*begin: footer*/
+.footer{
+    margin: 30px 0;
+    /*margin-top: 500px;*/
+}
+.footer .slogan{
+    height: 54px;
+    padding: 20px 0;
+    background-color: #F5F5F5;
+    position: relative;
+}
+.footer .slogan .com{
+    width: 300px;
+    text-align: center;
+}
+.footer .slogan .slogan1{
+    position: absolute;
+    left:50%;
+    margin-left: -600px;
+}
+.footer .slogan .slogan2{
+    position: absolute;
+    left:50%;
+    margin-left: -300px;
+}
+.footer .slogan .slogan3{
+    position: absolute;
+    left:50%;
+    margin-left: 0;
+}
+.footer .slogan .slogan4{
+    position: absolute;
+    left:50%;
+    margin-left: 300px;
+}
+.footer .footerLinks{
+    height:224px;
+}
+.footer .footerLinks dl{
+    float: left;
+    margin-right: 124px;
+}
+.footer .footerLinks dl.last{
+    margin-right: 0;
+}
+.footer .footerLinks dl dt{
+    font: 16px "Microsoft YaHei";
+    color: #7D667D;
+    margin: 26px 0 12px 0;
+}
+.footer .footerLinks dl dd{
+    font: 12px/20px "Microsoft YaHei";
+    color: #666;
+}
+.footer .footerLinks .coverage{
+    width: 191px;
+    height: 169px;
+    /*background-color: pink;*/
+    margin-top: 27px;
+    background: url(../images/jds.png) no-repeat 0 -131px;
+    padding-left: 12px;
+}
+.footer .footerLinks .coverage h3{
+    font: 16px "Microsoft YaHei";
+    color: #66667D;
+    margin-bottom: 15px;
+}
+.footer .footerLinks .coverage p{
+    font: 12px/20px "Microsoft YaHei";
+    color: #666;
+}
+.footer .footerLinks .coverage .look a{
+    font: 12px/20px "SimSun","Arial";
+    color: #666;
+}
+.footer .footerLinks .coverage .look a:hover{
+    color: #C81623;
+}
+
+.footer .friendLinks{
+    border-top: 1px solid #CCC;
+    text-align:center;
+}
+.footer .friendLinks .Links{
+    margin: 25px 0 5px 0;
+}
+.footer .friendLinks .Links a{
+    padding:0 10px;
+}
+.footer .friendLinks p{
+    font: 12px/20px "Microsoft YaHei";
+    color: #666;
+}
+.footer .friendLinks .brand{
+    margin-top: 10px;
+}
+.footer .friendLinks .brand a{
+    padding:0 5px;
+}
+
+/*end: footer*/
+
+
+
+
+
+
+
+

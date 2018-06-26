@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+html, body, h1, h2, h3, h4, h5, h6, p, div, span, ul, ol, li, dl, dt, dd, table, tr, th, td, form, fieldset, frame, frameset, b, i, em, strong, del, img, legend{
+	margin:0;
+	padding:0;
+}
+
+input, button, img{
+	margin:0;
+	padding:0;
+	outline-style:none;
+	border:0;
+}
+
+input{
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+select, input, img{
+	vertical-align:middle;
+}
+
+a{
+	text-decoration:none;
+}
+ul,ol{
+	list-style:none;
+}
+
+.fl{
+	float: left;
+}
+
+.fr{
+	float: right;
+}
+
+.clearfix::before, .clearfix::after{
+	content:"";
+	display:table;
+	clear:both;
+}
+.clearfix{
+	zoom:1;
+}
+
+
+

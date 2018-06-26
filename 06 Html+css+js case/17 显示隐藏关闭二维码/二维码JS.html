@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .nodeSmall {
+            width: 50px;
+            height: 50px;
+            background: url(images/bgs.png) no-repeat -159px -51px;
+            position: fixed;
+            right: 10px;
+            top: 40%;
+        }
+
+        .erweima {
+            position: absolute;
+            top: 0;
+            left: -150px;
+        }
+
+        .nodeSmall a {
+            display: block;
+            width: 50px;
+            height: 50px;
+        }
+
+        .x {
+            display: block;
+            border: 1px solid #D9D9D9;
+            width: 14px;
+            height: 14px;
+            float: right;
+            line-height: 14px;
+            color: #D6D6D6;
+            cursor: pointer;
+            position: absolute;
+            top: -1px;
+            left: -16px;
+        }
+
+
+
+        .hide {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="nodeSmall" id="node_small">
+    <a href="#"></a>
+
+    <div class="erweima hide" id="er">
+        <img src="images/456.png" alt=""/>
+        <span class="x" id="x">×</span>
+    </div>
+</div>
+<script>
+    //获取要操作的元素
+    var node = document.getElementById('node_small');
+    var er   = document.getElementById('er');
+    var x    = document.getElementById('x');
+    //给小二维码onmouseover和onmouseout事件给大二维码添加或者移除类名show 和 hide
+    node.onmouseover = function(){
+        replaceClassName(er, "hide", "show");
+    };
+    node.onmouseout  = function(){
+        replaceClassName(er, "show", "hide");
+    };
+    //给大二维码的关闭x绑定关闭大二维码onclick的事件
+    x.onclick = function(){
+       this.parentNode.style.display = "none";
+    };
+
+    //封装一个替换类名的函数
+    function replaceClassName(element, oldStr, newStr)
+    {
+        element.className = element.className.replace(oldStr, newStr);
+    }
+
+
+</script>
+</body>
+</html>

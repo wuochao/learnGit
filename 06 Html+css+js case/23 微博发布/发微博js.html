@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>发微博案例</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .box {
+            width: 600px;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 68px;
+            outline: none;
+            resize: none;
+        }
+
+        ul {
+            width: 450px;
+            padding-left: 80px;
+        }
+
+        ul li {
+            line-height: 25px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .title {
+            float: left;
+        }
+
+        .num {
+            float: right;
+        }
+
+        .input {
+            margin-top: 4px;
+            padding: 5px;
+        }
+
+        .func {
+            float: right;
+        }
+
+        #btn {
+            display: inline-block;
+            width: 60px;
+            height: 28px;
+            min-width: 40px;
+            background-color: #ff8140;
+            font: 14px/28px "Microsoft YaHei";
+            color: #fff;
+            text-align: center;
+            border: 1px solid #f77c3d;
+            border-radius: 2px;
+            outline: none;
+            box-shadow: none;
+            padding: 0 10px;
+            cursor: default;
+        }
+
+        input {/*用于添加删除按钮的样式*/
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="weibo">
+    <div>
+        <div class="title">有什么新鲜事想告诉大家</div>
+        <div class="num" id="rest">还可以输入<span id="restNum">140</span>字</div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="input">
+        <textarea name="" id="txt" cols="20" rows="10"></textarea>
+    </div>
+    <div class="func">
+        <a id="btn">发布</a>
+    </div>
+    <div style="clear: both"></div>
+    <ul id="ul"></ul>
+    <div></div>
+</div>
+<script>
+
+    //获取要操作的元素
+    var txt  = document.getElementById('txt');
+    var btn  = document.getElementById('btn');
+    var ul   = document.getElementById('ul');
+    var rest = document.getElementById('rest');
+    var restNum = null;
+    var len = 0;
+
+    //对文本域txt绑定onkeyup事件，当有输入的时候触发
+    txt.onkeyup = function(){
+        len = txt.value.trim().length;
+        if(len >=0 && len<= 140)
+        {
+            //提示文本“还可以输入<span id="restNum"></span>字”
+            rest.innerHTML = '还可以输入<span id="restNum"></span>字';
+            rest.style.color = "black";
+            restNum = document.getElementById('restNum');
+            //提示还可以输入的字数
+            setInnerText(restNum, 140-len);
+            //给btn绑定点击事件
+            btn.onclick = function(){
+                //如果用户输入的文本域内容为空，不允许点击发布，要求用户重新输入文本
+                if(txt.value.trim() == "")
+                {
+                    alert("输入内容为空，请重新输入后再点击发布");
+                    return;   //一定要添加return 结束函数
+                }
+
+                var li = document.createElement('li');
+                //将txt文本域里面的内容放入span标签中，也可以不要span标签，直接放入到li中
+                //考虑到后面要加删除按钮，所有添加一个span标签将内容与按钮分开比较好
+                var span = document.createElement('span');
+                //将文本域中的内容添加到span里面，并把span追加到li中
+                setInnerText(span, txt.value);
+                //给span添加自动换行属性
+                span.style.wordWrap = "break-word";
+                li.appendChild(span);
+
+                //将新的li插入到ul中，注意最新的li要放在最上面
+                //使用insertBefore方法实现
+                //先获取ul中第1个子元素，考虑兼容性处理使用下面兼容性函数
+                var firstLi = getFirstElement(ul);
+                ul.insertBefore(li, firstLi);
+
+                //当点击发布，ul中生成并显示li后，要对文本域中的原来文本进行清空
+                txt.value = "";
+                //恢复右上角提示文字“还可以输入<span id="restNum">140</span>字”
+                rest.innerHTML = '还可以输入<span id="restNum">140</span>字';
+
+                //给每条li增加删除delete按钮
+                var del = document.createElement('input');
+                del.type = "button";
+                del.value = "delete";
+                //将新产生的delete按钮追加到li的后面
+                li.appendChild(del);
+                //对delete按钮绑定点击删除li的事件
+                del.onclick = function(){
+                    ul.removeChild(this.parentNode);
+                };
+            };
+        }
+        else
+        {
+            setInnerText(rest, "字数不能超过140个");
+            rest.style.color = "red";
+            btn.onclick = function(){
+                alert("请删除多余字符后，再点击发布");
+                /*return false;*/
+            };
+
+        }
+    };
+
+
+
+
+
+/**兼容性处理，封装函数：
+ * 1、获取任意对象的内部文本
+ * 2、设置任意对象的内部文本
+ * 3、获取第一个子元素
+ * 4、获取最后一个子元素
+ *
+ */
+
+    //1、获取任意对象的内部文本
+    function getInnerText(element)
+    {
+        if(typeof element.innerText == "string")
+            return element.innerText;
+        else
+            return element.textContent;
+    }
+
+    //2、设置任意对象的内部文本
+    function setInnerText(element, content)
+    {
+        if(typeof element.innerText == "string")
+            element.innerText = content;
+        else
+            element.textContent = content;
+    }
+
+    //3、获取第一个元素
+    function getFirstElement(element)
+    {
+        if(element.firstElementChild)
+            return element.firstElementChild;
+        else
+        {
+            var node = element.firstChild;
+            while(node && node.nodeType !== 1)
+            {
+                node = node.nextSibling;
+            }
+            return node;
+        }
+    }
+
+    //4、获取最后一个子元素
+    function getLastElement(element)
+    {
+        if(element.lastElementChild)
+            return element.lastElementChild;
+        else
+        {
+            var node = element.lastChild;
+            while(node && node.nodeType !==1)
+            {
+                node = node.previousSibling;
+            }
+            return node;
+        }
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

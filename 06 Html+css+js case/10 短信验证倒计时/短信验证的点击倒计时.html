@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>短信验证的点击倒计时</title>
+</head>
+<body>
+    <input type="text"/>
+    <button id="btn">点击发送短信</button>
+
+</body>
+</html>
+<script>
+    var btn = document.getElementById('btn');
+    var count = 5;   //存放剩余时间秒数
+    var timer = null;
+    btn.onclick = function(){
+        clearInterval(timer);
+        this.disabled = true;
+        var that = this;
+        timer = setInterval(sendTextMsg,1000);  //开启定时器
+        function sendTextMsg(){
+            count --;
+            if(count >= 0)
+                that.innerHTML = '还剩余'+ count +'秒';
+            else
+            {
+                that.innerHTML = '重新发送短信';
+                that.disabled = false;
+                clearInterval(timer);   //清除定时器timer
+                count = 5;
+            }
+        }
+    }
+
+
+</script>
+

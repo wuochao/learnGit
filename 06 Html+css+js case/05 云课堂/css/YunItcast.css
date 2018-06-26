@@ -1,0 +1,275 @@
+body{
+	height: 2000px;
+}
+
+/*begin:wrapper*/
+.wrapper{
+	width: 1348px;
+	height: 2326px;
+	/*background-color: orange;*/
+	margin:0 auto;
+}
+/*end:wrapper*/
+/*begin:top*/
+.top{
+	width:1348px;
+	height: 60px;
+	background-color: #262626;
+	margin:0 auto;
+}
+
+.top .logo{
+	width: 187px;
+	height: 43px;
+	/*background: red;*/
+	background: url(../img/logo.jpg) no-repeat;
+	margin:8px 73px 8px 0;
+}
+.top .nav ul li{
+	float: left;
+	height: 60px;
+	margin-right: 32px;
+}
+.top .nav ul li a{
+	display:inline-block;
+	text-decoration: none;
+	font:12px/60px "SimSun";
+	color:white;
+}
+.top .nav ul li a:hover{
+	background-color: #9294A9;
+}
+.top .button{
+	margin:18px 154px 16px 0;
+}
+.top .button input{
+	width: 41px;
+	height: 22px;
+	border:2px solid #FF6400;
+	background-color: #262626;	
+}
+.top .button input.login{
+
+	font:12px/22px "Microsoft YaHei";
+	color:#FF6400;
+	text-align: center;
+	margin-right:6px;
+}
+
+.top .button input.register{
+
+	border-color:#FF6400;
+	color:black;
+	background-color: #FF6400;
+	font:12px/22px "Microsoft YaHei";
+	text-align: center;
+}
+
+/*end:top*/
+/*begin:banner*/
+.banner{
+	width: 1348px;
+	height: 440px;
+	/*background-color:red;*/
+	background: url(../img/banner.jpg) center top;
+}
+
+/*end:banner*/
+
+/*begin:ad*/
+.ad{
+	width: 1100px;
+	height: 267px;
+	padding:78px 124px;
+	background-color: white;
+	position: relative;
+}
+.ad .com{
+	width: 352px;
+	height: 267px;
+	/*background-color: red;*/
+	margin-right: 22px;
+}
+.ad .com.ad_3{
+	margin-right: 0;
+}
+.ad .com h3{
+	width: 352px;
+	height: 43px;
+	font:30px "Microsoft YaHei";
+	text-align: center;
+}
+.ad .com .img{
+	width: 352px;
+	height: 224px;
+	background: url(../img/tu.jpg) no-repeat center top;
+}
+.ad .com .img.img_2{
+	width: 352px;
+	height: 224px;
+	background: url(../img/package_pic2.jpg) no-repeat center top;
+}
+.ad .l{
+	width: 28px;
+	height: 63px;
+	background:url(../img/L.jpg) no-repeat;
+	position:absolute;
+	top:181px;
+	left:86px;
+
+}
+.ad .r{
+	width: 29px;
+	height: 63px;
+	background:url(../img/R.jpg) no-repeat;
+	position:absolute;
+	top:181px;
+	right:86px;
+	
+}
+/*end:ad*/
+/*begin:product1*/
+.product1{
+	width: 1199px;
+	height: 398px;
+	background-color: #F2F2F2;
+	padding:71px 74px 71px 75px;
+}
+.product1.product2{
+	background-color: white;
+}
+.product1 h2{
+	font:30px "Microsoft YaHei";
+	color:black;
+	margin-bottom: 20px;
+}
+.product1 .ui_1{
+	width: 385px;
+	height: 344px;
+	/*background-color: pink;*/
+	margin-right:22px;
+}
+.product1 .ui_1.last{
+	margin-right: 0;
+}
+.product1 .ui_1 .pic{
+	width: 385px;
+	height: 197px;
+	/*background-color: blue;*/
+}
+.product1 .ui_1 .pic.pic1{
+	background:url(../img/ui_pic1.jpg) no-repeat;
+}
+.product1 .ui_1 .pic.pic2{
+	background:url(../img/ui_pic2.jpg) no-repeat;
+}
+.product1 .ui_1 .pic.pic3{
+	background:url(../img/ui_pic3.jpg) no-repeat;
+}
+.product1 .ui_1 .pic.pic4{
+	background:url(../img/pm_pic1.jpg) no-repeat;
+}
+.product1 .ui_1 .pic.pic5{
+	background:url(../img/pm_pic2.jpg) no-repeat;
+}
+.product1 .ui_1 .pic.pic6{
+	background:url(../img/pm_pic3.jpg) no-repeat;
+}
+
+.product1 .ui_1 .info{
+	width: 360px;
+	height: 104px;
+	padding:23px 14px 19px 9px;
+	/*background-color:olive;*/
+	border:1px solid #DBDBDB;
+	border-top:none;
+	position:relative;
+}
+
+.product1 .ui_1 .info .course{
+	font:24px/24px "Microsoft YaHei";
+	color:#6E6E6E;
+}
+.product1 .ui_1 .info .price{
+	font:20px/24px "Microsoft YaHei";
+	color:#FF6503;
+	margin-top: 5px;
+}
+.product1 .ui_1 .info p{
+	font:12px "Microsoft YaHei";
+	color:#989898;
+	margin-top: 13px;
+}
+.product1 .ui_1 .info b{
+	font:12px "Microsoft YaHei";
+	color:#989898;
+	margin:6px 85px 0 0;	
+}
+.product1 .ui_1 .info .gobug{
+	width: 73px;
+	height: 28px;
+	background: url(../img/button.jpg);
+	position: absolute;
+	bottom:7px;
+	right:14px;
+}
+
+/*end:product1*/
+/*begin:product2*/
+.product2{
+	margin-bottom: 70px;
+}
+
+/*end:product2*/
+/*begin:links*/
+.links{
+	width: 1348px;
+	height: 180px;
+	border-top:1px solid #293751;
+	background-color: #304363;
+	position: relative;
+}
+.links dl{
+	float: left;
+	margin-right: 127px;
+	margin-top:32px;
+	font:12px "SimSun";
+	text-align: center;
+}
+.links dl.first{
+	margin-left: 75px;
+}
+.links dt{
+	color:white;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+.links dd{
+	color:#AEBECE;
+	line-height: 24px;
+
+}
+
+.links .ewm{
+	width: 115px;
+	height: 115px;
+	background:url(../img/ewm.jpg) no-repeat;
+	position: absolute;
+	top:31px;
+	right:73px;
+}
+/*end:links*/
+/*begin:copyright*/
+.copyright{
+	width: 1348px;
+	height: 40px;
+	background-color: #1B2435;
+}
+.copyright p{
+	font:12px/40px "Microsoft YaHei";
+	color:#AEBECE;
+	margin-left:75px;
+}
+
+/*end:copyright*/
+

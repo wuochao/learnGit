@@ -1,0 +1,175 @@
+.page{
+	width: 900px;
+	height: 310px;
+	border:1px solid #E7E7E7;
+	margin:0 auto;
+	margin-top:100px;
+}
+
+.page .left{
+	width: 549px;
+	height: 310px;
+}
+
+.page .left .up{
+	width: 523px;
+	padding: 13px;
+	padding-bottom:12px;
+}
+
+.page .left .up .pic{
+	width: 196px;
+	height: 130px;
+	background: url(../images/news.png) no-repeat;
+	margin-right: 24px;
+}
+
+.page .left .up .news{
+	width: 303px;
+	height: 130px;
+	font:12px/24px "SimSun";
+	color:#666666;
+	/*background-color: skyblue;*/
+}
+
+.page .left .up .news h3{
+	font:bold 14px "SimSun";
+	color:#FF4B4B;
+	margin-bottom:12px;
+
+}
+
+.page .left .up .news .button{
+	width: 185px;
+	height: 36px;
+	background-color: #0099FF;
+	color:white;
+	font:12px/36px "SimSun";
+	text-align:center;
+	margin-top: 14px;
+}
+
+.page .left .down{
+	width: 465px;
+	height: 114px;
+	padding:20px 42px;
+	border-top:1px dashed #CCCCCC;
+	margin-top: 12px;
+	/*background-color: teal;*/
+	position: relative;
+}
+
+.page .left .down ul{
+	
+}
+.page .left .down ul li{
+	width: 80px;
+	height: 105px;
+	font:12px "SimSun";
+	color:#666666;
+	text-align:center;
+	float: left;
+	margin-right: 13px;
+}
+
+.page .left .down ul li img{
+	width: 80px;
+	height: 80px;
+	margin-bottom: 10px;
+}
+
+.page .left .down ul li span{
+	margin-top:93px;
+}
+
+.page .left .down .left-button{
+	width: 25px;
+	height: 30px;
+	background: url(../images/left-button.png) no-repeat;
+	position: absolute;
+	top:50px;
+	left:10px;
+}
+
+.page .left .down .right-button{
+	width: 25px;
+	height: 30px;
+	background: url(../images/right-button.png) no-repeat;
+	position: absolute;
+	top:50px;
+	right:20px;
+}
+
+.right .login{
+	width: 298px;
+	height: 162px;
+	padding:15px 25px 25px 25px;
+	border:1px solid #E7E7E7;
+	border-bottom:none;
+	/*background-color: yellow;*/
+
+}
+.right .login h3{
+	font:bold 16px "Black";
+	color:#666666;
+	margin-bottom: 10px;
+}
+.right .login input{
+	width: 298px;
+	height: 40px;
+	border:1px solid #CCCCCC;
+	margin-bottom:10px;
+}
+
+.right .login input.submit{
+	width: 300px;
+	height: 36px;
+	border:none;
+	background-color: #FF9900;
+	color:white;
+	font:bold 16px "Black";
+	margin-bottom:0;
+}
+
+
+.right .tab{
+	width: 350px;
+	height: 107px;
+	/*background-color: blue;*/
+}
+
+.right .tab ul li{
+	float: left;
+	margin-left: 15px;
+}
+
+.right .tab ul li a{
+	display:inline-block;
+	width: 76px;
+	height: 26px;
+	font:12px/26px "Microsoft YaHei";
+	text-align:center;
+}
+.right .tab ul li a.info{
+	border:none;
+}
+.right .tab ul li a.recent{
+	border:1px solid #CCCCCC;
+	border-bottom:none;
+}
+
+.right .tab ul li a:hover{
+	background-color: #FF9900;
+	color:white;
+}
+
+
+.right .tab .line{
+	width: 350px;
+	height: 1px;
+	background-color: #ccc;
+}
+.right .tab .detail{
+	padding:18px 15px;
+}
+

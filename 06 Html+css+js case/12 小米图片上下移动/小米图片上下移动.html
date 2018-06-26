@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小米图片上下移动</title>
+    <style>
+        .pic {
+            width: 512px;
+            height: 400px;
+            border: 1px solid red;
+            margin: 100px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pic span {
+            width: 100%;
+            height: 200px;
+            position: absolute;
+            left: 0;
+            cursor: pointer;
+        }
+
+        .pic span.up {
+            top: 0;
+        }
+
+        .pic span.down {
+            bottom: 0;
+        }
+
+        .image {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="pic" id="pic">
+    <img class="image" id="image" src="mi.png" alt=""/>
+    <span class="up" id="up"></span>
+    <span class="down" id="down"></span>
+</div>
+
+</body>
+</html>
+<script>
+    function $(id) {
+        return document.getElementById(id);
+    }
+    var num = 0;   //控制图片的top值
+    var Timer = null;   //定时器名称
+    $('up').onmouseover = function () {
+        clearInterval(Timer);
+        Timer = setInterval(function () {
+            num -= 3;
+            if (num >= -1070) {
+                $('image').style.top = num + "px";
+            }
+            else {
+                clearInterval(Timer);
+            }
+        }, 30);
+    };
+    $('down').onmouseover = function () {
+        clearInterval(Timer);
+        Timer = setInterval(function () {
+            num++;
+            if (num < 0) {
+                $('image').style.top = num + "px";
+            }
+            else {
+                clearInterval(Timer);
+            }
+        }, 30);
+    };
+    $('pic').onmouseout = function(){
+        clearInterval(Timer);
+    };
+</script>

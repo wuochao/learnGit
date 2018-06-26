@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+html, body, h1, h2, h3, h4, h5, h6, p, span, div, ul, ol, li, dl, dt, dd, table, thead, tbody, tr, th, td, tfoot, caption, input, img, button, a, i, b, em, s，form, fieldset, legend{
+	margin:0;
+	padding:0;
+}
+
+fieldset, img, input, button{
+	outline-style:none;
+	border:0;
+}
+
+ul, ol{
+	list-style:none;
+}
+a {
+	text-decoration: none;
+	color:#666;
+}
+textarea{
+	resize:none;
+}
+table{
+	border-collapse:collapse;
+}
+s,i,em{
+	text-decoration:none;
+	font-style:normal;
+}
+
+
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+
+.clearfix::before, .clearfix::after{
+	content:"";
+	display:table;
+	clear:both;
+}
+
+.clearfix{
+	zoom:1;   /*兼容IE6*/
+}
+
+.red{
+	color:#C81623;
+}
+
+
+
+
+
+
+

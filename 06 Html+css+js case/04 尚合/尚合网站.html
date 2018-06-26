@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>尚合网站</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			height: 2000px;
+		}
+
+		.header{
+			width: 980px;
+			height: 62px;
+			margin:0 auto;
+			overflow:hidden;
+		}
+		.header .logo{
+			width: 179px;
+			height: 23px;
+			float: left;
+			margin-top:20px;
+			background: url(images/SamHaveLogo.png) no-repeat;
+		}
+		.header .searchBar{
+			width: 198px;
+			height: 30px;
+			float: right;
+			margin-top:20px;
+			background: url(images/searchBar.png) no-repeat;
+
+		}
+		.nav{
+			height: 55px;
+			background:url(images/nav_fill.png) repeat-x;
+			border-top:1px solid #E1E1E1;
+		}
+		.nav .banxin{
+			width: 980px;
+			height: 55px;
+			margin:0 auto;
+
+		}
+
+		.nav .banxin ul{
+			list-style:none;
+		}
+
+		.nav .banxin ul li{
+			float: left;
+
+		}
+
+		.nav .banxin ul li a{
+			display:inline-block;
+			width: 128px;
+			height: 55px;
+			text-decoration: none;
+			color:black;
+			text-align:center;
+			font:bold 14px/55px "SimSun";
+			border-left:1px solid #C4C4C4;
+			border-right:1px solid #CBCBCB;
+		}
+
+		.nav .banxin ul li a.first{
+			border-left:none;
+		}
+
+		.ad{
+			width: 980px;
+			height: 666px;
+			margin:0 auto;
+			background:url(images/ad.png);
+			overflow: hidden
+		}
+		.banner{
+			height: 29px;
+			background:url(images/banner_fill.png) repeat-x;
+			border-top:1px solid #EFEFEF;
+			border-bottom:1px solid #EFEFEF;
+			margin-bottom:15px;
+		}
+		.banner .banxin{
+			width: 980px;
+			height: 29px;
+			margin:0 auto;
+		}
+
+		.banner .banxin .notice {
+			font:  12px/29px "Microsoft YaHei";
+			float: left;
+		}
+
+		.banner .banxin .notice span{
+			font-weight:bold;
+		}
+		.banner .banxin .share{
+			float: right;
+			width: 86px;
+			height: 16px;
+			background:url(images/share.png);
+			margin-top:5px;
+			margin-right:6px;
+		}
+		.content{
+			width: 980px;
+			margin:0 auto;
+			overflow:hidden;
+
+		}
+
+		.content .product{
+			width: 310px;
+			height: 224px;
+			border:1px solid #E4E4E4;
+			float: left;
+			margin-right:12px;
+			overflow:hidden;
+		}
+
+		.content .product .link_product{
+			width: 55px;
+			height: 15px;
+			background:url(images/slogo.png) no-repeat left top;
+			color: #7AB800;
+			font:bold 12px "Microsoft YaHei";
+			padding-left:22px;
+			margin-top:13px;
+			margin-left:6px;
+		}
+		.content .product .left{
+			width: 15px;
+			height: 20px;
+			background:url(images/left.png);
+			float: left;
+			margin-top:62px;
+			margin-left:23px;
+			
+		}
+		.content .product .mobile{
+			width: 94px;
+			height: 144px;
+			background:url(images/mobile.png);
+			float:left;
+			margin-left:69px;
+			
+		}
+		.content .product .right{
+			width: 15px;
+			height: 20px;
+			background:url(images/right.png);
+			float:left;
+			margin-top:62px;
+			margin-left:61px;
+			
+		}
+		.content .news{
+			width: 373px;
+			height: 224px;
+			border:1px solid #E4E4E4;
+			float: left;
+			margin-right:11px;
+			position: relative;
+		}
+
+		.content .news .link_news{
+			width: 78px;
+			height: 15px;
+			background:url(images/slogo.png) no-repeat left top;
+			color: #7AB800;
+			font:bold 12px "Microsoft YaHei";
+			padding-left:22px;
+			margin-top:13px;
+			margin-left:6px;
+		}
+		.content .news .more{
+			position: absolute;
+			top:16px;
+			left:335px;
+
+		}
+
+		.content .news .more a{
+			display:inline-block;
+			font:12px "SimSun";
+			text-decoration: none;
+			color:#666666;
+		}
+		.content .news ul{
+			list-style:none;
+		}
+
+		.content .news ul li{
+			width: 332px;
+			height:27px;
+			border-bottom: 1px dashed #DCDCDC;
+			margin-left:23px;
+			margin-right:18px;
+
+		}
+
+		.content .news ul li a{
+			color:#666666;
+			font:12px/27px "Microsoft YaHei" ;
+			text-decoration: none;
+		}
+
+		.content .news ul li a.first{
+			color:red;
+			font-weight:bold;
+		}
+		.content .ts{
+			width: 268px;
+			height: 224px;
+			border:1px solid #E4E4E4;
+			float: left;
+		}
+
+		.content .ts .link_ts{
+			width: 78px;
+			height: 15px;
+			background:url(images/slogo.png) no-repeat left top;
+			color: #7AB800;
+			font:bold 12px "Microsoft YaHei";
+			padding-left:22px;
+			margin-top:13px;
+			margin-left:6px;
+		}
+
+		.content .ts ul{
+			list-style:none;
+			margin-left:28px;
+		}
+
+		.content .ts ul li{
+			width: 210px;
+			height:20px;
+			background:url(images/line.png) no-repeat left center;
+			padding-left:8px;
+
+		}
+
+		.content .ts ul li a{
+			font:12px/20px "Microsoft YaHei";
+			text-decoration: none;
+			color:#666666;
+
+		}
+
+		.content .ts .contact{
+			font:12px/22px "Microsoft YaHei";
+			color:#666666;
+			margin-top:40px;
+			margin-left:28px;
+		}
+
+		.footer{
+			height: 306px;
+			background-color:#2D2D2D;
+			margin-top:52px;
+		}
+
+		.footer .links{
+			width: 960px;
+			height: 205px;
+			margin:0 auto;
+			padding-left:20px;
+			padding-top:16px;
+		}
+		.footer .links dl{
+			float: left;
+		}
+
+		.footer .links dl dt{
+			margin-right:56px;
+		}
+
+		.footer .links dl dt a{
+			text-decoration: none;
+			font:bold 12px "Microsoft YaHei";
+			color:#C7C7C7;
+		}
+
+		.footer .links dl dd a{
+			text-decoration: none;
+			font:12px "Microsoft YaHei";
+			color:#707070;
+		}
+
+		.footer .links .top-button{
+			width: 54px;
+			height: 27px;
+			float: right;
+			position:relative;
+			top:-16px;
+			right:6px;
+		}
+
+		.footer .links .top-button a{
+			float: right;
+			width: 54px;
+			height: 27px;
+			background:url(images/back_top.png) no-repeat;
+		}
+		.footer .copyright{
+			height: 74px;
+			border-top:1px dashed #414141;
+			font:12px/1 "Microsoft YaHei";
+			text-align:center;
+			padding-top:10px;
+			overflow:hidden;
+		}
+
+		.footer .copyright .company{
+			overflow:hidden;
+		}
+
+		.footer .copyright .number{
+			margin-top:18px;
+			margin-bottom:9px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="header">
+		<div class="logo"></div>
+		<div class="searchBar"></div>
+	</div>
+	<div class="nav">
+		<div class="banxin">
+			<ul>
+				<li><a class="first" href="#">首 页</a></li>
+				<li><a href="#">智能手机</a></li>
+				<li><a href="#">平板电脑</a></li>
+				<li><a href="#">配件</a></li>
+				<li><a href="#">服务支持</a></li>
+				<li><a class="last" href="#">关于尚合</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="ad"></div>
+	<div class="banner">
+		<div class="banxin">
+			<div class="notice"><span>最新公告：</span>&nbsp;&nbsp;&nbsp;尚合Aone智能手机入网证已经获工信部门审批下发</div>
+			<div class="share"></div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="product">
+			<div class="link_product">新品发布</div>
+			<div class="left"></div>
+			<div class="mobile"></div>
+			<div class="right"></div>
+		</div>
+		<div class="news">
+			<div class="link_news">新闻中心</div>
+			<div class="more"><a href="#">更多</a></div>
+			<ul>
+				<li><a class="first" href="#">致歉公告</a></li>
+				<li><a href="#">首批尚合Aonet已全部售馨!</a></li>
+				<li><a href="#">【媒体报导】国产高性价比 尚合Aonet四核手机评测</a></li>
+				<li><a href="#">我司产品已经通过了国家强制性产品3C认证</a></li>
+				<li><a href="#">尚合Aone智能手机入网证已经获工信部门审批下发.</a></li>
+				<li><a href="#">我司通过ISO9001:2008国际质量管理体系认证.</a></li>
+			</ul>
+		</div>
+		<div class="ts">
+			<div class="link_ts">技术与支持</div>
+			<div>
+				<ul>
+					<li><a href="#">售后服务</a></li>
+					<li><a href="#">投诉与建议</a></li>
+					<li><a href="#">联保网点</a></li>
+					<li><a href="#">常见问题FAQ？</a></li>
+				</ul>
+			</div>
+			<div class="contact">
+				<p>深圳市汇聚众合科技发展有限公司</p>
+				<p>服务热线：400-633-7922</p>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="links">
+			<dl>
+				<dt><a href="#">尚合首页</a></dt>
+					<dd><a href="#">返回首页</a></dd>
+			</dl>
+			<dl>
+				<dt><a href="#">智能手机</a></dt>
+					<dd><a href="#">Aone-T</a></dd>
+					<dd><a href="#">Aone</a></dd>
+			</dl>
+			<dl>					
+				<dt><a href="#">平板电脑</a></dt>
+					<dd><a href="#">尚PAD S200</a></dd>
+					<dd><a href="#">尚PAD S100</a></dd>
+					<dd><a href="#">尚PAD SH-Q7</a></dd>
+					<dd><a href="#">尚PAD SH-Q5</a></dd>
+			</dl>
+			<dl>				
+				<dt><a href="#">配件中心</a></dt>
+					<dd><a href="#">Aone 智能手机</a></dd>
+			</dl>
+			<dl>				
+				<dt><a href="#">服务与支持</a></dt>
+					<dd><a href="#">售后服务</a></dd>
+					<dd><a href="#">投诉与建议</a></dd>
+					<dd><a href="#">联保网点</a></dd>
+					<dd><a href="#">常见问题FAQ</a></dd>
+					<dd><a href="#">订单查询</a></dd>
+					<dd><a href="#">下载专区</a></dd>
+			</dl>
+			<dl>				
+				<dt><a href="#">关于我们</a></dt>
+					<dd><a href="#">公司介绍</a></dd>
+					<dd><a href="#">企业文化</a></dd>
+					<dd><a href="#">工作机会</a></dd>
+					<dd><a href="#">法律声明</a></dd>
+					<dd><a href="#">联系我们</a></dd>
+			</dl>
+			<dl>				
+				<dt><a href="#">新闻中心</a></dt>
+					<dd><a href="#">公司新闻</a></dd>
+					<dd><a href="#">媒体报导</a></dd>
+					<dd><a href="#">行业动态</a></dd>
+			</dl>
+			<dl>				
+				<dt><a href="#">常用链接</a></dt>
+					<dd><a href="#">百度</a></dd>
+					<dd><a href="#">Google</a></dd>
+					<dd><a href="#">新浪微博</a></dd>
+			</dl>
+			<div class="top-button"><a href="#"></a></div>
+		</div>
+		<div class="copyright">
+			<p class="company">©2011-2012版权所有 深圳市汇聚众合科技发展有限公司 （品牌：尚合-SAMHAVE）服务热线：400-633-7922</p>
+			<p class="number">经营许可证编号：粤ICP备11077821号-1</p>
+			<p><img src="images/foot_bg2.png" alt="图片加载失败"></p>
+		</div>
+	</div>
+	
+</body>
+</html>

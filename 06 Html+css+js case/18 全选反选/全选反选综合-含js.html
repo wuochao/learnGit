@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrap {
+            width: 300px;
+            margin: 100px auto 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+            width: 300px;
+        }
+
+        th, td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+        }
+
+        td {
+            font: 14px "微软雅黑";
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+        }
+
+        tbody tr:hover {
+            cursor: pointer;
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <table>
+        <thead>
+        <tr>
+            <th>
+                <input type="checkbox" id="all"/>
+            </th>
+            <th>菜名</th>
+            <th>饭店</th>
+        </tr>
+        </thead>
+        <tbody id="tb">
+        <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>红烧肉</td>
+            <td>田老师</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>西红柿鸡蛋</td>
+            <td>田老师</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>红烧狮子头</td>
+            <td>田老师</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox"/>
+            </td>
+            <td>日式肥牛</td>
+            <td>田老师</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+/*    //上面allcheckbox会影响下面的checkbox
+    var all = document.getElementById('all');
+    var tbody = document.getElementById('tb');
+    var inputs = tb.getElementsByTagName('input');
+    all.onclick = function () {
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].checked = all.checked;
+        }
+    };
+
+    //下面checkbox也会影响上面的allcheckbox
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].onclick = function () {
+            var isCheckedAll = true;
+            for (var j = 0; j < inputs.length; j++) {
+                if (inputs[j].checked !== true) {
+                    isCheckedAll = false;
+                    break;
+                }
+            }
+            all.checked = isCheckedAll;
+        };
+    }*/
+    //获取要操作的元素
+    var all   = document.getElementById('all');
+    var tbody = document.getElementById('tb');
+    var inputs= tbody.getElementsByTagName('input');
+    //对全选all绑定点击事件
+    all.onclick = function(){
+        for(var i=0; i<inputs.length; i++)
+        {
+            inputs[i].checked = all.checked;
+        }
+
+    };
+    //下面选项影响上面的全选
+    for(var i=0; i<inputs.length; i++)
+    {
+        //遍历inputs绑定点击事件
+        inputs[i].onclick = function(){
+            //判断有没有都选中
+            //定义标记表示是否已经全选，先假设全选勾选的标记为true
+            var isCheckedAll = true;
+            for(var j=0; j<inputs.length; j++)
+            {
+                //如果下面有一项没有勾选，就把全选勾选的标记改成false并且break
+                if(inputs[j].checked !== true)
+                {
+                    isCheckedAll = false;
+                    break;
+                }
+            }
+            //如果上述遍历后，没有修改isCheckedAll的值，那么将all.checked改成true
+            //此时isCheckedAll也等于true，即isCheckedAll和all.checked的boolean值一致
+            all.checked = isCheckedAll;
+        };
+    }
+
+
+</script>
+</body>
+</html>

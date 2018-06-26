@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>clock case</title>
+    <style>
+        .clock {
+            width: 600px;
+            height: 600px;
+            margin: 100px auto;
+            background: url(images/clock.jpg) no-repeat;
+            position: relative;
+        }
+
+        .clock div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .hour {
+            background: url(images/hour.png) no-repeat center center;
+        }
+
+        .minute {
+            background: url(images/minute.png) no-repeat center center;
+        }
+
+        .second {
+            background: url(images/second.png) no-repeat center center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="clock">
+    <div class="hour" id="hour"></div>
+    <div class="minute" id="minute"></div>
+    <div class="second" id="second"></div>
+</div>
+</body>
+</html>
+<script>
+    var hour = document.getElementById('hour');
+    var minute = document.getElementById('minute');
+    var second = document.getElementById('second');
+    var h = 0, m = 0, s = 0, ms = 0;
+    setInterval(function () {
+        //clock动作函数
+        //step1： 得到现在的时分秒
+        var date = new Date();
+        ms = date.getMilliseconds();
+        s = date.getSeconds() + ms / 1000;
+        m = date.getMinutes() + s / 60;
+        h = date.getHours() % 12 + m / 60;
+        //step2: 根据时分秒的值旋转各个指针
+        //秒针： 6度/秒； 分针：6度/分；  时针： 30度/小时
+        //google的chrome和apple的safari
+        second.style.WebkitTransform = "rotate(" + 6 * s + "deg)";
+        minute.style.WebkitTransform = "rotate(" + 6 * m + "deg)";
+        hour.style.WebkitTransform = "rotate(" + 30 * h + "deg)";
+        //firefox的moz
+        second.style.MozTransform = "rotate(" + 6 * s + "deg)";
+        minute.style.MozTransform = "rotate(" + 6 * m + "deg)";
+        hour.style.MozTransform = "rotate(" + 30 * h + "deg)";
+
+    }, 30);
+
+
+</script>
