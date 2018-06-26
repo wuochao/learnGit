@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tetris俄罗斯方块</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: #ccc;
+        }
+        canvas {
+            display: block;
+            margin: 100px auto 0;
+            border: 1px solid red;
+            background: url(images/bg.png) no-repeat;
+
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="360" height="480"></canvas>
+    <script src="lib/simpleInheritance.js"></script>
+    <script src="lib/underscore-min.js"></script>
+    <script src="js/FrameUtil.js"></script>
+    <script src="js/StaticResourcesUtil.js"></script>
+    <script src="js/CellBlock.js"></script>
+    <script src="js/Map.js"></script>
+    <script src="js/ActiveBlock.js"></script>
+    <script src="js/Game.js"></script>
+
+    <script>
+        var game = new Game({
+            "canvasId": "canvas",
+            "fps"   : 50
+        });
+
+    </script>
+    <!--背景音乐-->
+    <audio src="images/bg-audio.mp3" id="au"></audio>
+</body>
+</html>

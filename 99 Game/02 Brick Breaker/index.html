@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>brick breaker</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        canvas{
+            display: block;
+            margin: 50px auto 0;
+            border: 1px solid black;
+            background: url(images/bg.png) repeat-x;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="1000" height="600" id="canvas"></canvas>
+    <script src="lib/simpleInheritance.js"></script>
+    <script src="js/StaticResourcesUtil.js"></script>
+    <script src="js/Brick.js"></script>
+    <script src="js/BrickManager.js"></script>
+    <script src="js/Racket.js"></script>
+    <script src="js/Ball.js"></script>
+    <script src="js/Game.js"></script>
+    <script>
+        var game = new Game({
+            "canvasId" : "canvas",
+            "fps"   :   120
+        });
+
+    </script>
+</body>
+</html>

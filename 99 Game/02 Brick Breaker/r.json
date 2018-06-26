@@ -1,0 +1,14 @@
+{
+  "images": [
+    {
+      "name": "ball",
+      "src": "images/ball.png"
+    },{
+      "name": "racket",
+      "src": "images/racket.png"
+    },{
+      "name": "brick",
+      "src": "images/brick.png"
+    }
+  ]
+}

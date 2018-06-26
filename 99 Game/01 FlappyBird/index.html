@@ -1,0 +1,43 @@
+<!docType html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flappy bird</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        canvas{
+            display: block; /*必须转块，不然canvas无法居中*/
+            margin: 0 auto;
+            /*border: 1px solid red;*/
+            background: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="320" height="500"></canvas>
+    <script src="lib/simpleInheritance.js"></script>
+    <script src="lib/underscore-min.js"></script>
+    <script src="js/FrameUtil.js"></script>
+    <script src="js/StaticResourcesUtil.js"></script>
+    <script src="js/Background.js"></script>
+    <script src="js/Bird.js"></script>
+    <script src="js/Pipe.js"></script>
+    <script src="js/ScoreManager.js"></script>
+    <script src="js/Game.js"></script>
+    <script>
+        var game = new Game({
+            "canvasId": 'canvas',
+            "fps": 50,
+        });
+
+        document.getElementById('canvas').width  = document.documentElement.clientWidth;
+        document.getElementById('canvas').height = document.documentElement.clientHeight;
+    </script>
+</body>
+</html>
