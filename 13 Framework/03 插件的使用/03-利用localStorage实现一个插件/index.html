@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="jquery-3.1.0.js"></script>
+    <script src="jquery.storage.js"></script>
+</head>
+
+<body>
+    key:    <input type="text" id="k">
+    <br> 
+    value:    <input type="text" id="v">
+    <br>
+    <input type="button" value="存储数据" id="save">
+    <input type="button" value="清除数据" id="clear">
+</body>
+<script>
+var key = 'itcast';
+$(function() {
+    var value = $.storage(key);
+    if (value) {
+        $('#k').val(key);
+        $('#v').val(value);
+    }
+
+    // 添加点击事件
+    $('#save').click(function() {
+        $.storage(key, $('#v').val());
+
+    });
+
+    // 清空
+    $('#clear').click(function() {
+        $.storage.clear();
+    });
+
+});
+</script>
+
+</html>

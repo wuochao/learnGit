@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="jquery-3.1.0.js"></script>
+    <style>
+        * {
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+</body>
+<script>
+
+$('div').html('<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>');
+$('div span').css({cursor: 'pointer'});
+var  i = 0;
+$('div span').each(function(){
+    this.title = i++;
+});
+
+var isClick;
+$('div span').hover(function(){
+    if( isClick )  // 如果点击过了，就不改变五角星的状态
+        return;
+    // 鼠标进入事件
+    $(this).text('★').prevAll().text('★').end().nextAll().text('☆');
+}, function(){
+    if( isClick ) // 如果点击过了，就不改变五角星的状态
+        return;
+    // 鼠标出去事件
+    $(this).text('☆').siblings().text('☆');
+}).click(function(){
+    if( isClick )
+        return;
+    isClick = this;
+    // 自调用函数弹出五角星的title
+    (function(){
+        alert( isClick.title );
+    })();
+});
+
+// 下面将上面的代码封装成一个插件形式
+// max: 表示五角星的个数
+// after_click： 表示点击触发事件，参数，记录分数
+jQuery.fn.rater = function( options ){
+    var max = options && options.max || 5;
+    var func = options && options.after_click;
+    // 先生成五角星
+    var innerHTMLString = '';
+    for(var i=0; i<max; i++){
+        innerHTMLString += '<span title="' + i + '">☆</span>';
+    }
+    this.html( innerHTMLString );
+
+    var i = 0;
+    var isClick;
+    $('span', this).css({ cursor: 'pointer'})
+    .hover(function(){
+        if( isClick )  // 如果点击过了，就不改变五角星的状态
+            return;
+        //鼠标悬停
+        $(this).text('★').prevAll().text('★').end().nextAll().text('☆');
+    }, function(){
+        if( isClick )  // 如果点击过了，就不改变五角星的状态
+            return;       
+        //鼠标离开
+        $(this).text('☆').siblings().text('☆');
+    }).click(function(){
+        if( isClick )
+            return;
+        
+        $(this).parent().attr( 'isClick', this.title - 0 + 1 );
+        if( typeof func == 'function') {
+            func( $(this).parent().attr('isClick') - 0);
+        }
+        // 自调用函数弹出五角星的title
+        (function(){
+            alert( isClick.title );
+        })();
+    });
+
+};
+
+$('div').rater({
+    max: 10,
+    after_click: function( value ){
+        alert( value );
+    }
+});
+
+
+
+
+
+
+
+
+</script>
+</html>
