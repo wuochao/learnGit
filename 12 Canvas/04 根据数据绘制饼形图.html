@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>根据数据绘制饼形图</title>
+	<style>
+		#cas{
+			border: 1px solid black;
+		}
+
+	</style>
+
+</head>
+<body>
+<canvas width="600" height="400" id="cas"></canvas>
+<script>
+function toAngle(radian){
+	return radian * 180 / Math.PI;
+}
+        
+function toRadian(angle){
+	return angle *  Math.PI / 180;
+}
+
+var cas = document.getElementById('cas');
+var ctx = cas.getContext('2d');
+
+var x0 = cas.width/2;
+var y0 = cas.height/2;
+var r = 100;
+var start = -90;
+
+var data = [11, 22, 33, 112, 34, 56];
+//首先求data的数据和，再算占比，乘以360度
+/*var sum = 0;
+data.forEach(function(item, index){
+	sum += item;
+});
+var data2 = data.map(function(item, index){
+	return {value: item, angle: item*360/sum };
+});
+console.log(data2);
+//遍历data2 绘图
+var colors = "red,lightgreen,blue,orange,olive,purple,cyan,skyblue,hotpink".split(',');
+data2.forEach(function(item, index){
+	ctx.beginPath();
+	ctx.fillStyle = colors[index];
+	ctx.moveTo(x0, y0);
+	ctx.arc(x0, y0, r, toRadian(start), toRadian(start+= item.angle) );
+	ctx.fill();
+});*/
+var sum = 0; //求数据中的总和，用于计算每个数据的占比
+data.forEach(function(item,index){
+	sum += item;
+});
+console.log(sum);
+
+//求每个数据的占比的角度值 item/sum * 360
+var dataAngle = [];
+data.map(function(item, index){
+	dataAngle.push(item/sum * 360);
+});
+console.log(dataAngle);
+
+//根据各个数据的占比角度画圆
+var colors = ['red','yellow', 'blue', 'green', 'cyan', 'purple'];
+
+
+dataAngle.forEach(function(item, index){
+	ctx.beginPath();
+	ctx.moveTo(x0, y0);
+	ctx.fillStyle = colors[index];
+	ctx.arc(x0, y0, r, toRadian(start), toRadian(start + item))
+	start += item;
+	ctx.closePath();
+	ctx.fill();
+});
+
+
+//绘制一圈小圆环，为了美观
+ctx.beginPath();
+ctx.lineWidth = 2;
+ctx.strokeStyle = 'skyblue';
+ctx.arc(x0, y0, r+5, 0, 2*Math.PI);
+ctx.stroke();
+
+</script>
+</body>
+</html>
+

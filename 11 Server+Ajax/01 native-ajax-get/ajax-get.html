@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax-get-native</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			var btn = document.getElementById('btn');
+			btn.onclick = function(){
+				var uname = document.getElementById('username').value;
+				var pw = document.getElementById('password').value;
+				//1 new XMLHttpRequest对象
+				var xhr = null;
+				if(XMLHttpRequest)
+				{
+					xhr = new XMLHttpRequest();
+				}
+				else
+				{
+					xhr = new ActiveXObject('Microsoft.XMLHTTP');
+				}
+
+				//2 准备发送
+				var param = "un="+uname+"&pw="+pw;
+				xhr.open('get', 'ajax-get.php?'+encodeURI(param), true);
+
+				//3 发送
+				xhr.send(null);
+
+				//4 回调
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4)
+					{
+						if(xhr.status == 200)
+						{
+							var data = xhr.responseText;
+							//console.log(data);
+							var info = document.getElementById('info');
+							if(data == 'good')
+							{
+								info.innerHTML = 'login success';
+							}
+							else if(data == 'bad')
+							{
+								info.innerHTML = 'login fail';
+							}
+						}
+					}
+
+				};
+			};
+
+		};
+
+
+	</script>
+</head>
+<body>
+	<form action="">
+		用户名：<input type="text" name="username" id="username"><span id='info'></span>
+		<br>
+		密码：<input type="password" name="password" id="password">
+		<input type="button" value="login" id='btn'>
+	</form>
+</body>
+</html>

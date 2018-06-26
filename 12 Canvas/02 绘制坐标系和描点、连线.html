@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>绘制坐标系、描点、连线</title>
+    <style>
+    #cas {
+        border: 1px solid black;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas width="600" height="400" id="cas"></canvas>
+    <script>
+    var cas = document.getElementById('cas');
+    var ctx = cas.getContext('2d');
+    // ( 10, 20 ), ( 15, 13 ), ( 17, 30 ), ( 30, 10 ), ( 20, 15 )
+    var data = [ [10, 20], [15, 13], [17, 30], [30, 10], [20, 15] ];
+    //先对data数据点按照x坐标的大小升序排列，因为后续连线时，1个x值不允许对应2个y值
+	for(var i=0; i<data.length-1; i++){
+		for(var j=0; j<data.length-1-i; j++){
+			if(data[j][0]>data[j+1][0])
+			{
+				var temp = data[j];
+				data[j]  = data[j+1];
+				data[j+1] = temp;
+			}
+		}
+	}
+
+	var paddingTop = 30; 
+	var paddingBottom = 30; 
+	var paddingLeft = 30; 
+	var paddingRight = 30; 
+	var arrowHeight = 20; 
+	var arrowWidth = 10;
+
+    var x0 = paddingLeft;
+    var y0 = cas.height - paddingBottom;
+    var xLength = cas.width - paddingLeft - paddingRight;
+    var yLength = cas.height - paddingTop - paddingBottom;
+    var xValMax = xLength - arrowHeight;
+    var yValMax = yLength - arrowHeight;
+    //绘制X和Y轴
+    ctx.beginPath();
+    ctx.moveTo(x0, paddingTop);
+    ctx.lineTo(x0, y0);
+    ctx.lineTo(x0 + xLength, y0);
+    ctx.stroke();
+
+    //绘制Y坐标轴的箭头
+    ctx.beginPath();
+    ctx.moveTo(x0, paddingTop);
+    ctx.lineTo(x0 - arrowWidth/2, paddingTop + arrowHeight);
+    ctx.lineTo(x0, paddingTop + arrowHeight/2);
+    ctx.lineTo(x0 + arrowWidth/2, paddingTop + arrowHeight);
+    ctx.closePath();
+    ctx.fill();
+
+    //绘制X坐标轴的箭头
+    ctx.beginPath();
+    ctx.moveTo(x0 + xLength, y0);
+    ctx.lineTo(x0 + xLength - arrowHeight, y0 - arrowWidth/2);
+    ctx.lineTo(x0 + xLength - arrowHeight/2, y0);
+    ctx.lineTo(x0 + xLength - arrowHeight, y0 + arrowWidth/2);
+    ctx.closePath();
+    ctx.fill();
+
+    //绘制data中的点，主要要根据点的坐标值和x轴、y轴的长度值，进行比例缩放
+    var xMax = data[0][0];
+    var yMax = data[0][1];
+    //先分别求出data数据中x和y坐标的最大值
+    data.forEach(function(item, index){
+    	if(xMax < item[0])
+    		xMax = item[0];
+    	if(yMax < item[1])
+    		yMax = item[1];
+    });
+    console.log(xMax);
+    console.log(yMax);
+    //按比例缩放data中的数据点
+    var dataScale = [];
+    data.forEach(function(item, index){
+    	var xTemp1 = item[0] * xValMax / xMax;
+    	var yTemp1 = item[1] * yValMax / yMax;
+    	dataScale.push([xTemp1, yTemp1]);
+    });
+    console.log(dataScale);
+    //坐标变换
+    var dataChange = [];
+    dataScale.forEach(function(item, index){
+    	var xTemp2 = x0 + item[0];
+    	var yTemp2 = y0 - item[1];
+    	dataChange.push([xTemp2, yTemp2]);
+    });
+    console.log(dataChange);
+    //开始描点，为了让点看的清楚，给点设置了宽度8px，上下左右都有4px长度
+    ctx.beginPath();
+    ctx.fillStyle = 'blue';
+    dataChange.forEach(function(item, index){
+   		ctx.moveTo(item[0]-4, item[1]-4);
+   		ctx.lineTo(item[0]+4, item[1]-4);
+   		ctx.lineTo(item[0]+4, item[1]+4);
+   		ctx.lineTo(item[0]-4, item[1]+4);
+    	ctx.fill();
+    });
+
+    //连接各个坐标点
+    ctx.beginPath();
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 2;
+    dataChange.forEach(function(item,index){
+    	if(index == 0)
+    		ctx.moveTo(item[0],item[1]);
+    	else
+    		ctx.lineTo(item[0],item[1]);
+    });
+    ctx.stroke();
+
+    </script>
+</body>
+
+</html>

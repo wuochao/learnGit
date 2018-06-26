@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>判断名字框失去焦点后，判断名字是否已经被注册</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			var un = document.getElementById('username');
+			var tip = document.getElementById('tip');
+			//console.log(un);
+			//console.log(tip);
+			un.onblur = function(){
+				//1 创建XMLHttpRequest对象
+				var xhr = null;
+				if(XMLHttpRequest)
+				{
+					xhr = new XMLHttpRequest();
+				}
+				else
+				{
+					xhr = new ActiveXObject('Microsoft.XMLHTTP');
+				}
+				//2 准备发送
+				var param = 'username='+this.value;
+				xhr.open('post','verifyName.php', true );
+
+				//3 设置请求头，发送
+				xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+				xhr.send(param);
+
+				//4 回调
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4)
+					{
+						if(xhr.status == 200)
+						{
+							var data = xhr.responseText;
+							console.log(data);
+							if(data == 1)
+							{
+								tip.innerHTML = '已经被注册';
+							}
+							else
+							{
+								tip.innerHTML = '没有被注册';
+							}
+
+						}
+					}
+				};
+			};
+		};
+
+	</script>
+</head>
+<body>
+	<form action="">
+		姓名：<input type="text" name="username" id="username"><span id="tip"></span><br>
+		密码：<input type="password" name="password" id="password"><br>
+		<input type="button" value="提交" id="btn">
+	</form>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>province-city-county</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#container{
+		width: 500px;
+		min-height: 300px;
+		background-color: lightgray;
+		margin: 10px auto;
+		text-align: left;
+		padding: 10px;
+	}
+	</style>
+	<script src='jquery.js'></script>
+	<script>
+	$(function(){
+		//封装一个数据查询函数，公用方法
+		function queryData(obj, callback)
+		{
+			$.ajax({
+				type: 'get',
+				url:'http://localhost/province-city-county.php',
+				data: obj,
+				dataType: 'json',
+				success: function(data){
+					callback(data);
+				}
+
+			});
+		}
+
+		
+		queryData({
+			flag: 1
+		},function(data){
+			console.log(data);
+			var opt = '';
+			$.each(data, function(i,e){
+				opt += '<option value='+e.id+'>'+e.province+'</option>';
+			});
+			$('#province').append(opt);
+		});
+
+		$('#province').change(function(){
+			$('#city').find('option:gt(0)').remove();
+			queryData({
+				flag: 2,
+				pId: $(this).val(),
+			}, function(data){
+				console.log(data);
+				var opt = '';
+				$.each(data, function(i,e){
+					opt += '<option value='+e.id+'>'+e.city+'</option>';
+				});
+				$('#city').append(opt);
+			});
+		});
+
+		$('#city').change(function(){
+			$('#county').find('option:gt(0)').remove();
+			queryData({
+				flag: 3,
+				cId: $(this).val(),
+			},function(data){
+				console.log(data);
+				var opt = '';
+				$.each(data, function(i,e){
+					opt += '<option value='+e.id+'>'+e.county+'</option>';
+				});
+				$('#county').append(opt);
+			});
+		});
+	});
+
+
+
+
+	</script>
+</head>
+<body>
+<div id="container">
+	<label for="province">
+		省：<select name="province" id="province">
+			<option value="">请选择省...</option>
+		</select>
+	</label>
+	<label for="city">
+		市：<select name="city" id="city">
+			<option value="">请选择市...</option>
+		</select>
+	</label>
+	<label for="county">
+		县：<select name="county" id="county">
+			<option value="">请选择县...</option>
+		</select>
+	</label>
+</div>
+</body>
+</html>

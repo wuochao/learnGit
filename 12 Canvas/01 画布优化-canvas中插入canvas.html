@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>画布优化-canvas中插入canvas</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		canvas {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="400" id="cas"></canvas>
+	<img>
+</body>
+<script>
+	// 处理弧度与角度的计算
+	function toAngle ( radian ) {
+		return radian * 180 / Math.PI; 
+	}
+	function toRadian ( angle ) {
+		return angle * Math.PI / 180;
+	}
+
+	var cas = document.getElementById( 'cas' );
+	var ctx = cas.getContext( '2d' );
+	
+	// 绘制一个 100, 100, 100, 100 的红色矩形
+	var canvas = document.createElement( 'canvas' );
+	canvas.width = 100;
+	canvas.height = 100;
+	canvas.getContext( '2d' ).fillStyle = 'red';
+	canvas.getContext( '2d' ).fillRect( 0, 0, 100, 100 );
+
+	var t = canvas.toDataURL('image/png');
+	// canvas.toDataURL([type], args)
+	/*type 可选
+		图片格式，默认为 image/png
+	encoderOptions 可选
+		图片质量。取值范围为 0 到 1 。如果指定图片格式为 image/jpeg 或 image/webp。如果超出取值范围，将会使用默认值 0.92。其他参数会被忽略*/
+
+	ctx.drawImage( canvas, 100, 100 );
+
+	var imgs = document.querySelector('img');
+	imgs.src = t;
+</script>
+</html>

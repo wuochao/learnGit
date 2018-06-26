@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax-post-native</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			var btn = document.getElementById('btn');
+			var info = document.getElementById('info');
+			btn.onclick = function(){
+				var uname = document.getElementById('username').value;
+				var pw = document.getElementById('password').value;
+				// 1、创建XMLHttpRequest对象，并考虑浏览器兼容性
+				var xhr = null;
+				if(XMLHttpRequest)
+				{
+					xhr = new XMLHttpRequest();
+				}
+				else
+				{
+					xhr = new ActiveXObject('Microsoft.XMLHTTP');
+				}
+				//2、 准备发送
+				var param = 'un='+uname+'&pw='+pw;
+				xhr.open('post', 'ajax-post.php', true);
+				//3、 设置http请求头，并发送
+				xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+				xhr.send(param);
+				//4、 回调函数
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4)
+					{
+						if(xhr.status == 200)
+						{
+							var data = xhr.responseText;
+							console.log(data);
+							//console.log(info);
+							if(data == 'good')
+							{
+								info.innerHTML = 'login success';
+							}
+							else if(data == 'bad')
+							{
+								info.innerHTML = 'login fail';
+							}
+						}
+					}
+
+				};
+
+			};	
+
+		};
+
+	</script>
+</head>
+<body>
+	<form action="">
+		用户名：<input type="text" id="username"><span id="info"></span>
+		<br>
+		密  码：<input type="password" id="password">
+		<input type="button" value="login" id="btn">
+	</form>
+	
+</body>
+</html>

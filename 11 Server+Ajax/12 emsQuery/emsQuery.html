@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>emsQuery</title>
+    <style>
+    #container {
+        width: 600px;
+        min-height: 300px;
+        background-color: lightgreen;
+        margin: 20px auto;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    #container ul {
+        list-style: none;
+    }
+    
+    #container ul li {
+        text-align: left;
+        font-size: 10px;
+        line-height: 24px;
+    }
+    </style>
+    <script src="jquery.js"></script>
+    <script>
+    $(function() {
+        $('#btn').click(function() {
+            var code = $('#code').val();
+            $.ajax({
+                url: 'http://localhost/ems.php',
+                data: {
+                    code: code,
+                    appid: 4001,
+                    com: 'ems'
+                },
+                jsonp: 'cb',
+                dataType: 'jsonp',
+                success: function(data) {
+                    console.log(data);
+                    if (data.data.info.status == 0) {
+                        $('#info').html(data.msg);
+                        return;
+                    }
+                    var ems = data.data.info.context;
+                    var tag = '<ul>';
+                    $.each(ems, function(i, e) {
+                        var time = e.time;
+                        //格式化成时间格式：2015年12月12日 上午10:39:20
+                        var t = new Date();
+                        t.setTime(time + '000'); //注意时间单位是s，要改成ms，添加3个0
+                        var date = t.getFullYear() + '年' + (t.getMonth() + 1) + '月' + t.getDay() + '日' 
+                        		+ (t.getHours() > 12 ? '下午' : '上午') 
+                        		+ t.getHours() % 12 + ':' + t.getMinutes() + ':' + t.getSeconds();
+                        tag += '<li><div>' + date + '</div><div>' + e.desc + '</div></li>';
+                    });
+                    tag += '</ul>';
+                    $('#info').html(tag);
+                }
+
+            });
+
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        快递单号：
+        <input type="text" name="code" id="code">
+        <!--可查询单号： 9971121346085 -->
+        <input type="button" value="查询" id="btn">
+        <div id="info"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<style>
+		#cas{
+			border: 1px solid black;
+		}
+
+	</style>
+
+</head>
+<body>
+<canvas width="400" height="600" id="cas"></canvas>
+<script>
+var cas = document.getElementById('cas');
+var ctx = cas.getContext('2d');
+
+//绘制树叶、树枝的路径
+function createCanopyPath(ctx){
+	ctx.beginPath();
+	ctx.moveTo(-25, -50);
+	ctx.lineTo(-10, -80);
+	ctx.lineTo(-20, -80);
+	ctx.lineTo(-5, -110);
+	ctx.lineTo(-15, -110);
+	ctx.lineTo(0, -140);
+	ctx.lineTo(15,-110);
+	ctx.lineTo(5,-110);
+	ctx.lineTo(20, -80);
+	ctx.lineTo(10, -80);
+	ctx.lineTo(25, -50);
+	ctx.closePath();
+}
+
+
+//绘制树
+function drawTree(ctx){
+	//树叶
+	createCanopyPath(ctx);
+	ctx.strokeStyle = "#663300";
+	ctx.lineWidth = 4;
+	ctx.lineJoin = 'round';
+	ctx.stroke();
+	ctx.fillStyle = '#339900';
+	ctx.fill();
+	//树干
+	ctx.fillRect(-5, -50, 10, 50);
+	//创建横向颜色的线性渐变
+	var trunkGradient = ctx.createLinearGradient(-5, 0, 5, 0);
+	trunkGradient.addColorStop(0, "#663300");
+	trunkGradient.addColorStop(0.4, "#996600");
+	trunkGradient.addColorStop(1, "#552200");
+
+	ctx.fillStyle = trunkGradient;
+	ctx.fillRect(-5, -50, 10, 50);
+
+	//树干的纵向透明度处理
+	var trunkAlphaGradient = ctx.createLinearGradient(0, -50, 0, 0);
+	trunkGradient.addColorStop(0, "rgba(0, 0, 0, .5)");
+	trunkGradient.addColorStop(0.2, "rgba(0, 0, 0, 0)");
+
+	ctx.fillStyle = trunkAlphaGradient;
+	ctx.fillRect(-5, -50, 10, 50);
+
+	//倒影
+	ctx.transform(1, 0, -0.5, 1, 0, 0); //矩阵变换
+	ctx.scale(1.0, 0.6); //设置比例大小
+
+	ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+	ctx.fillRect(-5, -50, 10, 50);
+
+	createCanopyPath(ctx);
+	ctx.fill();
+
+
+}
+
+
+// 创建绘制封面的方法
+function drawTrails(){
+	//绘制树枝、树叶
+	//小树
+	ctx.save();//在绘图状态堆上保存当前绘图状态
+	ctx.translate(130,250); //用来移动Canvas的原点到一个指定的值
+	drawTree(ctx);
+	ctx.restore();//弹出堆最上面保存的绘图状态
+	//大树
+	ctx.save();//在绘图状态堆上保存当前绘图状态
+	ctx.translate(260,500); //用来移动Canvas的原点到一个指定的值
+	ctx.scale(2.0, 2.0);
+	drawTree(ctx);
+	ctx.restore();//弹出堆最上面保存的绘图状态
+	//碎石路
+	ctx.save();//在绘图状态堆上保存当前绘图状态	
+	ctx.beginPath();
+	ctx.translate(-10,350); //用来移动Canvas的原点到一个指定的值
+	ctx.moveTo(0, 0);
+	ctx.quadraticCurveTo(170, 50, 260, -190); //二次贝塞尔曲线
+	ctx.quadraticCurveTo(310, -250, 410, -250); //二次贝塞尔曲线
+	ctx.strokeStyle = ctx.createPattern(gravel, 'repeat'); //重复填充
+	ctx.lineWidth = 20;
+	ctx.stroke();
+	ctx.restore();//弹出堆最上面保存的绘图状态	
+	
+
+	//文字
+	ctx.save();//在绘图状态堆上保存当前绘图状态	
+	ctx.font = "60px impact"; //设置文字字体
+	ctx.textAlign = "center"; //设置文字居中
+	ctx.fillStyle = "#996600";
+	ctx.fillText("Happy Trails!", 200, 60, 400);
+
+	//文字倒影
+	ctx.transform(1, 0, -0.5, 1, 0, 0); //矩阵变换
+	ctx.scale(1.0, 0.8);
+	ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+	ctx.fillText("Happy Trails!", 230, 80, 400);
+
+	ctx.restore();//弹出堆最上面保存的绘图状态
+}
+
+
+var gravel = new Image();
+gravel.src = 'gravel.jpg';
+gravel.onload = function(){
+	drawTrails();
+};
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

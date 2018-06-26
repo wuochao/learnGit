@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        #box {
+            width: 500px;
+            height: 300px;
+        }
+    </style>
+    <script src="echarts.min.js"></script>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+<script>
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('box'));
+
+    // 指定图表的配置项和数据
+    var option = {
+
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '100',
+                data: [
+                    { value: 400, name: '搜索引擎' },
+                    { value: 335, name: '直接访问' },
+                ]
+            }
+        ]
+    };
+
+    // 绘图
+    myChart.setOption(option);
+
+</script>
+
+</html>

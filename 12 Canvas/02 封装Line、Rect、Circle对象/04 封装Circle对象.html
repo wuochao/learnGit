@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>封装Circle对象</title>
+	<style>
+		#cas{
+			border: 1px solid black;
+		}
+
+	</style>
+
+</head>
+<body>
+<canvas width="600" height="400" id="cas"></canvas>
+<script>
+function toAngle(radian){
+	return radian * 180 / Math.PI;
+}
+        
+function toRadian(angle){
+	return angle *  Math.PI / 180;
+}
+
+var cas = document.getElementById('cas');
+var ctx = cas.getContext('2d');
+
+//封装Circle对象
+function Circle(config){
+	//必须参数
+	this.ctx = config.ctx;
+	this.x = config.x;
+	this.y = config.y;
+	this.r = config.r;
+	this.sAngle = config.sAngle;
+	this.eAngle = config.eAngle;
+	//可选参数
+	this.lineWidth = config.lineWidth;
+	this.strokeStyle = config.strokeStyle;
+	this.fillStyle = config.fillStyle;
+}       
+
+Circle.prototype = {
+	constructor: Circle,
+	stroke: function(){
+		var ctx = this.ctx;
+		ctx.save();
+		ctx.beginPath();
+		if(this.lineWidth)
+			ctx.lineWidth = this.lineWidth;
+		if(this.strokeStyle)
+			ctx.strokeStyle = this.strokeStyle;
+		ctx.arc(this.x, this.y, this.r, this.sAngle, this.eAngle);
+		ctx.stroke();
+		ctx.restore();
+	},
+	fill: function(){
+		var ctx = this.ctx;
+		ctx.save();
+		ctx.beginPath();
+		if(this.fillStyle)
+			ctx.fillStyle = this.fillStyle;
+		ctx.arc(this.x, this.y, this.r, this.sAngle, this.eAngle);
+		ctx.fill();
+		ctx.restore();
+	},
+};
+
+var c1 = new Circle({
+	ctx : ctx,
+	x : 300,
+	y : 100,
+	r : 60,
+	sAngle : 0,
+	eAngle : 2*Math.PI,
+	lineWidth : 5,
+	strokeStyle : 'orange'
+});
+
+c1.stroke();
+
+var c2 = new Circle({
+	ctx : ctx,
+	x : 300,
+	y : 300,
+	r : 60,
+	sAngle : 0,
+	eAngle : 2*Math.PI,
+	lineWidth : 10,
+	fillStyle : 'skyblue'
+});
+c2.stroke();
+c2.fill();
+
+
+</script>
+</body>
+</html>
+

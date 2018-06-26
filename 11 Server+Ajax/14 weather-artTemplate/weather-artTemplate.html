@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>weather-artTemplate</title>
+    <style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#container {
+		width: 400px;
+		min-height: 300px;
+		background-color: lightgreen;
+		margin: 10px auto;
+		padding: 10px;
+	}
+	li{
+        list-style: none;
+        text-align: left;
+        font-size: 10px;
+    }
+    </style>
+    <script src="jquery.js"></script>
+    <script src="template.js"></script>
+    <script type="text/html" id="weather-art">
+	{{if weather}}
+		{{each weather as value}}
+		<div>
+			<span>日期： {{value.date}}</span>
+			<ul>
+				<li>白天天气：{{value.info.day[1]}}</li>
+				<li>白天温度：{{value.info.day[2]}}</li>
+				<li>白天风向：{{value.info.day[3]}}</li>
+				<li>白天风速：{{value.info.day[4]}}</li>
+			</ul>
+			<ul>
+				<li>夜间天气：{{value.info.night[1]}}</li>
+				<li>夜间温度：{{value.info.night[2]}}</li>
+				<li>夜间风向：{{value.info.night[3]}}</li>
+				<li>夜间风速：{{value.info.night[4]}}</li>
+			</ul>
+		</div>
+		{{/each}}
+	{{/if}}
+    </script>
+    <script>
+    $(function(){
+    	$('#query').click(function(){
+    		var code = $('#city').val();
+    		$.ajax({
+    			url:'http://cdn.weather.hao.360.cn/api_weather_info.php',
+    			data:{
+    				app:'hao360',
+    				code: code
+    			},
+    			dataType:'jsonp',
+    			jsonp: '_jsonp',
+    			jsonpCallback:'abc',
+    			success: function(data){
+	    				console.log(data);
+	    				var html = template('weather-art', data);
+						$("#info").html(html);
+    				}
+    			});
+    		});
+    	});
+    </script>
+</head>
+
+<body>
+<div id="container">
+	<select name="城市" id="city">
+		<option value="101010100">北京</option>	
+		<option value="101020100">上海</option>	
+		<option value="101280101">广州</option>	
+		<option value="101280601">深圳</option>	
+		<option value="101200101">武汉</option>	
+	</select>
+	<input type="button" value="查询" id="query">
+	<div id="info"></div>
+</div>
+<!-- <div>
+	<span>日期：</span>
+	<ul>
+		<li>白天天气</li>
+		<li>白天温度</li>
+		<li>白天风向</li>
+		<li>白天风速</li>
+	</ul>
+	<ul>
+		<li>夜间天气</li>
+		<li>夜间温度</li>
+		<li>夜间风向</li>
+		<li>夜间风速</li>
+	</ul>
+</div> -->
+</body>
+
+</html>

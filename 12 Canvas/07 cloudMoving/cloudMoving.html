@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>cloudMoving</title>
+	<style>
+    body {
+        background: #ddd;
+    }
+    #cas {
+      position: absolute;
+      top: 30px;
+      left: 10px;
+      background: #fff;
+      cursor: crosshair;
+      margin-left: 10px;
+      margin-top: 10px;
+      -webkit-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+      -moz-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    
+    input {
+        margin-left: 15px;
+    }
+    </style>
+</head>
+<body>
+	<canvas width="1024" height="550" id="cas">Canvas not supported </canvas>
+	<input type="button" value="Animate" id="btn">
+</body>
+	<script>
+		var btn = document.getElementById('btn');
+		var cas = document.getElementById('cas');
+		var ctx = cas.getContext('2d');
+		var pause = true;
+		var cloudOffset = 0;
+		var cloudVelocity = 30; // 30 pixels/second  速度 乘以 时间 = 速度 除以 频率 = 移动的距离
+		var fps = 0;
+		var lastTime = 0;
+
+		//清除画布的函数erase
+		function erase(){
+			ctx.clearRect(0, 0, cas.width, cas.height);
+		}
+
+		//按钮点击处理函数
+		btn.onclick = function(){
+			if(btn.value == 'Animate')
+			{
+				pause = false;
+				btn.value = 'Pause';
+			}
+			else
+			{
+				pause = true;
+				btn.value = 'Animate';
+			}
+		};
+
+		//计算动画帧的函数calculateFps: （当前时间-上次时间）/1000 转换成 秒，再求倒数，就是频率，即fps
+		function calculateFps(now){
+			fps = 1000 / (now - lastTime);
+			lastTime = now;
+			return fps;
+		}
+
+		function animate(now){
+			if(now === undefined)
+			{
+				now = +new Date(); // + 将日期函数转换成数值类型
+				//console.log(now);
+			}
+			fps = calculateFps(now);
+			if(!pause)
+			{	//如果不时暂停状态，那么就清除画布后，再画
+				erase();
+				draw();
+			}
+			setTimeout(animate, 100); //间隔100ms后再次调用animate调用
+		}
+
+		//通过移动canvas绘图环境对象的原点坐标来实现背景滚动        
+		function draw(){
+			ctx.save();
+			cloudOffset = cloudOffset < cas.width ? cloudOffset + cloudVelocity / fps : 0;
+			ctx.save();
+			ctx.translate(-cloudOffset, 0);
+			ctx.drawImage(cloud, 0, 0);
+			ctx.drawImage(cloud, cloud.width-2, 0);
+			ctx.restore();
+		}
+
+		// 初始化
+		cas.width = cas.width;
+		cas.height = cas.height;
+		var cloud = new Image();
+		cloud.src = 'cloud.png';
+		cloud.onload = function(){
+			//console.log(cloud);
+			draw();
+		};
+		setTimeout(animate, 100);
+
+
+	</script>
+</html>
+

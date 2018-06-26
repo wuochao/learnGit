@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>绘制带有文字的饼形图</title>
+	<style>
+		#cas{
+			border: 1px solid black;
+		}
+
+	</style>
+
+</head>
+<body>
+<canvas width="600" height="400" id="cas"></canvas>
+<script>
+function toAngle(radian){
+	return radian * 180 / Math.PI;
+}
+        
+function toRadian(angle){
+	return angle *  Math.PI / 180;
+}
+
+var cas = document.getElementById('cas');
+var ctx = cas.getContext('2d');
+
+var x0 = cas.width/2;
+var y0 = cas.height/2;
+var r  = 100;
+var step = 120;
+var start = -90;
+var colors = ['skyblue', 'greenyellow', 'cyan'];
+var angles = [120, 150, 90];
+var txts = ['KO', 'Hellow World', 'See you next stage！'];
+var delta = 30;
+var paddingText = 5;
+var txtsLength = [];
+//先要计算txts中每个元素（文字）的长度
+for(var i=0; i<txts.length; i++){
+	txtsLength.push(ctx.measureText(txts[i]).width + 2 * paddingText);
+}
+console.log(txtsLength);
+
+//先按照比例画圆，再画角度平分线
+for(var i=0; i<angles.length; i++){
+	//先按照比例画圆
+	ctx.beginPath();
+	ctx.fillStyle = colors[i];
+	ctx.moveTo(x0, y0);
+	ctx.arc(x0, y0, r, toRadian(start), toRadian(start + angles[i]));
+	ctx.closePath();
+	ctx.fill();
+
+	//画角平分线，为了书写文字需要
+	ctx.beginPath();
+	var xTemp = x0 + (r+delta)*Math.cos(toRadian(start + angles[i]/2));
+	var yTemp = y0 + (r+delta)*Math.sin(toRadian(start + angles[i]/2));
+	ctx.strokeStyle = colors[i];
+	ctx.moveTo(x0, y0);
+	ctx.lineTo(xTemp, yTemp);
+	ctx.stroke();
+
+	//再画文字的底线
+	ctx.beginPath();
+	ctx.strokeStyle = colors[i];
+	ctx.moveTo(xTemp, yTemp);
+	if( start + angles[i]/2 > -90 && start + angles[i]/2 < 90)
+		ctx.lineTo(xTemp + txtsLength[i], yTemp);
+	else
+		ctx.lineTo(xTemp - txtsLength[i], yTemp);
+	ctx.stroke();
+
+	//写文字，注意如果写在右边，要左对齐，如果写在左边，要右对齐
+	
+	if( start + angles[i]/2 > -90 && start + angles[i]/2 < 90)
+	{
+		ctx.textAlign = 'right';
+		ctx.font = '14px Arial';
+		ctx.fillText(txts[i], xTemp + txtsLength[i] , yTemp - paddingText );
+	}
+	else
+	{
+		ctx.textAlign = 'left';
+		ctx.font = '14px Arial';
+		ctx.fillText(txts[i], xTemp - txtsLength[i] , yTemp - paddingText );
+	}
+
+
+	start += angles[i];
+}
+
+
+
+
+
+
+</script>
+</body>
+</html>
+

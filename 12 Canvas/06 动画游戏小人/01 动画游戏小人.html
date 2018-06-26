@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>动画游戏小人</title>
+    <style>
+    #cas {
+        border: 1px solid black;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas width="600" height="400" id="cas"></canvas>
+<script>
+var cas = document.getElementById('cas');
+var ctx = cas.getContext('2d');
+
+var img = new Image();
+img.src = "gameboy.png";
+img.onload = function(){
+    var i = 0;
+    var width = img.width / 4;
+    var height = img.height / 4;
+    setInterval(function(){
+    	//首先要擦除以前绘画的内容，然后再重新绘制
+    	ctx.clearRect(0, 0, cas.width, cas.height);
+        i == 3 ? i = 0 : i++;
+    	ctx.drawImage(img, i * width, 0 * height, width, height, 100, 100, width, height);
+        ctx.drawImage(img, i * width, 1 * height, width, height, 200, 100, width, height);
+        ctx.drawImage(img, i * width, 2 * height, width, height, 300, 100, width, height);
+        ctx.drawImage(img, i * width, 3 * height, width, height, 400, 100, width, height);
+        
+    }, 200);
+};
+
+
+
+
+</script>
+</body>
+</html>

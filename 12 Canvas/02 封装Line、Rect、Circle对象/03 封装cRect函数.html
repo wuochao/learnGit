@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>封装cRect对象</title>
+    <style>
+    #cas {
+        border: 1px solid black;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas width="600" height="400" id="cas"></canvas>
+    <script>
+    var cas = document.getElementById('cas');
+    var ctx = cas.getContext('2d');
+
+    //封装cRect
+    function cRect(x, y, width, height, r, color) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = color || 'olive' ;
+
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + width - r, y);
+        ctx.arcTo(x + width, y, x + width, y + r, r);
+        ctx.lineTo(x + width, y + height -r);
+        ctx.arcTo(x + width, y + height, x + width - r, y + height, r);
+        ctx.lineTo(x + r, y + height);
+        ctx.arcTo(x, y + height, x, y + height -r, r);
+        ctx.lineTo(x, y + r);
+        ctx.arcTo(x, y, x + r, y, r);
+
+        ctx.stroke();
+        ctx.restore();
+    }
+
+
+    cRect( 50, 50, 100, 50, 5 );
+    cRect( 100, 120, 100, 80, 8, 'blue' );
+    cRect( 300, 100, 200, 100, 10, 'green' );
+
+
+
+
+
+    </script>
+</body>
+
+</html>

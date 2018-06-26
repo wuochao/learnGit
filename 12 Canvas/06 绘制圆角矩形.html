@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>绘制圆角矩形</title>
+	<style>
+		#cas{
+			border: 1px solid black;
+		}
+
+	</style>
+
+</head>
+<body>
+<canvas width="600" height="400" id="cas"></canvas>
+<script>
+var cas = document.getElementById('cas');
+var ctx = cas.getContext('2d');
+
+var x0 = 100;
+var y0 = 100;
+var r  = 20;
+var width = 100;
+var height = 100;
+
+ctx.beginPath();
+ctx.strokeStyle = 'blue';
+ctx.moveTo(x0, y0);
+//ctx.lineTo(x0 + width, y0);
+ctx.arcTo(x0 + width + r, y0, x0 + width + r, y0 + r, r);
+//ctx.lineTo(x0 + width + r, y0 + r + height);
+ctx.arcTo(x0 + width + r, y0 + 2*r + height, x0 + width, y0 + 2*r + height, r);
+//ctx.lineTo(x0, y0 + 2*r + height);
+ctx.arcTo(x0 - r, y0 + 2*r + height, x0 - r, y0 + r + height, r);
+//ctx.lineTo(x0 - r, y0 + r);
+ctx.arcTo(x0-r, y0, x0, y0, r);
+ctx.stroke();
+
+
+
+    
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax-post-jquery</title>
+	<script src="jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#btn').click(function(){
+				var unVal = $('#username').val();
+				var pwVal = $('#password').val();
+				$.ajax({
+					type: 'post',
+					url: 'ajax-post-jquery.php',
+					data: 'un='+unVal+'&pw='+pwVal,
+					dataType: 'text',
+					success: function(data){
+						console.dir(data);
+						if(data == 'good')
+						{
+							$('#info').html('login success');
+						}
+						else if(data == 'bad')
+						{
+							$('#info').html('login fail');
+						}
+					}
+
+				});
+
+			});
+		});
+
+
+	</script>
+</head>
+<body>
+	<form action="">
+		用户名：<input type="text" id="username"><span id="info"></span>
+		<br>
+		密  码：<input type="password" id="password">
+		<input type="button" value="login" id="btn">
+	</form>
+	
+</body>
+</html>

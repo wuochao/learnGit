@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax-get-jquery</title>
+	<script src="jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#btn').click(function(){
+				var unVal = $('#username').val();
+				var pwVal = $('#password').val();
+				$.ajax({
+					type: 'get',
+					url:'ajax-get-jquery.php',
+					data: 'un='+unVal+'&pw='+pwVal,
+					dataType: 'text',
+					success: function(data){
+						if(data == 'good')
+						{
+							$('#info').html('login success');
+						}
+						else if(data == 'bad')
+						{
+							$('#info').html('login fail');
+						}
+					}
+
+				});
+			});
+		});
+	
+
+	</script>
+</head>
+<body>
+	<form action="">
+		用户名：<input type="text" name="username" id="username"><span id='info'></span>
+		<br>
+		密码：<input type="password" name="password" id="password">
+		<input type="button" value="login" id='btn'>
+	</form>
+</body>
+</html>

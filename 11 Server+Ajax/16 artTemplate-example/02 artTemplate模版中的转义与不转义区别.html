@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>artTemplate模版中的转义与不转义区别</title>
+    <script type="text/javascript" src="./template.js"></script>
+</head>
+
+<body>
+    <h1>不转义HTML</h1>
+    <div id="content"></div>
+    <script id="test" type="text/html">
+        <p>不转义：{{#value}}</p>
+        <p>默认转义： {{value}}</p>
+    </script>
+
+    <script>
+    // 这里的数据当中包含特殊字符#，表示不转义，那么按照字符串形式传给浏览器，浏览器解析成html页面显示给客户端
+    var data = {
+        value: '<span style="color:#F00">hello world!</span>'
+    };
+    var html = template('test', data);
+    document.getElementById('content').innerHTML = html;
+    </script>
+</body>
+
+</html>

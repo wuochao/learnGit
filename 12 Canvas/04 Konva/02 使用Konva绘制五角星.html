@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>使用Konva画五角星</title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    </style>
+    <script src="konva.js"></script>
+</head>
+
+<body>
+    <div id="dv"></div>
+</body>
+	<script>
+		var stage = new Konva.Stage({
+		    width: window.innerWidth,
+		    height: window.innerHeight,
+		    container: 'dv'
+		});
+
+		var layer = new Konva.Layer();
+		stage.add(layer);
+
+		var star = new Konva.Star({
+		    x: stage.getWidth() / 2,
+		    y: stage.getHeight() / 2,
+		    numPoints: 5,
+		    innerRadius: 60,
+		    outerRadius: 130,
+		    stroke: 'red',
+		    draggable: true
+		});
+
+		layer.add(star);
+		layer.draw();
+	</script>
+</html>

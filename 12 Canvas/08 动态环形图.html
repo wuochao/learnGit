@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>百分比动态环形图</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#cas{
+			border: 1px solid black;
+		}
+	</style>
+
+</head>
+<body>
+<canvas width="600" height="400" id="cas"></canvas>
+<script>
+function toAngle(radian){
+	return radian * 180 / Math.PI;
+}
+        
+function toRadian(angle){
+	return angle *  Math.PI / 180;
+}
+
+var cas = document.getElementById('cas');
+var ctx = cas.getContext('2d');
+
+var x0 = cas.width / 2;
+var y0 = cas.height / 2;
+var linewidth = 20;
+var r  = Math.min(cas.width, cas.height) / 2 - linewidth / 2;
+var start = -90;
+var end = 0;
+var timer = null;
+
+function draw(percent){
+	if(percent < 0 || percent > 100)
+	{
+		throw new Error("percent must be between 0 and 100！");
+		return;
+	}
+	end = percent / 100 * 360;
+	var angle = 0;
+	timer = setInterval(function(){
+		if( angle > end )
+		{
+			clearInterval(timer);
+		}
+		// 清除画布
+		cas.width = cas.width;
+
+		//画圆环
+		ctx.beginPath();
+		ctx.strokeStyle = '#0094ff';
+		ctx.lineWidth = linewidth;
+		ctx.arc(x0, y0, r, toRadian(start), toRadian(start + angle));
+		ctx.stroke();
+		ctx.save();
+		
+		//写文字
+		ctx.beginPath();
+		ctx.font = ' 30px Arial';
+		ctx.fillStyle = 'red';
+		ctx.textAlign = 'center'; 
+		ctx.textBaseline = 'middle';
+		var txt = Math.floor(angle / 360 * 100) + "%";
+		
+		
+		ctx.fillText(txt, x0, y0);
+		ctx.restore();
+
+		angle++;
+	}, 10);
+
+}
+
+
+draw(80);
+        
+
+</script>
+</body>
+</html>
+

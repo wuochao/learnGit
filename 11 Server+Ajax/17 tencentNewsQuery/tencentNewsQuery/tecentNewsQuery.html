@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tecentNewsQuery</title>
+    <style>
+    ul, li, p, div, span, a, img {
+        margin: 0;
+        padding: 0;
+    }   
+
+    body {
+        font-family: "Microsoft YaHei";
+        font-size: 14px;
+        line-height: 1.8;
+        word-wrap: break-word;
+    }
+    a {
+        color: #0094ff;
+        text-decoration: none;
+    }
+    ul, ol {
+        list-style: none;
+    }
+    .fl {
+        float: left;
+    }
+    
+    .fr {
+        float: right;
+    }
+    
+    .clearfix::before,
+    .clearfix::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+   
+    #comment{
+        width: 800px;
+        margin: 50px auto;
+        padding: 10px;
+        /*background-color: lightblue;*/
+    }
+    .c-li {
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding: 20px 0;
+        /*background-color: orange;*/
+        position: relative;
+    }
+    .c-li-l {
+        width: 60px;
+        height: 50px;
+        /*background-color: #eee;*/
+        float: left;
+        text-align: center;
+    }
+    .c-li-r {
+        margin-left: 80px;
+        /*background-color: olive;*/
+    }
+    .c-li-r .info{
+        height: 20px;
+        line-height: 20px;
+        /*background-color: pink;*/
+    }
+    .c-li-r .info .name{
+        margin: 0 10px;
+    }
+    .c-li-r .info .timeDiff{
+        margin: 0 10px;
+        color: #aaa;
+    }
+    .c-li-r .info .order{
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 12px;
+        color: #aaa;
+    }
+    .c-li-r .msg{
+        padding: 10px;
+        /*background-color: yellow;*/
+    }
+
+    .more {
+        width: 300px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border: 1px solid #aaa;
+        margin: 50px auto;
+    }
+
+    .more a{
+        display: block;
+    }
+    .more a:hover{
+        background-color: #eee;
+    }
+    .hidden {
+        display: none;
+    }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <ul id="comment"></ul>
+        <div class="more hidden"><a href="javascript:;">加载更多</a></div>
+    </div>
+    <script type="text/html" id="c-li">
+        {{each list value index}}
+        <li class="c-li clearfix">
+            <div class="c-li-l fl">
+                    <img src="{{value.userinfo.head}}" alt="">
+            </div>
+            <div class="c-li-r">
+                <p class="info">
+                    <a href="#" class="name">{{value.userinfo.nick}}</a>
+                    <span class="timeDiff">{{value.timeDifference}}</span>
+                    <span class="order">#{{baseNm + index + 1}}</span>
+                </p>
+                <p class="msg">
+                    {{value.content}}
+                </p>
+            </div>
+        </li>
+        {{/each}}
+    </script>
+</body>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/template.js"></script>
+<script type="text/javascript">
+$(function(){
+    var lastId = '6280346786642608295';
+    function mainComment(data){
+        var html = template('c-li', {
+            list: data,
+            baseNm: $('.c-li').length
+        });
+        $('#comment').append(html);
+    }
+
+    function loadEvt( Id ){
+        $.ajax({
+            url:'http://coral.qq.com/article/1983169624/comment',
+            type: 'get',
+            dataType: 'jsonp',  //换成json会出现跨域问题
+            jsonp: 'callback',
+            jsonpCallback: 'mainComment',
+            data: {
+                commentid: Id,
+                tag: '',
+                reqnum: 20
+            },
+            success: function(data){
+                mainComment(data.data.commentid);
+                lastId = data.data.last;
+                if( !data.data.hasnext ){
+                    $('div.more').hide();
+                } else {
+                    $('div.more').show();
+                }
+            },
+            error: function(){
+                alert('加载数据失败，请检查您的网络情况');
+            }
+
+        });
+    }
+
+
+    // 当点击加载更多时，再次调用loadEvt函数，新增20条评论信息
+    $('.more').on('click', function(){
+        loadEvt(lastId);
+    });
+
+    // 初始化，默认调用一次，显示20条评论信息
+    loadEvt(lastId);
+
+
+
+
+});
+
+
+</script>
+</html>
+<!--  需求：
+# 腾讯新闻查询接口
+## 查询评论信息
+- url接口地址 :
+   http://coral.qq.com/article/1983169624/comment
+- 请求方式 get
+- 请求参数
+    + commentid 请求查询的评论文章id  只有一个并且是字符串形式  '6280346786642608295'
+    + jsonp回调函数键名名字为callback
+    + jsonpCallback 函数键值为 mainComment
+    + tag        为空
+    + reqnum   每次返回的评论条数    为20
+```返回jsonp数据 success里面data默认就能拿到对象
+一：要求：
+  1 请求该接口 返回20条对应的评论信息，将请求回来的用户名 头像 评论内容 发表时间显示在页面上
+  2 点击加载更多 再追加数据
+  3 使用arttemplate模板引擎
+
+二：如果用dataType:"json" 发送试试会出什么问题？解答一下 -->

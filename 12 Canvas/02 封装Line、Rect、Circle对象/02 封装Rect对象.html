@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>封装Rect对象</title>
+    <style>
+    #cas {
+        border: 1px solid black;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas width="600" height="400" id="cas"></canvas>
+    <script>
+    var cas = document.getElementById('cas');
+    var ctx = cas.getContext('2d');
+
+    //封装Rect
+    function Rect(config) {
+        //必选参数
+        this.ctx = config.ctx;
+        this.x = config.x;
+        this.y = config.y;
+        this.width = config.width;
+        this.height = config.height;
+        //可选参数
+        this.lineWidth = config.lineWidth;
+        this.strokeStyle = config.strokeStyle;
+        this.fillStyle = config.fillStyle;
+
+    }
+
+    Rect.prototype = {
+        constructor: Rect,
+        stroke: function() {
+            //需要将Rect中的参数应用到prototype方法中
+            var ctx = this.ctx;
+            ctx.save();
+            ctx.beginPath();
+            if(this.lineWidth)
+                ctx.lineWidth = this.lineWidth;
+            if (this.strokeStyle)
+                ctx.strokeStyle = this.strokeStyle;
+            ctx.strokeRect(this.x, this.y, this.width, this.height);
+            ctx.restore();
+        },
+        fill: function() {
+            var ctx = this.ctx;
+            ctx.save();
+            ctx.beginPath();
+            if (this.fillStyle)
+                ctx.fillStyle = this.fillStyle;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.restore();
+        }
+
+    };
+
+    var rect1 = new Rect({
+        ctx: ctx,
+        x: 10,
+        y: 10,
+        width: 100,
+        height: 50,
+        strokeStyle: 'red',
+        lineWidth: 10
+    });
+    rect1.stroke();
+
+    var rect2 = new Rect({
+        ctx: ctx,
+        x: 150,
+        y: 100,
+        width: 100,
+        height: 50
+    });
+    rect2.stroke();
+
+    var rect3 = new Rect({
+        ctx: ctx,
+        x: 200,
+        y: 200,
+        width: 200,
+        height: 100,
+        fillStyle: 'yellow'
+    });
+    rect3.fill();
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
