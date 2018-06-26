@@ -1,0 +1,19 @@
+{
+  "name": "expressdemo",
+  "version": "1.0.0",
+  "description": "express demo ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "express",
+    "demo"
+  ],
+  "author": "xsj",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

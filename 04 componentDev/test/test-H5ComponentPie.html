@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <title>饼图</title>
+    <link rel="stylesheet" href="../css/H5ComponentBase.css">
+    <link rel="stylesheet" href="../css/H5ComponentPie.css">
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            font-size: 12px;
+        }
+
+        .iphone{
+            width: 340px;
+            height: 540px;
+            background-color: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -270px 0 0 -170px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 用于开发测试 H5ComponentPie 对象（饼图组件） -->
+    <div class="iphone"></div>
+
+    <script src="../lib/jquery.js"></script>
+    <script src="../js/H5ComponentBase.js"></script>
+    <!-- 引入饼图的资源 -->
+    <script src="../js/H5ComponentPie.js"></script>
+    <script>
+        var cfg = {
+            type: 'pie',
+            width: 400,
+            height: 400,
+            data: [
+                ['A项', .7, '#ff7676'],
+                ['B项', .1, '#fa0'],
+                ['C项', .03, '#9ae'],
+                ['D项', .02, '#0ef'],
+                ['E项', .15, '#0a3']
+            ],
+            css: {
+                top: 100,
+            },
+
+            center: true,
+        };
+
+        var h5 = new H5ComponentPie('pie', cfg);
+        $('.iphone').append(h5);
+
+        var leaveFlag = true;
+        $('body').click(function (){
+            $('.h5_component').trigger(leaveFlag? 'onLoad': 'onLeave');
+            leaveFlag = !leaveFlag;
+        }).click();
+
+    </script>
+</body>
+</html>

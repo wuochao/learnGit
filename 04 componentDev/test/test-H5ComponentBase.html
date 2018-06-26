@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <title>开发H5组件base对象</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            font-size: 12px;
+        }
+
+        .iphone {
+            width: 340px;
+            height: 540px;
+            background-color: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -270px;
+            margin-left: -170px;
+        }
+
+        .h5_component_base{
+            transition: all 1s;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../css/H5ComponentBase.css">
+
+<body>
+    <!-- 用于开发测试 H5ComponentBase 对象（基本的图文组件） -->
+    <div class="iphone">
+
+    </div>
+    <script src="../lib/jquery.js"></script>
+    <script src="../js/H5ComponentBase.js"></script>
+    <script>
+        var cfg = {
+            type: 'base',
+            text: '',
+            bg: './p1_people.png',
+            width: 514,
+            height: 306,
+            css: {
+                bottom:0,
+                opacity: 0,
+            },
+            center: true,
+            animateIn: {
+                bottom: 80,
+                opacity: 1,
+            },
+            animateOut: {
+                bottom: 0,
+                opacity: 0,
+            },
+
+        };
+        var h5 = new H5ComponentBase('myName', cfg);
+        $('.iphone').append(h5);
+
+        var leaveFlag = true;
+        $('body').click(function (){
+            $('.h5_component').trigger(leaveFlag? 'onLoad': 'onLeave');
+            leaveFlag = !leaveFlag;
+        });
+
+
+    </script>
+</body>
+</html>

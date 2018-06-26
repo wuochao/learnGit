@@ -1,0 +1,33 @@
+/* 折线图组件样式 */
+.h5_component_polyline{
+
+}
+.h5_component_polyline canvas{
+    /* 用canvas做动画，会进行分层，要用到 z-index属性，因此要定位 */
+    position:absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /*background: yellow;*/
+}
+.h5_component_polyline .txt{
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    bottom: -20px;
+    height: 20px;
+    line-height: 20px;
+    transform: scale(.8); /*浏览器不能显示小于12px的文本，如果要显示，可以用缩放的方式实现*/
+    transition: all 1s 1.5s;
+    opacity: 0;
+}
+.h5_component_polyline_load .txt{
+    opacity: 1;
+}
+
+.h5_component_polyline_leave .txt{
+    opacity: 0;
+}
+
+

@@ -1,0 +1,5 @@
+该项目笔记，参考网页：
+慕课网实战—《用组件方式开发 Web App全站 》笔记一
+http://blog.csdn.net/Lovejulyer/article/details/51866428 
+
+后续继续浏览相关网页即可看到 笔记二、笔记三、.......

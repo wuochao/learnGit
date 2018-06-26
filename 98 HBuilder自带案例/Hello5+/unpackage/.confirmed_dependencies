@@ -1,0 +1,48 @@
+{
+	"index.html": {
+		"resources": [
+			"css/common.css",
+			"js/update.js",
+			"js/shortcut.js",
+			"js/immersed.js"
+		],
+		"refer": [
+			"plus/accelerometer.html",
+			"plus/audio.html",
+			"plus/orientation.html"
+		]
+	},
+	"plus/accelerometer_shake.html": {
+		"resources": [
+			"img/shake/1.jpg",
+			"img/shakedown.png",
+			"img/shakeup.png",
+			"img/shake/3.jpg"
+		]
+	},
+	"plus/accelerometer.html": {
+		"resources": [
+			"js/common.js"
+		],
+		"refer": [
+			"plus/accelerometer_shake.html"
+		]
+	},
+	"plus/orientation.html": {
+		"refer": [
+			"plus/orientation_level.html"
+		]
+	},
+	"plus/audio.html": {
+		"resources": [
+			"img/astop.png"
+		]
+	},
+	"plus/orientation_level.html": {
+		"resources": [
+			"img/orientationl.png",
+			"img/orientationbg.png",
+			"img/orientationb.png"
+		]
+	}
+}

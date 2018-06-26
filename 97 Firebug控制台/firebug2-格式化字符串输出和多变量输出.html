@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>格式化字符串输出和多变量输出</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<script>
+		var animal="猫",count="3",auther="巴金";
+		var book1="《家》",book2="《春》",book3="《秋》";
+		//以下代码均是合法代码
+		console.log("%d个%s掉入陷阱", count, animal);
+		console.log(count, "个", animal, "掉入陷阱");
+		console.log("%s写了:",auther, book1, book2, book3);
+        /**
+		 * 类似于C语言中的语法，可以在console记录日志中使用
+		 * %s   	//字符串
+		 * %d  %i   //数字
+		 * %f   	//浮点型
+		 * %o   	//链接对象
+         */
+	</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/main.css" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title"></h1>
+		</header>
+		<div class="mui-content">
+		    <div id="msg">此处为聊天消息</div>
+			<button type="button" class="mui-btn mui-btn-blue" id="gallery">相册</button>
+			<button type="button" class="mui-btn mui-btn-green" id="camera">摄像头</button>
+			<button type="button" class="mui-btn mui-btn-red" id="getacc">重力感应</button>
+		</div>
+		
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				var cw = plus.webview.currentWebview();
+				var titleName = cw.title;
+				var header = document.querySelector('.mui-title');
+				header.innerText = titleName;
+				
+			});
+			// 获取相册
+			var msgDom = document.getElementById('msg');
+			var galleryBtn = document.getElementById('gallery');
+			galleryBtn.addEventListener('tap', function(){
+				plus.gallery.pick(function(path){
+					var img = '';
+					// alert(path.files[0]);
+					for(var i in path.files){
+						img += '<img width=100 height=100 src=' + path.files[i] + '>';
+					}
+					msgDom.innerHTML = img;
+				},function(e){
+					msgDom.innerHTML = e.message;
+				},{
+					filter:"image",
+					multiple:true
+				});
+			});
+			// 获取摄像头
+			var cmDom = document.getElementById('camera');
+			cmDom.addEventListener('tap', function(){
+				var cm = plus.camera.getCamera(1);
+				cm.captureImage(function(path){
+					alert('地址转换前：' + path);
+					var url = "file://" + plus.io.convertLocalFileSystemURL(path);
+					alert('地址转换后：' + url);
+					var img = '<img width=100 height=100 src=' + url + '>';
+					msgDom.innerHTML = img;
+				});
+			});
+			// 获取重力感应
+			var accDom = document.getElementById('getacc');
+			accDom.addEventListener('tap', function(e){
+				plus.accelerometer.watchAcceleration(function(a){
+					var msg = document.getElementById('msg');
+					msg.innerText = 'x:' + a.xAxis + '\n y:' + a.yAxis + '\n z:' + a.zAxis;
+				});
+			});
+			
+		</script> 
+	
+	</body>
+
+</html>
