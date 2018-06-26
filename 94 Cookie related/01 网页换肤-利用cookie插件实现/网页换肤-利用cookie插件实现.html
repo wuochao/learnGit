@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>网页换肤-利用cookie插件实现</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/skin_0.css" id="cssfile">
+    <!--   引入jQuery和cookie插件 -->
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery.cookie.js"></script>
+    <script>
+        //<![CDATA[
+        $(function () {
+            var $li = $("#skin li");
+            $li.click(function () {
+                switchSkin(this.id);
+            });
+            var cookie_skin = $.cookie("MyCssSkin");
+            if (cookie_skin) {
+                switchSkin(cookie_skin);
+            }
+        });
+
+        function switchSkin(skinName) {
+            $("#" + skinName).addClass("selected")    //当前<li>元素选中
+                .siblings().removeClass("selected");  //去掉其它同辈<li>元素的选中
+            $("#cssfile").attr("href", "css/" + skinName + ".css");     //设置不同皮肤
+            $.cookie("MyCssSkin", skinName, {path: '/', expires: 10});  //保存路径为当前目录，保存有效期10天
+        }
+
+        //]]>
+        // 注：在默认情况下，只有设置cookie的网页才能读取该cookie。如果想让一个页面读取另一个页面设置的cookie，必须设置cookie的路径。
+    </script>
+</head>
+<body>
+    <ul id="skin">
+        <li id="skin_0" title="灰色" class="selected">灰色</li>
+        <li id="skin_1" title="紫色">紫色</li>
+        <li id="skin_2" title="红色">红色</li>
+        <li id="skin_3" title="天蓝色">天蓝色</li>
+        <li id="skin_4" title="橙色">橙色</li>
+        <li id="skin_5" title="淡绿色">淡绿色</li>
+    </ul>
+
+    <div id="div_side_0">
+        <div id="news">
+            <h1 class="title">时事新闻</h1>
+        </div>
+    </div>
+
+    <div id="div_side_1">
+        <div id="game">
+            <h1 class="title">娱乐新闻</h1>
+        </div>
+    </div>
+</body>
+</html>

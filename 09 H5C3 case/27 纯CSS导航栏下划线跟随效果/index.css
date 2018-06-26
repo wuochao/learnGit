@@ -1,0 +1,33 @@
+
+.box{
+    box-sizing: border-box;
+    width: 800px;
+    height: 40px;
+    margin: 50px auto;
+    /*background: yellow;*/
+}
+.box>li{
+    float: left;
+    font:600 16px/40px "Microsoft YaHei";
+    color: #222;
+    padding: 0 15px;
+    position: relative;
+}
+
+
+li::before {
+    content: "";
+    width: 0%;
+    height: 2px;
+    background: red;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    transition: 0.2s all linear;
+}
+
+li:hover::before {
+    width: 100%;
+
+}
+

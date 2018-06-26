@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        canvas{
+            border: 1px solid #000;
+            background:url("p_1.jpg") no-repeat ;
+        }
+    </style>
+</head>
+<body>
+<canvas width="300" height="200" id="canvas"></canvas>
+</body>
+</html>
+<script>
+    var c = document.getElementById('canvas');
+    var ctx = c.getContext('2d');
+    //灰色能刮的图层
+    ctx.fillStyle="#333";
+    ctx.fillRect(0,0,300,200);
+
+    ctx.globalCompositeOperation = "destination-out";
+
+    c.addEventListener('mousedown', function () {
+        c.addEventListener('mousemove', a);
+    })
+    function a(){
+        var e= e||window.event;
+        ctx.beginPath();
+        ctx.arc( e.offsetX, e.offsetY,20,20,Math.PI*2,true);
+        ctx.fillStyle='red';
+        ctx.fill();
+        ctx.closePath();
+    }
+    c.addEventListener('mouseup', function () {
+        c.removeEventListener('mousemove',a);
+    });
+</script>
